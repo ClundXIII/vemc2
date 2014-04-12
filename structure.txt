@@ -1,0 +1,21 @@
+Structure from vemc2
+because of the previous bad structure of the
+code there will be a new System, no overall
+project, we will use libraries, etc.
+Everything with console, and the end project
+will be 'core'. (no lib)
+If there is no GUI, it will do the Object
+Management, too.
+The physical effects will be in 'physics'.
+The Objects have to use a 'physic helper'
+(instead of the old MassPointHelper). -->
+this will be a lib!
+'graphik' will be the 3D OpenGL Graphic ...
+really? YES ;D (a lib, too ...)
+in header we need a link to all root headers
+of all libs. (Maybe there will be a .deb
+Package with symlink in /usr/include/vemc2)
+'settings' will be the Settings manager ...
+maybe with much Macros or huge Template
+classes or boost support ... we will see ;)
+

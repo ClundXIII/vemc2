@@ -1,0 +1,5 @@
+1. use cmake ;)
+2. adjust Code::Blocks to use cmake, ...
+3. get the win version running
+4. tidy up the code (English comments, platform independent, good layout/style)
+
