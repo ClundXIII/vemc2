@@ -1,4 +1,4 @@
-#include "object.h"
+#include "./object.h"
 
 #include <iostream>
 #include <iomanip>
@@ -11,23 +11,23 @@ object::object(){
     return;
 }
 
-object::object(Simulation::object *toCopy){
-    Pos_X = toCopy->getX();
-    Pos_Y = toCopy->getY();
-    Pos_Z = toCopy->getZ();
+object::object(object *toCopy){
+    posX1 = toCopy->getX1();
+    posX2 = toCopy->getX2();
+    posX3 = toCopy->getX3();
 
     mass = toCopy->getMass();
 }
 
-object::object(ld PosX, ld PosY, ld PosZ, ld Massts){
-    Pos_X = PosX;
-    Pos_Y = PosY;
-    Pos_Z = PosZ;
+object::object(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts){
+    posX1 = posX1;
+    posX2 = posX1;
+    posX3 = posX3;
 
-    mass = Massts;
+    mass = massts;
 }
 
-object::object(ld PosX, ld PosY, ld PosZ, ld Massts, vector *Speedts){
+/*object::object(bdt PosX, bdt PosY, bdt PosZ, bdt Massts, vector *Speedts){
     Pos_X = PosX;
     Pos_Y = PosY;
     Pos_Z = PosZ;
@@ -37,7 +37,7 @@ object::object(ld PosX, ld PosY, ld PosZ, ld Massts, vector *Speedts){
     actSpeed.X = Speedts->X;
     actSpeed.Y = Speedts->Y;
     actSpeed.Z = Speedts->Z;
-}
+}*/
 
 object::~object(){
     //dtor
@@ -49,8 +49,11 @@ void object::drawField(){
 
 void object::draw(){
 
+    #ifndef VEMC2_COMPILE_NOGL
+
     double PDick = 0.01*((double)mass);
 
+    /*
     if (Settings::Grafik::LoghLevel == 1){ //natürlich (sprich e)
         PDick = log(mass);
     }
@@ -60,6 +63,7 @@ void object::draw(){
     else if (Settings::Grafik::LoghLevel == 3){ //10'er
         PDick = log10(mass);
     }
+    */
 
     glTranslatef(Settings::Grafik::scale*Pos_X, Settings::Grafik::scale*Pos_Y, Settings::Grafik::scale*Pos_Z);
 
@@ -208,19 +212,15 @@ void object::draw(){
     glRotatef(-customRot, 0.f, 1.f, 0.f);
 
     glTranslatef(Settings::Grafik::scale*(-Pos_X), Settings::Grafik::scale*(-Pos_Y), Settings::Grafik::scale*(-Pos_Z));
+
+    #endif
 }
 
 void object::tick(){
-    VectorHelper tempVektor;
 
+    /// TODO: fix this!!
     /*
-    tempVektor.X = 0;
-    tempVektor.Y = 0;
-    tempVektor.Z = 0;
-    tempVektor.Wert = 0;
-    tempVektor.rotX = 0;
-    tempVektor.rotY = 0;
-    */
+    VectorHelper tempVektor;
 
     postToAdd.X = 0;
     postToAdd.Y = 0;
@@ -238,43 +238,14 @@ void object::tick(){
     tempVektor.Y *= ZeitIntervall / mass;
     tempVektor.Z *= ZeitIntervall / mass;
 
-    //std::cout << "objectZeitintervall: " << ZeitIntervall << std::endl;
-
-    /*
-    tempVektor.X *= ZeitIntervall;
-    tempVektor.Y *= ZeitIntervall;
-    tempVektor.Z *= ZeitIntervall;
-    */
-
     SpedToAdd.X -= tempVektor.X;
     SpedToAdd.Y -= tempVektor.Y;
     SpedToAdd.Z -= tempVektor.Z;
-
-    //#ifdef 1
-        //std::cout << ZeitIntervall << std::endl;
-
-        //std::cout << "fuege hinzu (Speed): " << SpedToAdd.X << " " << SpedToAdd.Y << " " << SpedToAdd.Z << std::endl;
-    //#endif
+    */
 }
 
 void object::newValues(){
-
-    //SpedToAdd.X *= ZeitIntervall;
-    //SpedToAdd.Y *= ZeitIntervall;
-    //SpedToAdd.Z *= ZeitIntervall;
-
-    //std::cout << "fuege hinzu (Pos): " << SpedToAdd.X << " " << SpedToAdd.Y << " " << SpedToAdd.Z << std::endl;
-
-    /*if (actSpeed.Z * ZeitIntervall > 1) {
-
-        std::cout << " ZI: " << ZeitIntervall << " " << actSpeed.X << " " << actSpeed.Y << " " << actSpeed.Z << std::endl;
-        std::cout << "fuege hinzu (Pos): " << SpedToAdd.X << " " << SpedToAdd.Y << " " << SpedToAdd.Z << std::endl;
-        std::cout << "1.: ";for (int i=1; GLOBALOBJECTS[i]!=0; i++) GLOBALOBJECTS[i]->werte_ausgeben();
-
-        std::cout << std::endl;
-        sleep(5);
-    }*/
-
+    /*
     Pos_X += actSpeed.X * ZeitIntervall;
     Pos_Y += actSpeed.Y * ZeitIntervall;
     Pos_Z += actSpeed.Z * ZeitIntervall;
@@ -282,27 +253,17 @@ void object::newValues(){
     actSpeed.X += SpedToAdd.X;
     actSpeed.Y += SpedToAdd.Y;
     actSpeed.Z += SpedToAdd.Z;
-
-    /*if (actSpeed.Z * ZeitIntervall > 1) {
-
-        std::cout << "boeoeoese:";
-        std::cout << " ZI: " << ZeitIntervall << " " << actSpeed.X << " " << actSpeed.Y << " " << actSpeed.Z << std::endl;
-
-        for (int i=1; GLOBALOBJECTS[i]!=0; i++) GLOBALOBJECTS[i]->werte_ausgeben();
-
-        std::cout << std::endl;
-        sleep(5);
-    }*/
-
-    //std::cout << Pos_X << " " << Pos_Y << " " << Pos_Z << std::endl;
+    */
 }
 
-ld object::getMass() {return mass;}
-ld object::getX()    {return Pos_X;}
-ld object::getY()    {return Pos_Y;}
-ld object::getZ()    {return Pos_Z;}
+bdt object::getMass() {return mass;}
+bdt object::getX1()   {return posX1;}
+bdt object::getX2()   {return posX2;}
+bdt object::getX3()   {return posX3;}
 
-VectorHelper *object::getV(){
+
+///TODO: fill in
+/*VectorHelper *object::getV(){
     VectorHelper *temp;
     temp = new VectorHelper;
     temp->X = actSpeed.X;
@@ -310,4 +271,4 @@ VectorHelper *object::getV(){
     temp->Z = actSpeed.Z;
     temp->convertXYZToRotWert();
     return temp;
-}
+}*/

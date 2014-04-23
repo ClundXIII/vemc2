@@ -4,6 +4,7 @@
 #include "drawable.h"
 
 #include "./../define.h"
+#include "./../myMath.h"
 
 using namespace vemc2::simulation;
 
@@ -12,30 +13,30 @@ namespace simulation{
 
 class object : drawable {
     public:
-        Objekt();
-        Objekt(object *toCopy);
-        Objekt(ld PosX, ld PosY, ld PosZ, ld Massts);
-        ~Objekt();
+        object();
+        object(object *toCopy);
+        object(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts);
+        ~object();
 
         void draw();
-        void drawField()
+        void drawField();
         void newValues();
         void tick();
 
-        ld getMass();
-        ld getX();
-        ld getY();
-        ld getZ();
+        bdt getMass();
+        bdt getX1();
+        bdt getX2();
+        bdt getX3();
 
-        void setMass(ld massts);
-        void setX(ld Xts);
-        void setY(ld Yts);
-        void setZ(ld Zts);
+        void setMass(bdt massts);
+        void setX(bdt Xts);
+        void setY(bdt Yts);
+        void setZ(bdt Zts);
 
     protected:
 
-        ld Pos_X, Pos_Y, Pos_Z;
-        ld mass;
+        bdt posX1, posX2, posX3;
+        bdt mass;
 
 };
 

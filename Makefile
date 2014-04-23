@@ -2,6 +2,11 @@
 #this is the overall Makefile
 
 compile-all:
+	mkdir -p core/temp
+	mkdir -p cons/temp
+	make -C core
+	sudo make -C core install
+	make -C cons
 
 init-all:
 	make -C core preinst
@@ -13,5 +18,3 @@ install-libs-local:
 install-libs:
 	make -C core install
 
-release:
-	make -C core release

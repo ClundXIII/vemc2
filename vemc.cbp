@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="etc/;core/;cons/;gui/;doc/;core/etc/;" />
+		<Option virtualFolders="etc/;core/;core/;core/etc/;docs/;core/src/;core/src/universe/;core/src/object/;core/src/random/;core/src/object/kids/;core/src/mymath/;core/src/field/;core/src/effect/;core/src/settings/;cons/;" />
 		<Build>
 			<Target title="all">
 				<Option output="./vemc2_X/vemc" prefix_auto="1" extension_auto="1" />
@@ -47,11 +47,131 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Makefile">
-			<Option virtualFolder="etc/" />
+			<Option virtualFolder="core/etc/" />
 			<Option target="all" />
 		</Unit>
+		<Unit filename="cons/includesfm.h">
+			<Option virtualFolder="cons/" />
+			<Option target="all" />
+			<Option target="cons" />
+		</Unit>
+		<Unit filename="cons/main.cpp">
+			<Option virtualFolder="cons/" />
+			<Option target="all" />
+			<Option target="cons" />
+		</Unit>
 		<Unit filename="core/Makefile">
-			<Option virtualFolder="core/etc/" />
+			<Option virtualFolder="etc/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/define.h">
+			<Option virtualFolder="core/src/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/effect/effect.h">
+			<Option virtualFolder="core/src/effect/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/field/field.cpp">
+			<Option virtualFolder="core/src/field/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/field/field.h">
+			<Option virtualFolder="core/src/field/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/myMath.h">
+			<Option virtualFolder="core/src/mymath/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/mymath/eld.cpp">
+			<Option virtualFolder="core/src/mymath/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/mymath/eld.h">
+			<Option virtualFolder="core/src/mymath/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/body.h">
+			<Option virtualFolder="core/src/object/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/drawable.cpp">
+			<Option virtualFolder="core/src/object/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/drawable.h">
+			<Option virtualFolder="core/src/object/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/noobject.cpp">
+			<Option virtualFolder="core/src/object/kids/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/noobject.h">
+			<Option virtualFolder="core/src/object/kids/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/object.cpp">
+			<Option virtualFolder="core/src/object/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/object.h">
+			<Option virtualFolder="core/src/object/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/quant.cpp">
+			<Option virtualFolder="core/src/object/kids/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/object/quant.h">
+			<Option virtualFolder="core/src/object/kids/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/settings/ccs.cpp">
+			<Option virtualFolder="core/src/settings/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/settings/settingdefines.h">
+			<Option virtualFolder="core/src/settings/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/settings/settings.cpp">
+			<Option virtualFolder="core/src/settings/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/settings/settings.h">
+			<Option virtualFolder="core/src/settings/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/universe.cpp">
+			<Option virtualFolder="core/src/universe/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/universe.h">
+			<Option virtualFolder="core/src/universe/" />
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>

@@ -1,8 +1,7 @@
 #include <iostream>
+#include <math.h>
 
 #include "eld.h"
-
-#include <math.h>
 
 #define ELD_DEBUG_ON
 
@@ -84,9 +83,7 @@ void eld::optimize(){
             #ifdef ELD_DEBUG_ON
                 std::cout << "/10;+1" << std::endl;
             #endif
-            //std::cout << "vorher  " << exp << std::endl;
             exp++;
-            //std::cout << "nachher " << exp << std::endl;
             base /= 10;
         }
         while (base < 1){
@@ -102,9 +99,7 @@ void eld::optimize(){
             #ifdef ELD_DEBUG_ON
                 std::cout << "/10;+1" << std::endl;
             #endif
-            //std::cout << "vorher  " << exp << std::endl;
             exp++;
-            //std::cout << "nachher " << exp << std::endl;
             base /= 10;
         }
         while (base > -1){
@@ -128,8 +123,8 @@ eld eld::Add(eld toAdd){
     bdt WertB = toAdd.gB() * pow( 10, toAdd.gE() - middlePot );
 
     #ifdef ELD_DEBUG_ON
-        std::cout << "WertA: " << WertA << std::endl;
-        std::cout << "WertB: " << WertB << std::endl;
+        std::cout << "ValueA: " << WertA << std::endl;
+        std::cout << "ValueB: " << WertB << std::endl;
     #endif
 
 
@@ -138,7 +133,7 @@ eld eld::Add(eld toAdd){
     retEld.sBE( WertA+WertB , middlePot );
 
     #ifdef ELD_DEBUG_ON
-        std::cout << "Wert: " << retEld.getV() << std::endl;
+        std::cout << "Value: " << retEld.getV() << std::endl;
     #endif
 
     return retEld;
@@ -164,12 +159,12 @@ void eld::operator=(bdt toSet){
     optimize();
 }
 
+//basic operations:
+
 eld eld::operator+(eld toAdd){
 
     return Add(toAdd);
 }
-
-//basic operations:
 
 eld eld::operator-(eld toSub){
     toSub.sB(-toSub.gB());
@@ -186,7 +181,7 @@ eld eld::operator/(eld toDiv){
     return Mul(toDiv);
 }
 
-//now, with ld's as input:
+//now, with bdt's as input:
 ///TODO: OPTIMIZE!!!
 
 eld eld::operator+(bdt toAdd){

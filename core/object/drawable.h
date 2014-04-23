@@ -1,5 +1,7 @@
-#ifndef DRAWABLE_H
-#define DRAWABLE_H
+#ifndef DRAWABLE_H_INCLUDED
+#define DRAWABLE_H_INCLUDED
+
+#include "./../define.h"
 
 namespace vemc2{
 namespace simulation{
@@ -12,13 +14,8 @@ namespace simulation{
  *  ├─object    //everything that is being simulated
  *  │ ├─body    //planets and other bigger stuff
  *  │ └─quant   //quant objects
- *  └─noobject  //something, that is not simulated
- *
- * You can't create an object of this class,
- * because this hasn't got any source file.
- * If you want to have anything that doesn't
- * affect the simulation, use simulation::noobject
- * instead!
+ *  ├─field     //fields that can be drawn (active or non-active)
+ *  └─noobject  //something, that is not simulated (active or non-active)
  *
  * @author Simon Michalke
  * @version 0.9
@@ -30,7 +27,7 @@ class drawable{
         drawable();
         ~drawable();
 
-        virtual void draw();
+        void draw();
 
     protected:
     private:
@@ -40,4 +37,4 @@ class drawable{
 } /* namespace simulation */
 } /* namespace vemc2 */
 
-#endif // DRAWABLE_H
+#endif // DRAWABLE_H_INCLUDED
