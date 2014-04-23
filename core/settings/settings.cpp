@@ -21,21 +21,21 @@ int    Texture::UndergroundNr = 0;
 int    Texture::BackgroundNr = 0;
 float  Texture::Underground_Heigh = -100;
 
-bool   Grafik::useColoredObjs = true;
-bool   Grafik::vLines = false;
-int    Grafik::countPointsBuffer = (10*60*10*7); //10 mins, 2 Objects
-int    Grafik::fps = 0;
-int    Grafik::LoghLevel = 0;
-double Grafik::scale = 1;
-bool   Grafik::useGravPlane = true;
-//vemc2::Field_Mode Grafik::fMode = vemc::fPoints_2D;
-bdt    Grafik::fProbeSize = 100000000000;
-bool   Grafik::useSFML2overlay = false;
-bool   Grafik::useSphereForObj = true;
+bool   Graphic::useColoredObjs = true;
+bool   Graphic::vLines = false;
+int    Graphic::countPointsBuffer = (10*60*10*7); //10 mins, 2 Objects
+int    Graphic::fps = 0;
+int    Graphic::LoghLevel = 0;
+double Graphic::scale = 1;
+bool   Graphic::useGravPlane = true;
+//vemc2::Field_Mode Graphic::fMode = vemc::fPoints_2D;
+bdt    Graphic::fProbeSize = 100000000000;
+bool   Graphic::useSFML2overlay = false;
+bool   Graphic::useSphereForObj = true;
 
-int    Grafik::Sphere::countX = 20;
-int    Grafik::Sphere::countY = 10;
-int    Grafik::Sphere::mode   =  0;
+int    Graphic::Sphere::countX = 20;
+int    Graphic::Sphere::countY = 10;
+int    Graphic::Sphere::mode   =  0;
 
 float  Sim::actIntervall = 0.3;
 bool   Sim::useSimTimeToDump = false;
@@ -66,22 +66,22 @@ int vemc2::settings::init(std::fstream *f, int argc, char** argv){
     Texture::Name_Font        = tempresskjefhe;
     Texture::Underground_Heigh = -100;
 
-    Grafik::useColoredObjs = true;
-    Grafik::vLines = false;
-    Grafik::countPointsBuffer = (10*60*10*3); //10 mins, 3 Objects
-    Grafik::fps = 15;
-    Grafik::LoghLevel = 3;// 0 => no logarhythmic visualisation
-    Grafik::scale = 1;
-    Grafik::useGravPlane = true;
-    //Grafik::fMode = vemc::fLines_3D;
-    Grafik::fProbeSize = 6000000000;
-    //Grafik::fProbeSize = 50000000000;
-    Grafik::useSFML2overlay = true;
-    Grafik::useSphereForObj = false;
+    Graphic::useColoredObjs = true;
+    Graphic::vLines = false;
+    Graphic::countPointsBuffer = (10*60*10*3); //10 mins, 3 Objects
+    Graphic::fps = 15;
+    Graphic::LoghLevel = 3;// 0 => no logarhythmic visualisation
+    Graphic::scale = 1;
+    Graphic::useGravPlane = true;
+    //Graphic::fMode = vemc::fLines_3D;
+    Graphic::fProbeSize = 6000000000;
+    //Graphic::fProbeSize = 50000000000;
+    Graphic::useSFML2overlay = true;
+    Graphic::useSphereForObj = false;
 
-    Grafik::Sphere::countX = 20;
-    Grafik::Sphere::countY = 10;
-    Grafik::Sphere::mode   =  0;
+    Graphic::Sphere::countX = 20;
+    Graphic::Sphere::countY = 10;
+    Graphic::Sphere::mode   =  0;
 
     Sim::actIntervall = 0.3;
     Sim::useSimTimeToDump = false;
@@ -147,21 +147,21 @@ int vemc2::settings::init(std::fstream *f, int argc, char** argv){
         else if (compareSetting(InputS, "Texture::BackgroundNr"))      {}
         else if (compareSetting(InputS, "Texture::Underground_Heigh")) {}
 
-        else if (compareSetting(InputS, "Grafik::useColoredObjs"))     {Grafik::useColoredObjs   = setBool(tempString);}
-        else if (compareSetting(InputS, "Grafik::vLines"))             {Grafik::vLines           = setBool(tempString);}
-        else if (compareSetting(InputS, "Grafik::countPointsBuffer"))  {}
-        else if (compareSetting(InputS, "Grafik::fps"))                {}
-        else if (compareSetting(InputS, "Grafik::LoghLevel"))          {}
-        else if (compareSetting(InputS, "Grafik::scale"))              {}
-        else if (compareSetting(InputS, "Grafik::useGravPlane"))       {Grafik::useGravPlane     = setBool(tempString);}
-        else if (compareSetting(InputS, "Grafik::fMode"))              {}
-        else if (compareSetting(InputS, "Grafik::fProbeSize"))         {}
-        else if (compareSetting(InputS, "Grafik::useSFML2overlay"))    {Grafik::useSFML2overlay  = setBool(tempString);}
-        else if (compareSetting(InputS, "Grafik::useSphereForObj"))    {Grafik::useSphereForObj  = setBool(tempString);}
+        else if (compareSetting(InputS, "Graphic::useColoredObjs"))     {Graphic::useColoredObjs   = setBool(tempString);}
+        else if (compareSetting(InputS, "Graphic::vLines"))             {Graphic::vLines           = setBool(tempString);}
+        else if (compareSetting(InputS, "Graphic::countPointsBuffer"))  {}
+        else if (compareSetting(InputS, "Graphic::fps"))                {}
+        else if (compareSetting(InputS, "Graphic::LoghLevel"))          {}
+        else if (compareSetting(InputS, "Graphic::scale"))              {}
+        else if (compareSetting(InputS, "Graphic::useGravPlane"))       {Graphic::useGravPlane     = setBool(tempString);}
+        else if (compareSetting(InputS, "Graphic::fMode"))              {}
+        else if (compareSetting(InputS, "Graphic::fProbeSize"))         {}
+        else if (compareSetting(InputS, "Graphic::useSFML2overlay"))    {Graphic::useSFML2overlay  = setBool(tempString);}
+        else if (compareSetting(InputS, "Graphic::useSphereForObj"))    {Graphic::useSphereForObj  = setBool(tempString);}
 
-        else if (compareSetting(InputS, "Grafik::Sphere::countX"))     {}
-        else if (compareSetting(InputS, "Grafik::Sphere::countY"))     {}
-        else if (compareSetting(InputS, "Grafik::Sphere::mode"))       {}
+        else if (compareSetting(InputS, "Graphic::Sphere::countX"))     {}
+        else if (compareSetting(InputS, "Graphic::Sphere::countY"))     {}
+        else if (compareSetting(InputS, "Graphic::Sphere::mode"))       {}
 
         else if (compareSetting(InputS, "Sim::actIntervall"))          {}
         else if (compareSetting(InputS, "Sim::useSimTimeToDump"))      {Sim::useSimTimeToDump    = setBool(tempString);}
@@ -237,21 +237,21 @@ int vemc2::settings::printDefault(std::fstream *f){
     *f << "Texture::Name_Font=\"./res/UbuntuMono-B.ttf\"" << std::endl;
     *f << "Texture::Underground_Heigh=-100" << std::endl;
     *f << "" << std::endl;
-    *f << "#go on with namespace Grafik:" << std::endl;
-    *f << "Grafik::useColoredObjs=true" << std::endl;
-    *f << "Grafik::vLines=false" << std::endl;
-    *f << "Grafik::countPointsBuffer=18000" << std::endl;
-    *f << "Grafik::fps=15" << std::endl;
-    *f << "Grafik::LoghLevel=3" << std::endl;
-    *f << "Grafik::scale=1" << std::endl;
-    *f << "Grafik::useGravPlane=true" << std::endl;
-    *f << "Grafik::fMode=vemc::fLines_3D" << std::endl;
-    *f << "Grafik::fProbeSize=6000000000" << std::endl;
-    *f << "Grafik::useSFML2overlay=true" << std::endl;
-    *f << "Grafik::useSphereForObj=true" << std::endl;
-    *f << "Grafik::Sphere::countX=20" << std::endl;
-    *f << "Grafik::Sphere::countY=10" << std::endl;
-    *f << "Grafik::Sphere::mode=0" << std::endl;
+    *f << "#go on with namespace Graphic:" << std::endl;
+    *f << "Graphic::useColoredObjs=true" << std::endl;
+    *f << "Graphic::vLines=false" << std::endl;
+    *f << "Graphic::countPointsBuffer=18000" << std::endl;
+    *f << "Graphic::fps=15" << std::endl;
+    *f << "Graphic::LoghLevel=3" << std::endl;
+    *f << "Graphic::scale=1" << std::endl;
+    *f << "Graphic::useGravPlane=true" << std::endl;
+    *f << "Graphic::fMode=vemc::fLines_3D" << std::endl;
+    *f << "Graphic::fProbeSize=6000000000" << std::endl;
+    *f << "Graphic::useSFML2overlay=true" << std::endl;
+    *f << "Graphic::useSphereForObj=true" << std::endl;
+    *f << "Graphic::Sphere::countX=20" << std::endl;
+    *f << "Graphic::Sphere::countY=10" << std::endl;
+    *f << "Graphic::Sphere::mode=0" << std::endl;
     *f << "" << std::endl;
     *f << "#go on with namespace Sim:" << std::endl;
     *f << "Sim::actIntervall=0.3" << std::endl;

@@ -31,7 +31,7 @@ namespace settings{
         extern float  Underground_Heigh;
     };
 
-    namespace Grafik{
+    namespace Graphic{
         extern bool   useColoredObjs;
         extern bool   vLines;
         extern int    countPointsBuffer;

@@ -146,6 +146,22 @@ class universe{
                                       );
 
         /**
+         * Sets the machine to a spezified status like:
+         * - planet Simulation (bodies, gravitation, no collision)
+         * - quantum Simulation (Heisenberg & Co)
+         * - Feynman Simulation (quantums with collision)
+         * - Body Simulation (bodies with collision)
+         * Be careful, this will reset the values of the
+         * drawable Arrays and other stuff.
+         */
+        int setSimulationType();
+        int insertBody();
+        int insertQuant();
+        int insertField();
+        int insertNoobject();
+
+
+        /**
          * The following three functions
          * will be used to be overwritten
          * when this class is being inherited
