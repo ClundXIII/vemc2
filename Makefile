@@ -11,6 +11,10 @@ compile-all:
 startall: compile-all
 	bash -c "cd cons; bash portablestart.sh; cd .."
 
+clean-all:
+	make -C core clean
+	make -C cons clean
+
 init-all:
 	make -C core preinst
 	make -C core install
