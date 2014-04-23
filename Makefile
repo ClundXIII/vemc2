@@ -8,6 +8,9 @@ compile-all:
 	sudo make -C core install
 	make -C cons
 
+startall: compile-all
+	bash -c "cd cons; bash portablestart.sh; cd .."
+
 init-all:
 	make -C core preinst
 	make -C core install
