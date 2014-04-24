@@ -36,28 +36,9 @@
         #define bdt long double
     #endif
 ///end of base datatype
-
-///Define our constants we can use
 namespace vemc2{
 namespace simulation{class eld;};
-namespace mymath{
-    extern vemc2::simulation::eld e;
-    extern vemc2::simulation::eld h;
-    extern vemc2::simulation::eld angstroem;
-
-    namespace planck{
-        extern vemc2::simulation::eld m_p;
-        extern vemc2::simulation::eld l_p;
-        extern vemc2::simulation::eld t_p;
-        extern vemc2::simulation::eld q_p;
-        extern vemc2::simulation::eld T_p;
-    };
-
-    extern vemc2::simulation::eld dt;
-
 };
-}; /*namespace vemc2 */
-
 //the function itself is in mymath/eld.cpp
 vemc2::simulation::eld retEld(long double base, int exponent);
 

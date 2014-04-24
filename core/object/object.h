@@ -20,7 +20,6 @@ class object : drawable {
 
         void draw();
         void drawField();
-        void newValues();
 
         bdt getMass();
         bdt getX1();
@@ -28,9 +27,29 @@ class object : drawable {
         bdt getX3();
 
         void setMass(bdt massts);
-        void setX(bdt Xts);
-        void setY(bdt Yts);
-        void setZ(bdt Zts);
+        void setX1(bdt X1ts);
+        void setX2(bdt X2ts);
+        void setX3(bdt X3ts);
+
+        void setDataNull();
+
+        struct effect_data{ //data
+            struct{ //F
+                bdt X1;
+                bdt X2;
+                bdt X3;
+            }F;
+            struct{ //a
+                bdt X1;
+                bdt X2;
+                bdt X3;
+            }a;
+            struct{ //v
+                bdt X1;
+                bdt X2;
+                bdt X3;
+            }v;
+        }data;
 
     protected:
 

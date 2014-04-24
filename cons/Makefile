@@ -9,6 +9,7 @@ LDFLAGS=-L/opt/lib/vemc2/ -lvcore
 all: vemc2_nogui
 
 clean:
+	@touch temp/dummy
 	rm temp/*
 
 vemc2_nogui: temp/main.o

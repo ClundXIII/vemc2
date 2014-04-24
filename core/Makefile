@@ -2,13 +2,14 @@
 #this is the libcore Makefile, so we only get a .so
 
 CC=g++
-#CFLAGS=-fPIC -c -O3#optimized
-CFLAGS=-fPIC -c -Wall -g #debugging
-LDFLAGS=
+#CFLAGS=-std=c++0x -fPIC -c -O3#optimized
+CFLAGS=-std=c++0x -fPIC -c -Wall -g #debugging
+LDFLAGS=-pthread
 
 all: libvcore.so
 
 clean:
+	@touch temp/dummy
 	rm temp/* 
 
 preinst:
@@ -43,10 +44,13 @@ uninstall:
 #release:
 #	mkdir -p temp
 
-libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o
+libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
+	     temp/effect.o
 	mkdir -p temp
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
-	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o
+	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
+	temp/effect.o \
+	$(LDFLAGS)
 
 temp/object.o: object/object.cpp object/object.h
 	$(CC) $(CFLAGS) object/object.cpp      -o temp/object.o
@@ -66,21 +70,28 @@ temp/settings.o: settings/settings.cpp settings/settings.h settings/settingdefin
 	$(CC) $(CFLAGS) settings/settings.cpp  -o temp/settings.o
 temp/ccs.o: settings/ccs.cpp settings/settings.h settings/settingdefines.h
 	$(CC) $(CFLAGS) settings/ccs.cpp       -o temp/ccs.o
+temp/inertia.o: effect/inertia.cpp effect/inertia.h universe.h mymath/math_struct.h
+	$(CC) $(CFLAGS) effect/inertia.cpp     -o temp/inertia.o
+temp/effect.o: effect/effect.cpp effect/effect.h
+	$(CC) $(CFLAGS) effect/effect.cpp      -o temp/effect.o
 
 
 #Header files please:
 myMath.h:
 mymath/eld.h: define.h myMath.h
+mymath/math_struct.h: myMath.h mymath/eld.h
 object/drawable.h: define.h
 object/object.h: object/drawable.h define.h myMath.h
 object/body.h: object/object.h define.h
 object/noobject.h: object/drawable.h
 object/quant.h: object/object.h
 field/field.h: object/drawable.h effect/effect.h
-universe.h:
+universe.h: simulation.h settings/settings.h
 effect/effect.h:
+effect/inertia.h: effect/effect.h
 settings/settings.h: define.h myMath.h
 settings/settingdefines.h:
 
+simulation.h:mymath/math_struct.h effect/effect.h effect/inertia.h object/object.h object/noobject.h object/body.h object/quant.h field/field.h
 define.h:
 

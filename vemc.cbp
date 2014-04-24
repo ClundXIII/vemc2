@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="etc/;core/;core/;core/etc/;docs/;core/src/;core/src/universe/;core/src/object/;core/src/random/;core/src/object/kids/;core/src/mymath/;core/src/field/;core/src/effect/;core/src/settings/;cons/;" />
+		<Option virtualFolders="etc/;core/;core/;core/etc/;docs/;core/src/;core/src/universe/;core/src/object/;core/src/random/;core/src/object/kids/;core/src/mymath/;core/src/field/;core/src/effect/;core/src/settings/;cons/;core/src/simulation/;" />
 		<Build>
 			<Target title="all">
 				<Option output="./vemc2_X/vemc" prefix_auto="1" extension_auto="1" />
@@ -70,7 +70,22 @@
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>
+		<Unit filename="core/effect/effect.cpp">
+			<Option virtualFolder="core/src/effect/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
 		<Unit filename="core/effect/effect.h">
+			<Option virtualFolder="core/src/effect/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/effect/inertia.cpp">
+			<Option virtualFolder="core/src/effect/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/effect/inertia.h">
 			<Option virtualFolder="core/src/effect/" />
 			<Option target="all" />
 			<Option target="libcore" />
@@ -96,6 +111,11 @@
 			<Option target="libcore" />
 		</Unit>
 		<Unit filename="core/mymath/eld.h">
+			<Option virtualFolder="core/src/mymath/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/mymath/math_struct.h">
 			<Option virtualFolder="core/src/mymath/" />
 			<Option target="all" />
 			<Option target="libcore" />
@@ -162,6 +182,11 @@
 		</Unit>
 		<Unit filename="core/settings/settings.h">
 			<Option virtualFolder="core/src/settings/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/simulation.h">
+			<Option virtualFolder="core/src/" />
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>

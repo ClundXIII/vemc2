@@ -8,6 +8,12 @@ using namespace vemc2::simulation;
 object **GLOBALOBJECTS;
 
 object::object(){
+    posX1 = 0;
+    posX2 = 0;
+    posX3 = 0;
+
+    setDataNull();
+
     return;
 }
 
@@ -17,34 +23,22 @@ object::object(object *toCopy){
     posX3 = toCopy->getX3();
 
     mass = toCopy->getMass();
+
+    setDataNull();
 }
 
 object::object(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts){
-    posX1 = posX1;
-    posX2 = posX1;
-    posX3 = posX3;
+    posX1 = posX1ts;
+    posX2 = posX2ts;
+    posX3 = posX3ts;
 
     mass = massts;
+
+    setDataNull();
 }
-
-/*object::object(bdt PosX, bdt PosY, bdt PosZ, bdt Massts, vector *Speedts){
-    Pos_X = PosX;
-    Pos_Y = PosY;
-    Pos_Z = PosZ;
-
-    mass = Massts;
-
-    actSpeed.X = Speedts->X;
-    actSpeed.Y = Speedts->Y;
-    actSpeed.Z = Speedts->Z;
-}*/
 
 object::~object(){
     //dtor
-}
-
-void object::drawField(){
-
 }
 
 void object::draw(){
@@ -216,59 +210,32 @@ void object::draw(){
     #endif
 }
 
-/*void object::tick(){
 
-    /// TODO: fix this!!
+void object::drawField(){
 
-    VectorHelper tempVektor;
-
-    postToAdd.X = 0;
-    postToAdd.Y = 0;
-    postToAdd.Z = 0;
-
-    SpedToAdd.X = 0;
-    SpedToAdd.Y = 0;
-    SpedToAdd.Z = 0;
-
-    #ifdef debug
-    //  std::cout << "meine Params: " << Pos_X << " " << Pos_Y << " " << Pos_Z << " " << mass << " " << actSpeed.Wert << std::endl;
-    #endif
-    MassHelper->getF(Pos_X, Pos_Y, Pos_Z, mass, &tempVektor);
-    tempVektor.X *= ZeitIntervall / mass;
-    tempVektor.Y *= ZeitIntervall / mass;
-    tempVektor.Z *= ZeitIntervall / mass;
-
-    SpedToAdd.X -= tempVektor.X;
-    SpedToAdd.Y -= tempVektor.Y;
-    SpedToAdd.Z -= tempVektor.Z;
-
-}*/
-
-void object::newValues(){
-    /*
-    Pos_X += actSpeed.X * ZeitIntervall;
-    Pos_Y += actSpeed.Y * ZeitIntervall;
-    Pos_Z += actSpeed.Z * ZeitIntervall;
-
-    actSpeed.X += SpedToAdd.X;
-    actSpeed.Y += SpedToAdd.Y;
-    actSpeed.Z += SpedToAdd.Z;
-    */
 }
 
-bdt object::getMass() {return mass;}
-bdt object::getX1()   {return posX1;}
-bdt object::getX2()   {return posX2;}
-bdt object::getX3()   {return posX3;}
 
+bdt object::getMass(){return mass;}
+bdt object::getX1()  {return posX1;}
+bdt object::getX2()  {return posX2;}
+bdt object::getX3()  {return posX3;}
 
-///TODO: fill in
-/*VectorHelper *object::getV(){
-    VectorHelper *temp;
-    temp = new VectorHelper;
-    temp->X = actSpeed.X;
-    temp->Y = actSpeed.Y;
-    temp->Z = actSpeed.Z;
-    temp->convertXYZToRotWert();
-    return temp;
-}*/
+void object::setMass(bdt massts){mass  = massts;}
+void object::setX1(bdt X1ts)    {posX1 = X1ts;}
+void object::setX2(bdt X2ts)    {posX2 = X2ts;}
+void object::setX3(bdt X3ts)    {posX3 = X3ts;}
+
+void object::setDataNull(){
+    data.F.X1 = 0;
+    data.F.X2 = 0;
+    data.F.X3 = 0;
+
+    data.v.X1 = 0;
+    data.v.X2 = 0;
+    data.v.X3 = 0;
+
+    data.a.X1 = 0;
+    data.a.X2 = 0;
+    data.a.X3 = 0;
+}

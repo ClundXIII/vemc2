@@ -9,7 +9,7 @@ int main(int argc, char *argv[]){
 
     vemc2::universe *world = new vemc2::universe();
 
-    //world.setSimulationType(vemc2::bodySimulation);
+    //world->setSimulationType(vemc2::planetSimulation);
 
     return 0;
 }

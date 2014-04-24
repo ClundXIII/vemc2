@@ -1,6 +1,8 @@
 #ifndef EFFECT_H_INCLUDED
 #define EFFECT_H_INCLUDED
 
+#include "./../object/object.h"
+
 /**
  * This is the mother class of all effects.
  *
@@ -11,9 +13,13 @@
  */
 
 namespace vemc2{
+
+class universe;
+
 namespace simulation{
 
 class effect{
+
     public:
 
         /**
@@ -36,14 +42,11 @@ class effect{
          */
         virtual void upValues();
 
-        //static void insertObjects():
-
     protected:
 
-        //static
+        vemc2::universe *globUniverse;
 
     private:
-
         //
 
 };

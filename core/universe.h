@@ -13,17 +13,8 @@
  * @version 0.0.01
  */
 
-#include "object/object.h"
-#include "object/noobject.h"
-#include "object/body.h"
-#include "object/quant.h"
-#include "field/field.h"
+#include "simulation.h"
 #include "settings/settings.h"
-
-using namespace vemc2;
-using namespace vemc2::simulation;
-using namespace vemc2::settings;
-
 
 namespace vemc2{
 
@@ -96,7 +87,7 @@ class universe{
             }graphic;
 
             struct{ // sim
-                float actIntervall;
+                bdt   dt;
                 bool  useSimTimeToDump;
                 bool  showDebText;
                 bool  useParaProc;
@@ -116,7 +107,7 @@ class universe{
                 int   offY;
                 int   offZ;
                 float stretch;
-                Field_Dir Ver_Richt;
+                vemc2::settings::Field_Dir Ver_Richt;
                 int   MaxFieldAct; //if 0, ->unlimeted
             }gravPlane;
 
@@ -131,14 +122,44 @@ class universe{
          * Be careful, this will reset the values of the
          * drawable Arrays and other stuff.
          */
-        int setSimulationType();
+        int setSimulationType(vemc2::simulation_type simTypets);
         int insertBody();
         int insertQuant();
         int insertField();
         int insertNoobject();
 
+        /**
+         * List of objects that are being used
+         * Every object is in his own array AND
+         * in the array of the mother class and
+         * of the grandmother class, etc.
+         * --> Some Objects are in more than one
+         * array. Every Object is at least in the
+         * drawable Array.
+         *
+         * The arrays are being used by the
+         * Effects and Fields, ...
+         *
+         * Maybe we have to set them as public
+         */
+         drawable **drawableArray;
+         object   **objectArray;
+         body     **bodyArray;
+         quant    **quantArray;
+         field    **fieldArray;
+         noobject **noobjectArray;
+
+         int drawableCount;
+         int objectCount;
+         int bodyCount;
+         int quantCount;
+         int fieldCount;
+         int noobjectCount;
+
 
     protected:
+
+        vemc2::simulation_type simType;
 
         /**
          * This function copies the global settings from the
@@ -174,32 +195,13 @@ class universe{
         void invokeAfterSim();
 
         /**
-         * List of objects that are being used
-         * Every object is in his own array AND
-         * in the array of the mother class and
-         * of the grandmother class, etc.
-         * --> Some Objects are in more than one
-         * array. Every Object is at least in the
-         * drawable Array.
-         *
-         * The arrays are being used by the
-         * Effects and Fields, ...
-         *
-         * Maybe we have to set them as public
+         * Effect List contain all effects.
+         * They will be called from 0 to
+         * effectCount-1
          */
-         drawable **drawableArray;
-         object   **objectArray;
-         body     **bodyArray;
-         quant    **quantArray;
-         field    **fieldArray;
-         noobject **noobjectArray;
 
-         int drawableCount;
-         int objectCount;
-         int bodyCount;
-         int quantCount;
-         int fieldCount;
-         int noobjectCount;
+         effect **effectArray;
+         int      effectCount;
 
     private:
 

@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 
-using namespace vemc2;
 using namespace std;
+using namespace vemc2;
+using namespace vemc2::simulation;
+using namespace vemc2::settings;
 
 universe::universe(){
     cout << "===============================================" << endl;
@@ -34,10 +36,13 @@ universe::universe(){
                                       );
     cout << "                                done!" << endl;
     cout << "(10)creating simulation           ..." << endl;
-    cout << "(11)creating simThread            ..." << endl;
+    cout << "(11)setting up effects            ..." << endl;
+    //
+    cout << "                                done!" << endl;
+    cout << "(12)creating simThread            ..." << endl;
     cout << "                                done!" << endl;
 
-    cout << " sucessfully created a new universum!" << endl;
+    cout << "  sucessfully created a new universe!" << endl;
 }
 
 universe::~universe(){
@@ -52,6 +57,40 @@ void universe::run(){
 }
 
 void universe::run(double secondsToRun){
+}
+
+/**
+ *
+ *
+ *
+ *
+ *
+ */
+int universe::setSimulationType(vemc2::simulation_type simTypets){
+    simType = simTypets;
+    ///TODO: add reserve Array space invoking here
+
+    return 0;
+}
+
+/**
+ * Inserts
+ */
+int universe::insertBody(){
+
+    return 0;
+}
+int universe::insertQuant(){
+
+    return 0;
+}
+int universe::insertField(){
+
+    return 0;
+}
+int universe::insertNoobject(){
+
+    return 0;
 }
 
 void universe::getGlobalSettings(){
@@ -83,7 +122,7 @@ void universe::getGlobalSettings(){
     settings.graphic.sphere.countY      = settings::Graphic::Sphere::countY;
     settings.graphic.sphere.mode        = settings::Graphic::Sphere::mode;
 
-    settings.sim.actIntervall           = settings::Sim::actIntervall;
+    settings.sim.dt                     = settings::Sim::actIntervall;
     settings.sim.useSimTimeToDump       = settings::Sim::useSimTimeToDump;
     settings.sim.showDebText            = settings::Sim::showDebText;
     settings.sim.useParaProc            = settings::Sim::useParaProc;
