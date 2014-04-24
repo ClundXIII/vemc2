@@ -216,10 +216,10 @@ void object::draw(){
     #endif
 }
 
-void object::tick(){
+/*void object::tick(){
 
     /// TODO: fix this!!
-    /*
+
     VectorHelper tempVektor;
 
     postToAdd.X = 0;
@@ -241,8 +241,8 @@ void object::tick(){
     SpedToAdd.X -= tempVektor.X;
     SpedToAdd.Y -= tempVektor.Y;
     SpedToAdd.Z -= tempVektor.Z;
-    */
-}
+
+}*/
 
 void object::newValues(){
     /*

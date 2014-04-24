@@ -9,7 +9,7 @@ using namespace vemc2::simulation;
 namespace vemc2{
 namespace simulation{
 
-class field : drawable, effect{
+class field : drawable{
     public:
         field();
         ~field();

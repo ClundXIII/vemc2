@@ -18,18 +18,25 @@ namespace simulation{
  *  └─noobject  //something, that is not simulated (active or non-active)
  *
  * @author Simon Michalke
- * @version 0.9
+ * @version 0.0.01
  *
  */
 
 class drawable{
     public:
+
         drawable();
         ~drawable();
 
-        void draw();
+		void setActive(bool activets);
+		bool isActive();
+
+        virtual void draw()=0;
 
     protected:
+
+		bool active;
+
     private:
 
 };

@@ -34,6 +34,13 @@ class body : object {
 
     protected:
 
+        /**
+         * Thanks to Gisela Anton for this idea!
+         */
+        bdt rotX1;
+        bdt rotX2;
+        bdt rotX3;
+
 };
 
 } /*namespace simulation */

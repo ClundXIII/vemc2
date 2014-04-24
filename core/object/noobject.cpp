@@ -10,14 +10,6 @@ noobject::~noobject(){
 	// dtor
 }
 
-void noobject::setActive(bool activets){
-	active = activets;
-}
-
-bool noobject::isActive(){
-	return active;
-}
-
 void noobject::draw(){
 	if (active){
 		//

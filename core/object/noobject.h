@@ -10,11 +10,11 @@ namespace simulation{
 /**
  * This is not an object that takes
  * part in the simulation
- * this will just be drawn by the graphics 
+ * this will just be drawn by the graphics
  * to visulize something
  *
  * @author Simon Michalke
- * @version 0.9
+ * @version 0.0.01
  *
  */
 
@@ -23,15 +23,10 @@ class noobject : drawable{
         noobject();
         ~noobject();
 
-		void setActive(bool activets);
-		bool isActive();
-		
         void draw();
 
     protected:
     private:
-	
-		bool active;
 
 };
 

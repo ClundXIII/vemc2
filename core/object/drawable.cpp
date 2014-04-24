@@ -8,6 +8,10 @@ drawable::drawable(){
 drawable::~drawable(){
     //dtor
 }
+ void drawable::setActive(bool activets){
+     active = activets;
+ }
 
-void drawable::draw(){
-}
+ bool drawable::isActive(){
+    return active;
+ }

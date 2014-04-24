@@ -32,7 +32,7 @@
  * (could also be a float or double as parameter)
  *
  * @author Simon Michalke
- * @version 0.9
+ * @version 0.0.01
  */
 
 namespace vemc2{

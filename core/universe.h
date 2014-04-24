@@ -10,7 +10,7 @@
  * "universe" class //todo: make this sure :/
  *
  * @author Simon Michalke
- * @version 0.9
+ * @version 0.0.01
  */
 
 #include "object/object.h"
@@ -62,7 +62,7 @@ class universe{
          *
          *
          */
-        struct{ // settings
+        struct{ // settings struct
 
             struct{ // texture struct
                 bool   used;
@@ -122,6 +122,22 @@ class universe{
 
         }settings;
 
+        /**
+         * Sets the machine to a spezified status like:
+         * - planet Simulation (bodies, gravitation, no collision)
+         * - quantum Simulation (Heisenberg & Co)
+         * - Feynman Simulation (quantums with collision)
+         * - Body Simulation (bodies with collision)
+         * Be careful, this will reset the values of the
+         * drawable Arrays and other stuff.
+         */
+        int setSimulationType();
+        int insertBody();
+        int insertQuant();
+        int insertField();
+        int insertNoobject();
+
+
     protected:
 
         /**
@@ -137,28 +153,13 @@ class universe{
          * maybe we need long instead of int ...
          */
         void reservDrawableArraySpace(\
-                                      int drawableCount,  \
-                                      int objectCount,    \
-                                      int bodyCount,      \
-                                      int quantCount,     \
-                                      int fieldCount,     \
-                                      int noobjectCount   \
+                                      int drawableCountts,  \
+                                      int objectCountts,    \
+                                      int bodyCountts,      \
+                                      int quantCountts,     \
+                                      int fieldCountts,     \
+                                      int noobjectCountts   \
                                       );
-
-        /**
-         * Sets the machine to a spezified status like:
-         * - planet Simulation (bodies, gravitation, no collision)
-         * - quantum Simulation (Heisenberg & Co)
-         * - Feynman Simulation (quantums with collision)
-         * - Body Simulation (bodies with collision)
-         * Be careful, this will reset the values of the
-         * drawable Arrays and other stuff.
-         */
-        int setSimulationType();
-        int insertBody();
-        int insertQuant();
-        int insertField();
-        int insertNoobject();
 
 
         /**
@@ -192,6 +193,13 @@ class universe{
          quant    **quantArray;
          field    **fieldArray;
          noobject **noobjectArray;
+
+         int drawableCount;
+         int objectCount;
+         int bodyCount;
+         int quantCount;
+         int fieldCount;
+         int noobjectCount;
 
     private:
 

@@ -21,7 +21,6 @@ class object : drawable {
         void draw();
         void drawField();
         void newValues();
-        void tick();
 
         bdt getMass();
         bdt getX1();

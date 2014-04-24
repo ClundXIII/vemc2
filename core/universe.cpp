@@ -8,14 +8,22 @@ using namespace vemc2;
 using namespace std;
 
 universe::universe(){
+    cout << "===============================================" << endl;
     cout << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << endl;
     cout << "vcore Library, Version 0.0.01-pre / 23042014" << endl;
-    cout << "Have a lot of fun ..." << endl;
-    cout << "    creating new universe         ..."   << endl;
-    cout << "(01)getting global settings       ..."   << endl;
+    cout << "Have a lot of fun ...                " << endl;
+    cout << "    creating new universe         ..." << endl;
+    cout << "(00)                                 " << endl;
+    cout << "(01)getting global settings       ..." << endl;
     getGlobalSettings();
-    cout << "                                  done!" << endl;
-    cout << "(02)reserving space for drawables ..."   << endl;
+    cout << "                                done!" << endl;
+    cout << "(02)reserving space for drawables ..." << endl;
+    drawableArray =0;
+    objectArray   =0;
+    bodyArray     =0;
+    quantArray    =0;
+    fieldArray    =0;
+    noobjectArray =0;
     reservDrawableArraySpace(\
                                       2168, //drawableCount
                                       2048, //objectCount
@@ -24,10 +32,12 @@ universe::universe(){
                                        128, //fieldCount
                                         16  //noobjectCount
                                       );
-    cout << "                                  done!" << endl;
-    cout << "(10)creating simulation           ..."   << endl;
-    cout << "(11)creating simThread            ..."   << endl;
-    cout << "                                  done!" << endl;
+    cout << "                                done!" << endl;
+    cout << "(10)creating simulation           ..." << endl;
+    cout << "(11)creating simThread            ..." << endl;
+    cout << "                                done!" << endl;
+
+    cout << " sucessfully created a new universum!" << endl;
 }
 
 universe::~universe(){
@@ -94,43 +104,64 @@ void universe::getGlobalSettings(){
 }
 
 void universe::reservDrawableArraySpace(\
-                              int drawableCount, \
-                              int objectCount,   \
-                              int bodyCount,     \
-                              int quantCount,    \
-                              int fieldCount,    \
-                              int noobjectCount  \
+                              int drawableCountts, \
+                              int objectCountts,   \
+                              int bodyCountts,     \
+                              int quantCountts,    \
+                              int fieldCountts,    \
+                              int noobjectCountts  \
                               ){
-    drawableArray = new drawable*[drawableCount];
-    for (int i=0; i<drawableCount; i++)
+
+    if (drawableArray != 0){
+        cout << "    deleting old drawables ..." << endl;
+        for (int i=0; i<drawableCount; i++)
+            if (drawableArray[i])
+                delete(drawableArray[i]);
+        delete drawableArray;
+        delete objectArray;
+        delete bodyArray;
+        delete quantArray;
+        delete fieldArray;
+        delete noobjectArray;
+    }
+
+
+    drawableArray = new drawable*[drawableCountts];
+    for (int i=0; i<drawableCountts; i++)
         drawableArray[i] = 0;
-    cout << "    " << drawableCount << " drawables" << endl;
+    cout << "    " << drawableCountts << " drawables" << endl;
 
-    objectArray   = new object*[objectCount];
-    for (int i=0; i<objectCount; i++)
+    objectArray   = new object*[objectCountts];
+    for (int i=0; i<objectCountts; i++)
         objectArray[i] = 0;
-    cout << "    " << objectCount << " objects" << endl;
+    cout << "    " << objectCountts << " objects" << endl;
 
-    bodyArray     = new body*[bodyCount];
-    for (int i=0; i<bodyCount; i++)
+    bodyArray     = new body*[bodyCountts];
+    for (int i=0; i<bodyCountts; i++)
         bodyArray[i] = 0;
-    cout << "    " << bodyCount << " bodies" << endl;
+    cout << "    " << bodyCountts << " bodies" << endl;
 
-    quantArray    = new quant*[quantCount];
-    for (int i=0; i<quantCount; i++)
+    quantArray    = new quant*[quantCountts];
+    for (int i=0; i<quantCountts; i++)
         quantArray[i] = 0;
-    cout << "    " << quantCount << " quants" << endl;
+    cout << "    " << quantCountts << " quants" << endl;
 
-    fieldArray    = new field*[fieldCount];
-    for (int i=0; i<fieldCount; i++)
+    fieldArray    = new field*[fieldCountts];
+    for (int i=0; i<fieldCountts; i++)
         fieldArray[i] = 0;
-    cout << "    " << fieldCount << " fields" << endl;
+    cout << "    " << fieldCountts << " fields" << endl;
 
-    noobjectArray = new noobject*[noobjectCount];
-    for (int i=0; i<noobjectCount; i++)
+    noobjectArray = new noobject*[noobjectCountts];
+    for (int i=0; i<noobjectCountts; i++)
         noobjectArray[i] = 0;
-    cout << "    " << noobjectCount << " noobjects" << endl;
+    cout << "    " << noobjectCountts << " noobjects" << endl;
 
+    drawableCount = drawableCountts;
+    objectCount   = objectCountts;
+    bodyCount     = bodyCountts;
+    quantCount    = quantCountts;
+    fieldCount    = fieldCountts;
+    noobjectCount = noobjectCountts;
 }
 
 void universe::invokeBeforeSim(){}
