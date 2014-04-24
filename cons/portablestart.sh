@@ -1,13 +1,4 @@
-echo "###################################################"
-echo "#                                                 #"
-echo "#  Visualeiemc2 - (c) by Simon Michalke, 04/2014  #"
-echo "#                                                 #"
-echo "#              --- DEMO Version ---               #"
-echo "#                portable start                   #"
-echo "#                                                 #"
-echo "#  email: simon.m.m@freenet.de                    #"
-echo "#                                                 #"
-echo "###################################################"
+echo "starting portable app ..."
 echo Library Path: $LD_LIBRARY_PATH
 if [ $# -eq 0 ]
  then
