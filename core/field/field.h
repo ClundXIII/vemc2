@@ -11,13 +11,23 @@ namespace simulation{
 
 class field : drawable{
     public:
-        field();
-        ~field();
 
-        void draw();
+        /**
+         * We don't declare any contructors / destructors so the
+         * compiler doesn't search for them ;-)
+         */
+        //field();
+        //~field();
+
+        virtual void draw();
 
     protected:
     private:
+
+        /**
+         * This is a pointer to the universe the field belongs to.
+         */
+        vemc2::universe *globUniverse;
 
 };
 

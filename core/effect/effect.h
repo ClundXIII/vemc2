@@ -44,6 +44,9 @@ class effect{
 
     protected:
 
+        /**
+         * This is a pointer to the universe the effect belongs to.
+         */
         vemc2::universe *globUniverse;
 
     private:

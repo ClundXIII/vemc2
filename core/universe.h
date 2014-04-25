@@ -86,13 +86,18 @@ class universe{
 
             }graphic;
 
-            struct{ // sim
-                bdt   dt;
+            struct{ // sim_thread
                 bool  useSimTimeToDump;
                 bool  showDebText;
                 bool  useParaProc;
                 int   countParaThreads;
-                bool  quant_Simulation;
+            }sim_thread;
+
+            struct{ // sim
+                bdt       dt;
+                bool      quant_Simulation;
+                bool      body_Simulation;
+                bool      use_srt;
             }sim;
 
             struct{ //win
@@ -158,6 +163,17 @@ class universe{
 
 
     protected:
+
+        /**
+         * The field struct contain all fields sorted by type.
+         * This struct will be used by the effects, so that
+         * they find their field more easy.
+         * For drawing, use the **fieldArray!
+         * For own theories / fields, extend this array
+         */
+        struct field_struct{
+            //
+        }fields;
 
         vemc2::simulation_type simType;
 

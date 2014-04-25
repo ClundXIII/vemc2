@@ -102,44 +102,45 @@ void universe::getGlobalSettings(){
     strcpy(settings.texture.Name_Background,  settings::Texture::Name_Background);
     strcpy(settings.texture.Name_Font,        settings::Texture::Name_Font);
 
-    settings.texture.UndergroundNr      = 0;
-    settings.texture.BackgroundNr       = 0;
-    settings.texture.Underground_Heigh  = 0;
+    settings.texture.UndergroundNr          = 0;
+    settings.texture.BackgroundNr           = 0;
+    settings.texture.Underground_Heigh      = 0;
 
-    settings.graphic.useColoredObjs     = settings::Graphic::useColoredObjs;
-    settings.graphic.vLines             = settings::Graphic::vLines;
-    settings.graphic.countPointsBuffer  = settings::Graphic::countPointsBuffer;
-    settings.graphic.fps                = settings::Graphic::fps;
-    settings.graphic.LoghLevel          = settings::Graphic::LoghLevel;
-    settings.graphic.scale              = settings::Graphic::scale;
-    settings.graphic.useGravPlane       = settings::Graphic::useGravPlane;
-    //settings.graphic.fMode              = settings::Graphic::fMode;
-    settings.graphic.fProbeSize         = settings::Graphic::fProbeSize;
-    settings.graphic.useSFML2overlay    = settings::Graphic::useSFML2overlay;
-    settings.graphic.useSphereForObj    = settings::Graphic::useSphereForObj;
+    settings.graphic.useColoredObjs         = settings::Graphic::useColoredObjs;
+    settings.graphic.vLines                 = settings::Graphic::vLines;
+    settings.graphic.countPointsBuffer      = settings::Graphic::countPointsBuffer;
+    settings.graphic.fps                    = settings::Graphic::fps;
+    settings.graphic.LoghLevel              = settings::Graphic::LoghLevel;
+    settings.graphic.scale                  = settings::Graphic::scale;
+    settings.graphic.useGravPlane           = settings::Graphic::useGravPlane;
+    //settings.graphic.fMode                  = settings::Graphic::fMode;
+    settings.graphic.fProbeSize             = settings::Graphic::fProbeSize;
+    settings.graphic.useSFML2overlay        = settings::Graphic::useSFML2overlay;
+    settings.graphic.useSphereForObj        = settings::Graphic::useSphereForObj;
 
-    settings.graphic.sphere.countX      = settings::Graphic::Sphere::countX;
-    settings.graphic.sphere.countY      = settings::Graphic::Sphere::countY;
-    settings.graphic.sphere.mode        = settings::Graphic::Sphere::mode;
+    settings.graphic.sphere.countX          = settings::Graphic::Sphere::countX;
+    settings.graphic.sphere.countY          = settings::Graphic::Sphere::countY;
+    settings.graphic.sphere.mode            = settings::Graphic::Sphere::mode;
 
-    settings.sim.dt                     = settings::Sim::actIntervall;
-    settings.sim.useSimTimeToDump       = settings::Sim::useSimTimeToDump;
-    settings.sim.showDebText            = settings::Sim::showDebText;
-    settings.sim.useParaProc            = settings::Sim::useParaProc;
-    settings.sim.countParaThreads       = settings::Sim::countParaThreads;
-    settings.sim.quant_Simulation       = settings::Sim::quant_Simulation;
+    settings.sim_thread.useSimTimeToDump    = settings::Sim::useSimTimeToDump;
+    settings.sim_thread.showDebText         = settings::Sim::showDebText;
+    settings.sim_thread.useParaProc         = settings::Sim::useParaProc;
+    settings.sim_thread.countParaThreads    = settings::Sim::countParaThreads;
 
-    settings.win.SPSreal                = settings::Win::SPSreal;
+    settings.sim.dt                         = settings::Sim::actIntervall;
+    settings.sim.quant_Simulation           = settings::Sim::quant_Simulation;
 
-    settings.gravPlane.countX           = settings::gravPlane::countX;
-    settings.gravPlane.countY           = settings::gravPlane::countY;
-    settings.gravPlane.countZ           = settings::gravPlane::countZ;
-    settings.gravPlane.offX             = settings::gravPlane::offX;
-    settings.gravPlane.offY             = settings::gravPlane::offY;
-    settings.gravPlane.offZ             = settings::gravPlane::offZ;
-    settings.gravPlane.stretch          = settings::gravPlane::stretch;
-    settings.gravPlane.Ver_Richt        = settings::gravPlane::Ver_Richt;
-    settings.gravPlane.MaxFieldAct      = settings::gravPlane::MaxFieldAct;
+    settings.win.SPSreal                    = settings::Win::SPSreal;
+
+    settings.gravPlane.countX               = settings::gravPlane::countX;
+    settings.gravPlane.countY               = settings::gravPlane::countY;
+    settings.gravPlane.countZ               = settings::gravPlane::countZ;
+    settings.gravPlane.offX                 = settings::gravPlane::offX;
+    settings.gravPlane.offY                 = settings::gravPlane::offY;
+    settings.gravPlane.offZ                 = settings::gravPlane::offZ;
+    settings.gravPlane.stretch              = settings::gravPlane::stretch;
+    settings.gravPlane.Ver_Richt            = settings::gravPlane::Ver_Richt;
+    settings.gravPlane.MaxFieldAct          = settings::gravPlane::MaxFieldAct;
 }
 
 void universe::reservDrawableArraySpace(\
