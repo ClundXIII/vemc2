@@ -45,11 +45,11 @@ uninstall:
 #	mkdir -p temp
 
 libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	     temp/effect.o
+	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o
 	mkdir -p temp
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
 	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	temp/effect.o \
+	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o \
 	$(LDFLAGS)
 
 temp/object.o: object/object.cpp object/object.h
@@ -74,24 +74,37 @@ temp/inertia.o: effect/inertia.cpp effect/inertia.h universe.h mymath/math_struc
 	$(CC) $(CFLAGS) effect/inertia.cpp     -o temp/inertia.o
 temp/effect.o: effect/effect.cpp effect/effect.h
 	$(CC) $(CFLAGS) effect/effect.cpp      -o temp/effect.o
-
+temp/Gfield.o: field/Gfield.cpp field/Gfield.h
+	$(CC) $(CFLAGS) field/Gfield.cpp       -o temp/Gfield.o
+temp/Efield.o: field/Efield.cpp field/Efield.h
+	$(CC) $(CFLAGS) field/Efield.cpp       -o temp/Efield.o
+temp/sim_thread.o: simulation/sim_thread.cpp simulation/sim_thread.h
+	$(CC) $(CFLAGS) simulation/sim_thread.cpp    -o temp/sim_thread.o
 
 #Header files please:
 myMath.h:
 mymath/eld.h: define.h myMath.h
 mymath/math_struct.h: myMath.h mymath/eld.h
+
 object/drawable.h: define.h
 object/object.h: object/drawable.h define.h myMath.h
 object/body.h: object/object.h define.h
 object/noobject.h: object/drawable.h
 object/quant.h: object/object.h
+
 field/field.h: object/drawable.h effect/effect.h
+field/Gfield.h: field/field.h
+field/Efield.h: field/field.h
+
 universe.h: simulation.h settings/settings.h
+
 effect/effect.h:
 effect/inertia.h: effect/effect.h
+
 settings/settings.h: define.h myMath.h
 settings/settingdefines.h:
 
+simulation/sim_thread.h:
 simulation.h:mymath/math_struct.h effect/effect.h effect/inertia.h object/object.h object/noobject.h object/body.h object/quant.h field/field.h
 define.h:
 

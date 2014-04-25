@@ -11,5 +11,7 @@ int main(int argc, char *argv[]){
 
     //world->setSimulationType(vemc2::planetSimulation);
 
+    delete world;
+
     return 0;
 }

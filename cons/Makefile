@@ -1,8 +1,8 @@
 #Makefile for vemc2 (c) by Simon Michalke, 2014
 
 CC=g++
-#CFLAGS=-c -O3 -I./../core #optimized
-CFLAGS=-c -Wall -g -I./../core #debugging
+#CFLAGS=-std=c++0x -c -O3 -I./../core #optimized
+CFLAGS=-std=c++0x -c -Wall -g -I./../core #debugging
 LDFLAGS=-L/opt/lib/vemc2/ -lvcore
 
 

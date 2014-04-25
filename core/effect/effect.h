@@ -34,13 +34,13 @@ class effect{
          * The effects should save the changes theirselves to
          * apply them in the upValues() function.
          */
-        virtual void tick();
+        virtual void tick() =0;
 
         /**
          * This function applies the changes / effects / etc
          * which were calculated by the tick() function before.
          */
-        virtual void upValues();
+        virtual void upValues()  =0;
 
     protected:
 

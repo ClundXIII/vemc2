@@ -46,7 +46,17 @@ universe::universe(){
 }
 
 universe::~universe(){
-    //dtor
+
+    cout << "(END) delete() invoked ... cleaning up ..." << endl;
+
+    //cleaning up
+    deleteAllDrawables();
+    deleteAllEffects();
+
+    cout << "If you see this, there wasn't a single" << endl;
+    cout << "SEGFAULT ... HORAAAAYYYY!!!!" << endl;
+    cout << "" << endl;
+    cout << "World sucessfully deleted!" << endl;
 }
 
 void universe::start(){
@@ -152,19 +162,7 @@ void universe::reservDrawableArraySpace(\
                               int noobjectCountts  \
                               ){
 
-    if (drawableArray != 0){
-        cout << "    deleting old drawables ..." << endl;
-        for (int i=0; i<drawableCount; i++)
-            if (drawableArray[i])
-                delete(drawableArray[i]);
-        delete drawableArray;
-        delete objectArray;
-        delete bodyArray;
-        delete quantArray;
-        delete fieldArray;
-        delete noobjectArray;
-    }
-
+    deleteAllDrawables();
 
     drawableArray = new drawable*[drawableCountts];
     for (int i=0; i<drawableCountts; i++)
@@ -208,3 +206,28 @@ void universe::invokeBeforeSim(){}
 void universe::invokeMiddleSim(){}
 void universe::invokeAfterSim(){}
 
+
+void universe::deleteAllDrawables(){
+    if (drawableArray != 0){
+        cout << "    deleting old drawables ..." << endl;
+        for (int i=0; i<drawableCount; i++)
+            if (drawableArray[i])
+                delete(drawableArray[i]);
+        delete drawableArray;
+        delete objectArray;
+        delete bodyArray;
+        delete quantArray;
+        delete fieldArray;
+        delete noobjectArray;
+    }
+}
+
+void universe::deleteAllEffects(){
+    if (effectArray != 0){
+        for (int i=0; i<effectCount; i++)
+            if (effectArray[i] != 0)
+                delete (effectArray[i]);
+
+        effectArray = 0;
+    }
+}

@@ -215,11 +215,21 @@ class universe{
          * They will be called from 0 to
          * effectCount-1
          */
-
          effect **effectArray;
          int      effectCount;
 
     private:
+
+        /**
+         * Cleaning up the memory and deletes all the drawables
+         * (including the fields)
+         */
+        void deleteAllDrawables();
+
+        /**
+         * Cleaning up the memory and deletes all the effects;
+         */
+        void deleteAllEffects();
 
 
 };

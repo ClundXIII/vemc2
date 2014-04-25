@@ -90,6 +90,26 @@
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>
+		<Unit filename="core/field/Efield.cpp">
+			<Option virtualFolder="core/src/field/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/field/Efield.h">
+			<Option virtualFolder="core/src/field/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/field/Gfield.cpp">
+			<Option virtualFolder="core/src/field/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/field/Gfield.h">
+			<Option virtualFolder="core/src/field/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
 		<Unit filename="core/field/field.cpp">
 			<Option virtualFolder="core/src/field/" />
 			<Option target="all" />
@@ -187,6 +207,26 @@
 		</Unit>
 		<Unit filename="core/simulation.h">
 			<Option virtualFolder="core/src/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/simulation/sim_thread.cpp">
+			<Option virtualFolder="core/src/simulation/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/simulation/sim_thread.h">
+			<Option virtualFolder="core/src/simulation/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/simulation/threadhelper.cpp">
+			<Option virtualFolder="core/src/simulation/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/simulation/threadhelper.h">
+			<Option virtualFolder="core/src/simulation/" />
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>
