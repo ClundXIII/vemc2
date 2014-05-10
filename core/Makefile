@@ -78,7 +78,7 @@ temp/Gfield.o: field/Gfield.cpp field/Gfield.h
 	$(CC) $(CFLAGS) field/Gfield.cpp       -o temp/Gfield.o
 temp/Efield.o: field/Efield.cpp field/Efield.h
 	$(CC) $(CFLAGS) field/Efield.cpp       -o temp/Efield.o
-temp/sim_thread.o: simulation/sim_thread.cpp simulation/sim_thread.h
+temp/sim_thread.o: simulation/sim_thread.cpp simulation/sim_thread.h universe.h
 	$(CC) $(CFLAGS) simulation/sim_thread.cpp    -o temp/sim_thread.o
 
 #Header files please:

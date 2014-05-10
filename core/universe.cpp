@@ -37,7 +37,10 @@ universe::universe(){
     cout << "                                done!" << endl;
     cout << "(10)creating simulation           ..." << endl;
     cout << "(11)setting up effects            ..." << endl;
-    //
+    effectCount = 16;
+    effectArray = new effect*[16];
+    for (int i=0; i<effectCount; i++)
+        effectArray[i] = 0;
     cout << "                                done!" << endl;
     cout << "(12)creating simThread            ..." << endl;
     cout << "                                done!" << endl;

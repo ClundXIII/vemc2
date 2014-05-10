@@ -220,16 +220,6 @@
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>
-		<Unit filename="core/simulation/threadhelper.cpp">
-			<Option virtualFolder="core/src/simulation/" />
-			<Option target="all" />
-			<Option target="libcore" />
-		</Unit>
-		<Unit filename="core/simulation/threadhelper.h">
-			<Option virtualFolder="core/src/simulation/" />
-			<Option target="all" />
-			<Option target="libcore" />
-		</Unit>
 		<Unit filename="core/universe.cpp">
 			<Option virtualFolder="core/src/universe/" />
 			<Option target="all" />
