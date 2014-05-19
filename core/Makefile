@@ -45,66 +45,129 @@ uninstall:
 #	mkdir -p temp
 
 libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o
+	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o
 	mkdir -p temp
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
 	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o \
+	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o \
 	$(LDFLAGS)
 
 temp/object.o: object/object.cpp object/object.h
-	$(CC) $(CFLAGS) object/object.cpp      -o temp/object.o
+	$(CC) $(CFLAGS) object/object.cpp            -o temp/object.o
 temp/eld.o: mymath/eld.cpp mymath/eld.h
-	$(CC) $(CFLAGS) mymath/eld.cpp         -o temp/eld.o
+	$(CC) $(CFLAGS) mymath/eld.cpp               -o temp/eld.o
 temp/noobject.o: object/noobject.cpp object/noobject.h
-	$(CC) $(CFLAGS) object/noobject.cpp    -o temp/noobject.o
+	$(CC) $(CFLAGS) object/noobject.cpp          -o temp/noobject.o
 temp/field.o: field/field.cpp field/field.h
-	$(CC) $(CFLAGS) field/field.cpp        -o temp/field.o
+	$(CC) $(CFLAGS) field/field.cpp              -o temp/field.o
 temp/quant.o: object/quant.cpp object/quant.h
-	$(CC) $(CFLAGS) object/quant.cpp       -o temp/quant.o
+	$(CC) $(CFLAGS) object/quant.cpp             -o temp/quant.o
 temp/universe.o: universe.cpp universe.h
-	$(CC) $(CFLAGS) universe.cpp           -o temp/universe.o
+	$(CC) $(CFLAGS) universe.cpp                 -o temp/universe.o
 temp/drawable.o: object/drawable.cpp object/drawable.h
-	$(CC) $(CFLAGS) object/drawable.cpp    -o temp/drawable.o
+	$(CC) $(CFLAGS) object/drawable.cpp          -o temp/drawable.o
 temp/settings.o: settings/settings.cpp settings/settings.h settings/settingdefines.h
-	$(CC) $(CFLAGS) settings/settings.cpp  -o temp/settings.o
+	$(CC) $(CFLAGS) settings/settings.cpp        -o temp/settings.o
 temp/ccs.o: settings/ccs.cpp settings/settings.h settings/settingdefines.h
-	$(CC) $(CFLAGS) settings/ccs.cpp       -o temp/ccs.o
+	$(CC) $(CFLAGS) settings/ccs.cpp             -o temp/ccs.o
 temp/inertia.o: effect/inertia.cpp effect/inertia.h universe.h mymath/math_struct.h
-	$(CC) $(CFLAGS) effect/inertia.cpp     -o temp/inertia.o
+	$(CC) $(CFLAGS) effect/inertia.cpp           -o temp/inertia.o
 temp/effect.o: effect/effect.cpp effect/effect.h
-	$(CC) $(CFLAGS) effect/effect.cpp      -o temp/effect.o
+	$(CC) $(CFLAGS) effect/effect.cpp            -o temp/effect.o
 temp/Gfield.o: field/Gfield.cpp field/Gfield.h
-	$(CC) $(CFLAGS) field/Gfield.cpp       -o temp/Gfield.o
+	$(CC) $(CFLAGS) field/Gfield.cpp             -o temp/Gfield.o
 temp/Efield.o: field/Efield.cpp field/Efield.h
-	$(CC) $(CFLAGS) field/Efield.cpp       -o temp/Efield.o
-temp/sim_thread.o: simulation/sim_thread.cpp simulation/sim_thread.h universe.h
+	$(CC) $(CFLAGS) field/Efield.cpp             -o temp/Efield.o
+temp/sim_thread.o: simulation/sim_thread.cpp simulation/sim_thread.h universe.h simulation/effectthread.h
 	$(CC) $(CFLAGS) simulation/sim_thread.cpp    -o temp/sim_thread.o
+temp/effectthread.o: simulation/effectthread.cpp simulation/effectthread.h
+	$(CC) $(CFLAGS) simulation/effectthread.cpp  -o temp/effectthread.o
 
 #Header files please:
+copy-header:
+	cp myMath.h                      ./../header/core/myMath.h
+	cp mymath/eld.h                  ./../header/core/mymath/eld.h
+	cp mymath/math_struct.h          ./../header/core/mymath/math_struct.h
+	cp object/drawable.h             ./../header/core/object/drawable.h
+	cp object/object.h               ./../header/core/object/object.h
+	cp object/body.h                 ./../header/core/object/body.h
+	cp object/noobject.h             ./../header/core/object/noobject.h
+	cp object/quant.h                ./../header/core/object/quant.h
+	cp field/field.h                 ./../header/core/field/field.h
+	cp field/Gfield.h                ./../header/core/field/Gfield.h
+	cp field/Efield.h                ./../header/core/field/Efield.h
+	cp universe.h                    ./../header/core/universe.h
+	cp effect/effect.h               ./../header/core/effect/effect.h
+	cp effect/inertia.h              ./../header/core/effect/inertia.h
+	cp settings/settings.h           ./../header/core/settings/settings.h
+	cp settings/settingdefines.h     ./../header/core/settings/settingdefines.h
+	cp simulation/sim_thread.h       ./../header/core/simulation/sim_thread.h
+	cp simulation/effectthread.h     ./../header/core/simulation/effectthread.h
+	cp simulation.h                  ./../header/core/simulation.h
+	cp define.h                      ./../header/core/define.h
+
+
 myMath.h:
+	@#cp myMath.h                      ./../header/core/myMath.h
 mymath/eld.h: define.h myMath.h
+	@#@mkdir -p ./../header/core/mymath
+	@#cp mymath/eld.h                  ./../header/core/mymath/eld.h
 mymath/math_struct.h: myMath.h mymath/eld.h
+	@#@mkdir -p ./../header/core/mymath
+	@#cp mymath/math_struct.h          ./../header/core/mymath/math_struct.h
 
 object/drawable.h: define.h
+	@#@mkdir -p ./../header/core/object
+	@#cp object/drawable.h             ./../header/core/object/drawable.h
 object/object.h: object/drawable.h define.h myMath.h
+	@#@mkdir -p ./../header/core/object
+	@#cp object/object.h               ./../header/core/object/object.h
 object/body.h: object/object.h define.h
+	@#@mkdir -p ./../header/core/object
+	@#cp object/body.h                 ./../header/core/object/body.h
 object/noobject.h: object/drawable.h
+	@#@mkdir -p ./../header/core/object
+	@#cp object/noobject.h             ./../header/core/object/noobject.h
 object/quant.h: object/object.h
+	@#@mkdir -p ./../header/core/object
+	@#cp object/quant.h                ./../header/core/object/quant.h
 
 field/field.h: object/drawable.h effect/effect.h
+	@#@mkdir -p ./../header/core/field
+	@#cp field/field.h                 ./../header/core/field/field.h
 field/Gfield.h: field/field.h
+	@#@mkdir -p ./../header/core/field
+	@#cp field/Gfield.h                ./../header/core/field/Gfield.h
 field/Efield.h: field/field.h
+	@#@mkdir -p ./../header/core/field
+	@#cp field/Efield.h                ./../header/core/field/Efield.h
 
 universe.h: simulation.h settings/settings.h
+	@#cp universe.h                    ./../header/core/universe.h
 
 effect/effect.h:
+	@#@mkdir -p ./../header/core/effect
+	@#cp effect/effect.h               ./../header/core/effect/effect.h
 effect/inertia.h: effect/effect.h
+	@#@mkdir -p ./../header/core/effect
+	@#cp effect/inertia.h              ./../header/core/effect/inertia.h
 
 settings/settings.h: define.h myMath.h
+	@#@mkdir -p ./../header/core/settings
+	@#cp settings/settings.h           ./../header/core/settings/settings.h
 settings/settingdefines.h:
+	@#@mkdir -p ./../header/core/settings
+	@#cp settings/settingdefines.h     ./../header/core/settings/settingdefines.h
 
 simulation/sim_thread.h:
+	@#@mkdir -p ./../header/core/simulation
+	@#cp simulation/sim_thread.h       ./../header/core/simulation/sim_thread.h
+simulation/effectthread.h: effect/effect.h
+	@#@mkdir -p ./../header/core/simulation
+	@#cp simulation/effectthread.h     ./../header/core/simulation/effectthread.h
+
 simulation.h:mymath/math_struct.h effect/effect.h effect/inertia.h object/object.h object/noobject.h object/body.h object/quant.h field/field.h
+	@#cp simulation.h                  ./../header/core/simulation.h
 define.h:
+	@#cp define.h                      ./../header/core/define.h
 

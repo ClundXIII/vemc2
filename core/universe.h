@@ -26,6 +26,15 @@ class universe{
         ~universe();
 
         /**
+         * the update() function applies the changed
+         * settings to the params of the simulation
+         * thread, the effects, etcpp
+         * Be careful! Do this as less as you want, it
+         * is maybe not memory-resistant!
+         */
+        void update();
+
+        /**
          * the start() function starts a new thread
          * and runs the simulation in it.
          * so this should be used if you want to do
@@ -91,6 +100,12 @@ class universe{
                 bool  showDebText;
                 bool  useParaProc;
                 int   countParaThreads;
+                int   paraLevel;/**
+                                 * 0 => parallelize calculation per object
+                                 * 1 => parallelize effect calculation
+                                 * 2 => parallelize effect calculation per object
+                                 * 3 => parallelize effect calculation per object per dimension
+                                 */
             }sim_thread;
 
             struct{ // sim
@@ -161,6 +176,13 @@ class universe{
          int fieldCount;
          int noobjectCount;
 
+        /**
+         * Effect List contain all effects.
+         * They will be called from 0 to
+         * effectCount-1
+         */
+         effect **effectArray;
+         int      effectCount;
 
     protected:
 
@@ -209,14 +231,6 @@ class universe{
         void invokeBeforeSim();
         void invokeMiddleSim();
         void invokeAfterSim();
-
-        /**
-         * Effect List contain all effects.
-         * They will be called from 0 to
-         * effectCount-1
-         */
-         effect **effectArray;
-         int      effectCount;
 
     private:
 

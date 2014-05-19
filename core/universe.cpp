@@ -15,37 +15,14 @@ universe::universe(){
     cout << "vcore Library, Version 0.0.01-pre / 23042014" << endl;
     cout << "Have a lot of fun ...                " << endl;
     cout << "    creating new universe         ..." << endl;
-    cout << "(00)                                 " << endl;
-    cout << "(01)getting global settings       ..." << endl;
-    getGlobalSettings();
-    cout << "                                done!" << endl;
-    cout << "(02)reserving space for drawables ..." << endl;
     drawableArray =0;
     objectArray   =0;
     bodyArray     =0;
     quantArray    =0;
     fieldArray    =0;
     noobjectArray =0;
-    reservDrawableArraySpace(\
-                                      2168, //drawableCount
-                                      2048, //objectCount
-                                      1024, //bodyCount
-                                      1024, //quantCount
-                                       128, //fieldCount
-                                        16  //noobjectCount
-                                      );
-    cout << "                                done!" << endl;
-    cout << "(10)creating simulation           ..." << endl;
-    cout << "(11)setting up effects            ..." << endl;
-    effectCount = 16;
-    effectArray = new effect*[16];
-    for (int i=0; i<effectCount; i++)
-        effectArray[i] = 0;
-    cout << "                                done!" << endl;
-    cout << "(12)creating simThread            ..." << endl;
-    cout << "                                done!" << endl;
 
-    cout << "  sucessfully created a new universe!" << endl;
+    effectCount = 0;
 }
 
 universe::~universe(){
@@ -60,6 +37,41 @@ universe::~universe(){
     cout << "SEGFAULT ... HORAAAAYYYY!!!!" << endl;
     cout << "" << endl;
     cout << "World sucessfully deleted!" << endl;
+}
+
+void universe::update(){
+    cout << "(00)update() invoked!                " << endl;
+    cout << "(01)getting global settings       ..." << endl;
+    getGlobalSettings();
+    cout << "                                done!" << endl;
+    cout << "(02)reserving space for drawables ..." << endl;
+    reservDrawableArraySpace(\
+                                      2168, //drawableCount
+                                      2048, //objectCount
+                                      1024, //bodyCount
+                                      1024, //quantCount
+                                       128, //fieldCount
+                                        16  //noobjectCount
+                                      );
+    cout << "                                done!" << endl;
+    cout << "(10)creating simulation           ..." << endl;
+    cout << "(11)setting up effects            ..." << endl;
+    if (effectCount != 0){ //we have to delete the old effects first!
+        cout << "    deleting old effects ..." << endl;
+        for (int i=0; i<effectCount; i++){
+            delete effectArray[i];
+        }
+        delete effectArray;
+    }
+    effectCount = 16;
+    effectArray = new effect*[16];
+    for (int i=0; i<effectCount; i++)
+        effectArray[i] = 0;
+    cout << "                                done!" << endl;
+    cout << "(12)creating simThread            ..." << endl;
+    cout << "                                done!" << endl;
+
+    cout << "  sucessfully created a new universe!" << endl;
 }
 
 void universe::start(){
@@ -139,6 +151,7 @@ void universe::getGlobalSettings(){
     settings.sim_thread.showDebText         = settings::Sim::showDebText;
     settings.sim_thread.useParaProc         = settings::Sim::useParaProc;
     settings.sim_thread.countParaThreads    = settings::Sim::countParaThreads;
+    settings.sim_thread.paraLevel           = 0;
 
     settings.sim.dt                         = settings::Sim::actIntervall;
     settings.sim.quant_Simulation           = settings::Sim::quant_Simulation;

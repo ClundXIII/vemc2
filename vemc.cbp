@@ -6,12 +6,10 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="etc/;core/;core/;core/etc/;docs/;core/src/;core/src/universe/;core/src/object/;core/src/random/;core/src/object/kids/;core/src/mymath/;core/src/field/;core/src/effect/;core/src/settings/;cons/;core/src/simulation/;" />
+		<Option virtualFolders="etc/;core/;core/;core/etc/;docs/;core/src/;core/src/universe/;core/src/object/;core/src/random/;core/src/object/kids/;core/src/mymath/;core/src/field/;core/src/effect/;core/src/settings/;cons/;core/src/simulation/;graphic/;graphic/etc/;graphic/src/;" />
 		<Build>
 			<Target title="all">
-				<Option output="./vemc2_X/vemc" prefix_auto="1" extension_auto="1" />
-				<Option object_output="./temp/relobj/" />
-				<Option type="1" />
+				<Option type="4" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -20,27 +18,25 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
-			<Target title="install">
-				<Option type="4" />
-				<Option compiler="gcc" />
-			</Target>
 			<Target title="libcore">
-				<Option output="vemc" prefix_auto="1" extension_auto="1" />
+				<Option output="libvcore.so.0.0" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 			</Target>
-			<Target title="gui">
-				<Option output="vemc" prefix_auto="1" extension_auto="1" />
-				<Option type="0" />
-				<Option compiler="gcc" />
-			</Target>
 			<Target title="cons">
-				<Option output="vemc" prefix_auto="1" extension_auto="1" />
+				<Option output="cons/vemc2_nogui" prefix_auto="1" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
+			</Target>
+			<Target title="graphic">
+				<Option output="vemc" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 			</Target>
 		</Build>
 		<Compiler>
@@ -210,6 +206,16 @@
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>
+		<Unit filename="core/simulation/effectthread.cpp">
+			<Option virtualFolder="core/src/simulation/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
+		<Unit filename="core/simulation/effectthread.h">
+			<Option virtualFolder="core/src/simulation/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
 		<Unit filename="core/simulation/sim_thread.cpp">
 			<Option virtualFolder="core/src/simulation/" />
 			<Option target="all" />
@@ -229,6 +235,26 @@
 			<Option virtualFolder="core/src/universe/" />
 			<Option target="all" />
 			<Option target="libcore" />
+		</Unit>
+		<Unit filename="graphic/Makefile">
+			<Option virtualFolder="graphic/etc/" />
+			<Option target="all" />
+			<Option target="graphic" />
+		</Unit>
+		<Unit filename="graphic/graphic.cpp">
+			<Option virtualFolder="graphic/src/" />
+			<Option target="all" />
+			<Option target="graphic" />
+		</Unit>
+		<Unit filename="graphic/graphic.h">
+			<Option virtualFolder="graphic/src/" />
+			<Option target="all" />
+			<Option target="graphic" />
+		</Unit>
+		<Unit filename="graphic/main.cpp">
+			<Option virtualFolder="graphic/src/" />
+			<Option target="all" />
+			<Option target="graphic" />
 		</Unit>
 		<Extensions>
 			<code_completion />

@@ -4,27 +4,43 @@
 #include <thread>
 
 namespace vemc2{
-namespace simulation{
 
 class universe;
+
+namespace simulation{
+
+class effectthread;
 
 class sim_thread : public std::thread{
 
     public:
 
-        sim_thread(vemc2::simulation::universe *globUniversets);
+        sim_thread(vemc2::universe *globUniversets);
         ~sim_thread();
 
+        //void start();
+
         void run();
+
+        void pause();
+
+        void unpause();
+
+        void stop();
 
     protected:
 
 
-        vemc2::simulation::universe *globUniverse;
+        vemc2::universe *globUniverse;
 
         static void static_run(sim_thread *toRun);
 
+        vemc2::simulation::effectthread **paraThreads;
+
     private:
+
+        bool paused;
+        bool running;
 
 };
 

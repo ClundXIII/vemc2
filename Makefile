@@ -1,6 +1,20 @@
 #Makefile for vemc2 (c) by Simon Michalke
 #this is the overall Makefile
 
+all:
+	make -C core
+	make -C cons
+	make -C graphic
+
+libcore:
+	make -C core
+
+cons:
+	make -C cons
+
+graphic:
+	make -C graphic
+
 compile-all:
 	mkdir -p core/temp
 	mkdir -p cons/temp
