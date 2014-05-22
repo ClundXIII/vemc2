@@ -5,9 +5,13 @@ CC=g++
 #CFLAGS=-std=c++0x -fPIC -c -O3#optimized
 CFLAGS=-std=c++0x -fPIC -c -Wall -g #debugging
 LDFLAGS=-pthread
-INCLDIR=-L./../header
+INCLDIR=-I./..
 
 all: libvgl main
+
+clean:
+	@touch temp/dummy
+	rm temp/*
 
 libvgl: temp/graphic.o
 	$(CC) -g -shared -Wl,-soname,libvgl.so.`cat version | head -c 1` -o libvgl.so.`cat version` \

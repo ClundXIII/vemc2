@@ -49,6 +49,8 @@ sim_thread::~sim_thread(){
 
 void sim_thread::run(){
 
+    ///TODO this doesnt work ... make more!!
+
     running = true;
 
     if (globUniverse->settings.sim_thread.useParaProc){

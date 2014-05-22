@@ -35,6 +35,16 @@ class universe{
         void update();
 
         /**
+         * The resetArrays() function re-allocates all
+         * the memory needed for the drawable and effect
+         * arrays.
+         * Invoke this if you changed the amount of the
+         * drawables, etc
+         * (--> int *count)
+         */
+        void resetArrays();
+
+        /**
          * the start() function starts a new thread
          * and runs the simulation in it.
          * so this should be used if you want to do
@@ -134,7 +144,7 @@ class universe{
         }settings;
 
         /**
-         * Sets the machine to a spezified status like:
+         * Sets the machine to a pre-defined status like:
          * - planet Simulation (bodies, gravitation, no collision)
          * - quantum Simulation (Heisenberg & Co)
          * - Feynman Simulation (quantums with collision)
@@ -143,10 +153,19 @@ class universe{
          * drawable Arrays and other stuff.
          */
         int setSimulationType(vemc2::simulation_type simTypets);
-        int insertBody();
-        int insertQuant();
-        int insertField();
-        int insertNoobject();
+
+        /**
+         * These functions insert the different kind of
+         * drawables (see object/drawable.h) into the
+         * universe. They will recursively call the insert
+         * function of their mother class automatically
+         */
+        int insertDrawable(vemc2::simulation::drawable *toInsert);
+        int insertObject(vemc2::simulation::object *toInsert);
+        int insertBody(vemc2::simulation::body *toInsert);
+        int insertQuant(vemc2::simulation::quant *toInsert);
+        int insertField(vemc2::simulation::field *toInsert);
+        int insertNoobject(vemc2::simulation::noobject *toInsert);
 
         /**
          * List of objects that are being used
@@ -160,29 +179,30 @@ class universe{
          * The arrays are being used by the
          * Effects and Fields, ...
          *
-         * Maybe we have to set them as public
+         * We actually got *Count-1 drawables (etc)
+         * avaible! keep this in mind!
          */
-         drawable **drawableArray;
-         object   **objectArray;
-         body     **bodyArray;
-         quant    **quantArray;
-         field    **fieldArray;
-         noobject **noobjectArray;
+        drawable **drawableArray;
+        object   **objectArray;
+        body     **bodyArray;
+        quant    **quantArray;
+        field    **fieldArray;
+        noobject **noobjectArray;
 
-         int drawableCount;
-         int objectCount;
-         int bodyCount;
-         int quantCount;
-         int fieldCount;
-         int noobjectCount;
+        int drawableCount;
+        int objectCount;
+        int bodyCount;
+        int quantCount;
+        int fieldCount;
+        int noobjectCount;
 
         /**
          * Effect List contain all effects.
          * They will be called from 0 to
          * effectCount-1
          */
-         effect **effectArray;
-         int      effectCount;
+        effect **effectArray;
+        int      effectCount;
 
     protected:
 
@@ -211,7 +231,7 @@ class universe{
          * arrays. It is being invoked in the contructor.
          * maybe we need long instead of int ...
          */
-        void reservDrawableArraySpace(\
+        void reserveDrawableArraySpace(\
                                       int drawableCountts,  \
                                       int objectCountts,    \
                                       int bodyCountts,      \
@@ -245,6 +265,13 @@ class universe{
          */
         void deleteAllEffects();
 
+        /**
+         * scrollToArrayEnd() searches for the first position
+         * within an 2D-Array (typical a *Array var) that
+         * is 0. Useful for finding the next place to add
+         * a drawable / effect.
+         */
+        int scrollToArrayEnd(void **a);
 
 };
 

@@ -13,7 +13,7 @@ namespace simulation{
 class body : object {
     public:
         body();
-        body(object *toCopy);
+        body(body *toCopy);
         body(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts);
         ~body();
 
@@ -23,14 +23,14 @@ class body : object {
         void tick();
 
         bdt getMass();
-        bdt getX();
-        bdt getY();
-        bdt getZ();
+        bdt getX1();
+        bdt getX2();
+        bdt getX3();
 
         void setMass(bdt massts);
-        void setX(bdt Xts);
-        void setY(bdt Yts);
-        void setZ(bdt Zts);
+        void setX1(bdt X1ts);
+        void setX2(bdt X2ts);
+        void setX3(bdt X3ts);
 
     protected:
 

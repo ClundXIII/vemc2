@@ -22,7 +22,18 @@ universe::universe(){
     fieldArray    =0;
     noobjectArray =0;
 
-    effectCount = 0;
+    effectArray   =0;
+
+    drawableCount = 2168;
+    objectCount   = 2084;
+    bodyCount     = 1024;
+    quantCount    = 1024;
+    fieldCount    =  128;
+    noobjectCount =   16;
+
+    effectCount = 16;
+
+    update();
 }
 
 universe::~universe(){
@@ -45,26 +56,18 @@ void universe::update(){
     getGlobalSettings();
     cout << "                                done!" << endl;
     cout << "(02)reserving space for drawables ..." << endl;
-    reservDrawableArraySpace(\
-                                      2168, //drawableCount
-                                      2048, //objectCount
-                                      1024, //bodyCount
-                                      1024, //quantCount
-                                       128, //fieldCount
-                                        16  //noobjectCount
-                                      );
+    resetArrays();
     cout << "                                done!" << endl;
     cout << "(10)creating simulation           ..." << endl;
     cout << "(11)setting up effects            ..." << endl;
-    if (effectCount != 0){ //we have to delete the old effects first!
+    if (effectArray != 0){ //we have to delete the old effects first!
         cout << "    deleting old effects ..." << endl;
         for (int i=0; i<effectCount; i++){
             delete effectArray[i];
         }
         delete effectArray;
     }
-    effectCount = 16;
-    effectArray = new effect*[16];
+    effectArray = new effect*[effectCount];
     for (int i=0; i<effectCount; i++)
         effectArray[i] = 0;
     cout << "                                done!" << endl;
@@ -72,6 +75,17 @@ void universe::update(){
     cout << "                                done!" << endl;
 
     cout << "  sucessfully created a new universe!" << endl;
+}
+
+void universe::resetArrays(){
+    reserveDrawableArraySpace(\
+                              drawableCount,
+                              objectCount,
+                              bodyCount,
+                              quantCount,
+                              fieldCount,
+                              noobjectCount
+                              );
 }
 
 void universe::start(){
@@ -99,21 +113,148 @@ int universe::setSimulationType(vemc2::simulation_type simTypets){
 }
 
 /**
- * Inserts
+ * just a quick define to get a nicer code within
+ * the *insert() functions ;-)
  */
-int universe::insertBody(){
+#define sTAE(a) scrollToArrayEnd(a)
+
+int universe::insertDrawable(vemc2::simulation::drawable *toInsert){
+
+    int pos = sTAE( (void**)drawableArray);
+    if (pos >= (drawableCount - 1) ){
+        cout << "drawableCount exceed limits in universe.cpp::insertDrawable!" << endl;
+        return 1;
+    }
+
+    drawableArray[pos] = toInsert;
+
+    cout << "Inserted drawable at position " << pos << endl;
 
     return 0;
 }
-int universe::insertQuant(){
+
+int universe::insertObject(vemc2::simulation::object *toInsert){
+
+    int ret;
+
+    //first insert this in the mother class array:
+    ret = insertDrawable( (drawable*) toInsert);
+    if (ret != 0){
+        cout << "insertDrawable returned " << ret << " in universe.cpp::insertObject" << endl;
+        return 2;
+    }
+
+
+    int pos = sTAE( (void**)objectArray);
+    if (pos >= (objectCount - 1) ){
+        cout << "objectCount exceed limits in universe.cpp::insertObject!" << endl;
+        return 1;
+    }
+
+    objectArray[pos] = toInsert;
+
+    cout << "Inserted object at position " << pos << endl;
 
     return 0;
 }
-int universe::insertField(){
+
+int universe::insertBody(vemc2::simulation::body *toInsert){
+
+    int ret;
+
+    //first insert this in the mother class array:
+    ret = insertObject( (object*) toInsert);
+    if (ret != 0){
+        cout << "insertObject returned " << ret << " in universe.cpp::insertBody" << endl;
+        return 2;
+    }
+
+
+    int pos = sTAE( (void**)bodyArray);
+    if (pos >= (bodyCount - 1) ){
+        cout << "bodyCount exceed limits in universe.cpp::insertBody!" << endl;
+        return 1;
+    }
+
+    bodyArray[pos] = toInsert;
+
+    cout << "Inserted body at position " << pos << endl;
 
     return 0;
 }
-int universe::insertNoobject(){
+
+int universe::insertQuant(vemc2::simulation::quant *toInsert){
+
+    int ret;
+
+    //first insert this in the mother class array:
+    ret = insertObject( (object*) toInsert);
+    if (ret != 0){
+        cout << "insertObject returned " << ret << " in universe.cpp::insertQuant" << endl;
+        return 2;
+    }
+
+
+    int pos = sTAE( (void**)quantArray);
+    if (pos >= (quantCount - 1) ){
+        cout << "quantCount exceed limits in universe.cpp::insertQuant!" << endl;
+        return 1;
+    }
+
+    quantArray[pos] = toInsert;
+
+    cout << "Inserted quant at position " << pos << endl;
+
+    return 0;
+}
+
+int universe::insertField(vemc2::simulation::field *toInsert){
+
+    int ret;
+
+    //first insert this in the mother class array:
+    ret = insertDrawable( (drawable*) toInsert);
+    if (ret != 0){
+        cout << "insertDrawable returned " << ret << " in universe.cpp::insertField" << endl;
+        return 2;
+    }
+
+
+    int pos = sTAE( (void**)fieldArray);
+    if (pos >= (fieldCount - 1) ){
+        cout << "fieldCount exceed limits in universe.cpp::insertField!" << endl;
+        return 1;
+    }
+
+    fieldArray[pos] = toInsert;
+
+    cout << "Inserted field at position " << pos << endl;
+
+
+    return 0;
+}
+
+int universe::insertNoobject(vemc2::simulation::noobject *toInsert){
+
+    int ret;
+
+    //first insert this in the mother class array:
+    ret = insertDrawable( (drawable*) toInsert);
+    if (ret != 0){
+        cout << "insertDrawable returned " << ret << " in universe.cpp::insertNoobject" << endl;
+        return 2;
+    }
+
+
+    int pos = sTAE( (void**)noobjectArray);
+    if (pos >= (noobjectCount - 1) ){
+        cout << "noobjectCount exceed limits in universe.cpp::insertNoobject!" << endl;
+        return 1;
+    }
+
+    noobjectArray[pos] = toInsert;
+
+    cout << "Inserted noobject at position " << pos << endl;
 
     return 0;
 }
@@ -169,7 +310,7 @@ void universe::getGlobalSettings(){
     settings.gravPlane.MaxFieldAct          = settings::gravPlane::MaxFieldAct;
 }
 
-void universe::reservDrawableArraySpace(\
+void universe::reserveDrawableArraySpace(\
                               int drawableCountts, \
                               int objectCountts,   \
                               int bodyCountts,     \
@@ -246,4 +387,11 @@ void universe::deleteAllEffects(){
 
         effectArray = 0;
     }
+}
+
+
+int universe::scrollToArrayEnd(void **a){
+    int i=0;
+    for (; a[i]!=0; i++){}
+    return i;
 }

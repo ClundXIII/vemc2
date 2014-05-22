@@ -45,15 +45,17 @@ uninstall:
 #	mkdir -p temp
 
 libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o
+	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o
 	mkdir -p temp
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
 	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o \
+	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o \
 	$(LDFLAGS)
 
 temp/object.o: object/object.cpp object/object.h
 	$(CC) $(CFLAGS) object/object.cpp            -o temp/object.o
+temp/body.o: object/body.cpp object/body.h
+	$(CC) $(CFLAGS) object/body.cpp              -o temp/body.o
 temp/eld.o: mymath/eld.cpp mymath/eld.h
 	$(CC) $(CFLAGS) mymath/eld.cpp               -o temp/eld.o
 temp/noobject.o: object/noobject.cpp object/noobject.h
