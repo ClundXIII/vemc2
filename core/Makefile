@@ -20,6 +20,8 @@ preinst:
 install:
 	sudo echo "/opt/lib/vemc2/" > /etc/ld.so.conf.d/vemc2.conf
 	@echo "cleaning up lib dir ..."
+	mkdir -p /opt/lib/vemc2
+	touch /opt/lib/vemc2/dummy
 	rm /opt/lib/vemc2/*
 	cp libvcore.so.`cat version` /opt/lib/vemc2/
 	ln -fs /opt/lib/vemc2/libvcore.so.`cat version`              /opt/lib/vemc2/libvcore.so.`cat version | head -c 3`
