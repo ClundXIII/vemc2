@@ -16,22 +16,22 @@ class object : drawable {
         object();
         object(object *toCopy);
         object(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts);
-        ~object();
+        virtual ~object();
 
-        void draw();
-        void drawField();
+        virtual void draw();
+        virtual void drawField();
 
-        bdt getMass();
-        bdt getX1();
-        bdt getX2();
-        bdt getX3();
+        virtual bdt getMass();
+        virtual bdt getX1();
+        virtual bdt getX2();
+        virtual bdt getX3();
 
-        void setMass(bdt massts);
-        void setX1(bdt X1ts);
-        void setX2(bdt X2ts);
-        void setX3(bdt X3ts);
+        virtual void setMass(bdt massts);
+        virtual void setX1(bdt X1ts);
+        virtual void setX2(bdt X2ts);
+        virtual void setX3(bdt X3ts);
 
-        void setDataNull();
+        virtual void setDataNull();
 
         struct effect_data{ //data
             struct{ //F

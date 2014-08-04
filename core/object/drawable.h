@@ -26,7 +26,7 @@ class drawable{
     public:
 
         drawable();
-        ~drawable();
+        virtual ~drawable();
 
 		void setActive(bool activets);
 		bool isActive();

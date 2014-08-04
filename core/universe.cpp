@@ -4,17 +4,25 @@
 #include <stdio.h>
 #include <string.h>
 
-using namespace std;
+using namespace Vesper::LoggingType;
 using namespace vemc2;
 using namespace vemc2::simulation;
 using namespace vemc2::settings;
 
 universe::universe(){
-    cout << "===============================================" << endl;
-    cout << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << endl;
-    cout << "vcore Library, Version 0.0.01-pre / 23042014" << endl;
-    cout << "Have a lot of fun ...                " << endl;
-    cout << "    creating new universe         ..." << endl;
+    Vesper::Vout::init();
+    out = new Vesper::Logging(Vesper::LoggingType::server);
+    *out << "===============================================";
+    *out << 123;
+    *out << endl;
+    *out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014";
+    *out << endl;
+    *out << "vcore Library, Version 0.0.01-pre / 23042014";
+    *out << endl;
+    *out << "Have a lot of fun ...                ";
+    *out << endl;
+    *out << "    creating new universe         ...";
+    *out << endl;
     drawableArray =0;
     objectArray   =0;
     bodyArray     =0;
@@ -33,35 +41,52 @@ universe::universe(){
 
     effectCount = 16;
 
+    useForSimulation = t_none;
+    simulateObjectCount = 0;
+    simulateObjects = 0;
+
     update();
 }
 
 universe::~universe(){
 
-    cout << "(END) delete() invoked ... cleaning up ..." << endl;
+    *out << "(END) delete() invoked ... cleaning up ...";
+    *out << endl;
 
     //cleaning up
     deleteAllDrawables();
     deleteAllEffects();
 
-    cout << "If you see this, there wasn't a single" << endl;
-    cout << "SEGFAULT ... HORAAAAYYYY!!!!" << endl;
-    cout << "" << endl;
-    cout << "World sucessfully deleted!" << endl;
+    *out << "If you see this, there wasn't a single";
+    *out << endl;
+    *out << "SEGFAULT ... HORAAAAYYYY!!!!";
+    *out << endl;
+    *out << "";
+    *out << endl;
+    *out << "World sucessfully deleted!";
+    *out << endl;
 }
 
 void universe::update(){
-    cout << "(00)update() invoked!                " << endl;
-    cout << "(01)getting global settings       ..." << endl;
+    *out << "(00)update() invoked!                ";
+    *out << endl;
+    *out << "(01)getting global settings       ...";
+    *out << endl;
     getGlobalSettings();
-    cout << "                                done!" << endl;
-    cout << "(02)reserving space for drawables ..." << endl;
+    *out << "                                done!";
+    *out << endl;
+    *out << "(02)reserving space for drawables ...";
+    *out << endl;
     resetArrays();
-    cout << "                                done!" << endl;
-    cout << "(10)creating simulation           ..." << endl;
-    cout << "(11)setting up effects            ..." << endl;
+    *out << "                                done!";
+    *out << endl;
+    *out << "(10)creating simulation           ...";
+    *out << endl;
+    *out << "(11)setting up effects            ...";
+    *out << endl;
     if (effectArray != 0){ //we have to delete the old effects first!
-        cout << "    deleting old effects ..." << endl;
+        *out << "    deleting old effects ...";
+        *out << endl;
         for (int i=0; i<effectCount; i++){
             delete effectArray[i];
         }
@@ -70,11 +95,15 @@ void universe::update(){
     effectArray = new effect*[effectCount];
     for (int i=0; i<effectCount; i++)
         effectArray[i] = 0;
-    cout << "                                done!" << endl;
-    cout << "(12)creating simThread            ..." << endl;
-    cout << "                                done!" << endl;
+    *out << "                                done!";
+    *out << endl;
+    *out << "(12)creating simThread            ...";
+    *out << endl;
+    *out << "                                done!";
+    *out << endl;
 
-    cout << "  sucessfully created a new universe!" << endl;
+    *out << "  sucessfully created a new universe!";
+    *out << endl;
 }
 
 void universe::resetArrays(){
@@ -112,6 +141,10 @@ int universe::setSimulationType(vemc2::simulation_type simTypets){
     return 0;
 }
 
+void universe::setObjectType(objectType typets){
+    useForSimulation = typets;
+}
+
 /**
  * just a quick define to get a nicer code within
  * the *insert() functions ;-)
@@ -122,13 +155,16 @@ int universe::insertDrawable(vemc2::simulation::drawable *toInsert){
 
     int pos = sTAE( (void**)drawableArray);
     if (pos >= (drawableCount - 1) ){
-        cout << "drawableCount exceed limits in universe.cpp::insertDrawable!" << endl;
+        *out << "drawableCount exceed limits in universe.cpp::insertDrawable!";
+        *out << endl;
         return 1;
     }
 
     drawableArray[pos] = toInsert;
 
-    cout << "Inserted drawable at position " << pos << endl;
+    *out << "Inserted drawable at position ";
+    *out << pos;
+    *out << endl;
 
     return 0;
 }
@@ -140,20 +176,26 @@ int universe::insertObject(vemc2::simulation::object *toInsert){
     //first insert this in the mother class array:
     ret = insertDrawable( (drawable*) toInsert);
     if (ret != 0){
-        cout << "insertDrawable returned " << ret << " in universe.cpp::insertObject" << endl;
+        *out << "insertDrawable returned ";
+        *out << ret;
+        *out << " in universe.cpp::insertObject";
+        *out << endl;
         return 2;
     }
 
 
     int pos = sTAE( (void**)objectArray);
     if (pos >= (objectCount - 1) ){
-        cout << "objectCount exceed limits in universe.cpp::insertObject!" << endl;
+        *out << "objectCount exceed limits in universe.cpp::insertObject!";
+        *out << endl;
         return 1;
     }
 
     objectArray[pos] = toInsert;
 
-    cout << "Inserted object at position " << pos << endl;
+    *out << "Inserted object at position ";
+    *out << pos;
+    *out << endl;
 
     return 0;
 }
@@ -165,20 +207,26 @@ int universe::insertBody(vemc2::simulation::body *toInsert){
     //first insert this in the mother class array:
     ret = insertObject( (object*) toInsert);
     if (ret != 0){
-        cout << "insertObject returned " << ret << " in universe.cpp::insertBody" << endl;
+        *out << "insertObject returned ";
+        *out << ret;
+        *out << " in universe.cpp::insertBody";
+        *out << endl;
         return 2;
     }
 
 
     int pos = sTAE( (void**)bodyArray);
     if (pos >= (bodyCount - 1) ){
-        cout << "bodyCount exceed limits in universe.cpp::insertBody!" << endl;
+        *out << "bodyCount exceed limits in universe.cpp::insertBody!";
+        *out << endl;
         return 1;
     }
 
     bodyArray[pos] = toInsert;
 
-    cout << "Inserted body at position " << pos << endl;
+    *out << "Inserted body at position ";
+    *out << pos;
+    *out << endl;
 
     return 0;
 }
@@ -190,20 +238,26 @@ int universe::insertQuant(vemc2::simulation::quant *toInsert){
     //first insert this in the mother class array:
     ret = insertObject( (object*) toInsert);
     if (ret != 0){
-        cout << "insertObject returned " << ret << " in universe.cpp::insertQuant" << endl;
+        *out << "insertObject returned ";
+        *out << ret;
+        *out << " in universe.cpp::insertQuant";
+        *out << endl;
         return 2;
     }
 
 
     int pos = sTAE( (void**)quantArray);
     if (pos >= (quantCount - 1) ){
-        cout << "quantCount exceed limits in universe.cpp::insertQuant!" << endl;
+        *out << "quantCount exceed limits in universe.cpp::insertQuant!";
+        *out << endl;
         return 1;
     }
 
     quantArray[pos] = toInsert;
 
-    cout << "Inserted quant at position " << pos << endl;
+    *out << "Inserted quant at position ";
+    *out << pos;
+    *out << endl;
 
     return 0;
 }
@@ -215,20 +269,26 @@ int universe::insertField(vemc2::simulation::field *toInsert){
     //first insert this in the mother class array:
     ret = insertDrawable( (drawable*) toInsert);
     if (ret != 0){
-        cout << "insertDrawable returned " << ret << " in universe.cpp::insertField" << endl;
+        *out << "insertDrawable returned ";
+        *out << ret;
+        *out << " in universe.cpp::insertField";
+        *out << endl;
         return 2;
     }
 
 
     int pos = sTAE( (void**)fieldArray);
     if (pos >= (fieldCount - 1) ){
-        cout << "fieldCount exceed limits in universe.cpp::insertField!" << endl;
+        *out << "fieldCount exceed limits in universe.cpp::insertField!";
+        *out << endl;
         return 1;
     }
 
     fieldArray[pos] = toInsert;
 
-    cout << "Inserted field at position " << pos << endl;
+    *out << "Inserted field at position ";
+    *out << pos;
+    *out << endl;
 
 
     return 0;
@@ -241,20 +301,26 @@ int universe::insertNoobject(vemc2::simulation::noobject *toInsert){
     //first insert this in the mother class array:
     ret = insertDrawable( (drawable*) toInsert);
     if (ret != 0){
-        cout << "insertDrawable returned " << ret << " in universe.cpp::insertNoobject" << endl;
+        *out << "insertDrawable returned ";
+        *out << ret;
+        *out << " in universe.cpp::insertNoobject";
+        *out << endl;
         return 2;
     }
 
 
     int pos = sTAE( (void**)noobjectArray);
     if (pos >= (noobjectCount - 1) ){
-        cout << "noobjectCount exceed limits in universe.cpp::insertNoobject!" << endl;
+        *out << "noobjectCount exceed limits in universe.cpp::insertNoobject!";
+        *out << endl;
         return 1;
     }
 
     noobjectArray[pos] = toInsert;
 
-    cout << "Inserted noobject at position " << pos << endl;
+    *out << "Inserted noobject at position ";
+    *out << pos;
+    *out << endl;
 
     return 0;
 }
@@ -324,32 +390,50 @@ void universe::reserveDrawableArraySpace(\
     drawableArray = new drawable*[drawableCountts];
     for (int i=0; i<drawableCountts; i++)
         drawableArray[i] = 0;
-    cout << "    " << drawableCountts << " drawables" << endl;
+    *out << "    ";
+    *out << drawableCountts;
+    *out << " drawables";
+    *out << endl;
 
     objectArray   = new object*[objectCountts];
     for (int i=0; i<objectCountts; i++)
         objectArray[i] = 0;
-    cout << "    " << objectCountts << " objects" << endl;
+    *out << "    ";
+    *out << objectCountts;
+    *out << " objects";
+    *out << endl;
 
     bodyArray     = new body*[bodyCountts];
     for (int i=0; i<bodyCountts; i++)
         bodyArray[i] = 0;
-    cout << "    " << bodyCountts << " bodies" << endl;
+    *out << "    ";
+    *out << bodyCountts;
+    *out << " bodies";
+    *out << endl;
 
     quantArray    = new quant*[quantCountts];
     for (int i=0; i<quantCountts; i++)
         quantArray[i] = 0;
-    cout << "    " << quantCountts << " quants" << endl;
+    *out << "    ";
+    *out << quantCountts;
+    *out << " quants";
+    *out << endl;
 
     fieldArray    = new field*[fieldCountts];
     for (int i=0; i<fieldCountts; i++)
         fieldArray[i] = 0;
-    cout << "    " << fieldCountts << " fields" << endl;
+    *out << "    ";
+    *out << fieldCountts;
+    *out << " fields";
+    *out << endl;
 
     noobjectArray = new noobject*[noobjectCountts];
     for (int i=0; i<noobjectCountts; i++)
         noobjectArray[i] = 0;
-    cout << "    " << noobjectCountts << " noobjects" << endl;
+    *out << "    ";
+    *out << noobjectCountts;
+    *out << " noobjects";
+    *out << endl;
 
     drawableCount = drawableCountts;
     objectCount   = objectCountts;
@@ -366,7 +450,8 @@ void universe::invokeAfterSim(){}
 
 void universe::deleteAllDrawables(){
     if (drawableArray != 0){
-        cout << "    deleting old drawables ..." << endl;
+        *out << "    deleting old drawables ...";
+        *out << endl;
         for (int i=0; i<drawableCount; i++)
             if (drawableArray[i])
                 delete(drawableArray[i]);

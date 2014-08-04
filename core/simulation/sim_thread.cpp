@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <thread>
+#include <unistd.h>
 
 #include "./../universe.h"
 #include "./effectthread.h"

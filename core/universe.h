@@ -16,6 +16,8 @@
 #include "simulation.h"
 #include "settings/settings.h"
 
+#include <vesper_log/Logging.hpp>
+
 namespace vemc2{
 
 class universe{
@@ -43,6 +45,12 @@ class universe{
          * (--> int *count)
          */
         void resetArrays();
+
+        /**
+         * resetWorld resets the World an copies the Scene from
+         * the Arrays to the simulateObjects
+         */
+        void resetWorld();
 
         /**
          * the start() function starts a new thread
@@ -155,6 +163,11 @@ class universe{
         int setSimulationType(vemc2::simulation_type simTypets);
 
         /**
+         * This sets the object Type that is being used for simulating
+         */
+        void setObjectType(objectType typets);
+
+        /**
          * These functions insert the different kind of
          * drawables (see object/drawable.h) into the
          * universe. They will recursively call the insert
@@ -197,6 +210,23 @@ class universe{
         int noobjectCount;
 
         /**
+         * simulateObjects contains the Objects, that are being simulated.
+         * The content of the Array, that is being simulated is copied to
+         * simulateObject Array as soon as resetWorld is being invoked.
+         */
+        object   **simulateObjects;
+
+        /**
+         * This represents the type of object that is being used to simulate
+         * see: simulation.h
+         */
+        objectType useForSimulation;
+        /**
+         * The number of objects in **simulateObjects
+         */
+        int simulateObjectCount;
+
+        /**
          * Effect List contain all effects.
          * They will be called from 0 to
          * effectCount-1
@@ -205,6 +235,8 @@ class universe{
         int      effectCount;
 
     protected:
+
+        Vesper::Logging *out;
 
         /**
          * The field struct contain all fields sorted by type.

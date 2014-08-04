@@ -7,7 +7,11 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
+    Vesper::Vout::init();
+    sleep(1);
+
     vemc2::universe *world = new vemc2::universe();
+    sleep(1);
 
     //world->setSimulationType(vemc2::planetSimulation);
     world->insertBody(new vemc2::simulation::body(5, 5, 5, 50));
@@ -15,7 +19,11 @@ int main(int argc, char *argv[]){
     world->insertObject(new vemc2::simulation::object(5, 2, 5, 5));
     world->insertBody(new vemc2::simulation::body(5, 5, 1, 42));
 
+    world->setObjectType(vemc2::t_body);
+
     delete world;
+
+    sleep(5);
 
     return 0;
 }

@@ -27,7 +27,10 @@ temp/main.o: main.cpp graphic.h
 	$(CC) $(CFLAGS) $(INCLDIR) main.cpp      -o temp/main.o
 temp/graphic.o: graphic.cpp graphic.h
 	$(CC) $(CFLAGS) $(INCLDIR) graphic.cpp   -o temp/graphic.o
+temp/draws.o: draws.cpp draws.h
+	$(CC) $(CFALGS) $(INCLDIR) draws.cpp     -o temp/draws.o
 
 
 #header files:
 graphic.h:
+draws.h:

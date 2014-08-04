@@ -2,6 +2,7 @@
 #define EFFECTTHREAD_H_INCLUDED
 
 #include <thread>
+#include <mutex>
 
 #include "./../effect/effect.h"
 

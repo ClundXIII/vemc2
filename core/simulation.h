@@ -20,6 +20,15 @@ namespace vemc2{
         feynmanSimulation,
         bodySimulation
     };
+
+    /**
+     * extend this enum if you want!
+     */
+    enum objectType{
+        t_none =0,
+        t_body,
+        t_quant
+    };
 }; /* namespace vemc2 */
 
 #endif // SIMULATION_H_INCLUDED

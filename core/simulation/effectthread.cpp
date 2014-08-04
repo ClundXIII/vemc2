@@ -1,6 +1,7 @@
 #include "./effectthread.h"
 
 #include <iostream>
+#include <unistd.h>
 
 ///TODO: put this 256 into a settings namespace or into some header file!!
 #define MAXEFFPERTHREAD 256

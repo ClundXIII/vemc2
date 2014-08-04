@@ -1,10 +1,13 @@
 #Makefile for vemc2 (c) by Simon Michalke
 #this is the libcore Makefile, so we only get a .so
 
+vesper-dir=/media/simon/simondss/42vesper/fork
+cmake-build-path=/bin
+
 CC=g++
-#CFLAGS=-std=c++0x -fPIC -c -O3#optimized
-CFLAGS=-std=c++0x -fPIC -c -Wall -g #debugging
-LDFLAGS=-pthread
+#CFLAGS=-I$(vesper-dir) -std=c++0x -fPIC -c -O3#optimized
+CFLAGS=-I$(vesper-dir) -std=c++0x -fPIC -c -Wall -g #debugging
+LDFLAGS=-pthread -Wl,-rpath=$(vesper-dir)$(cmake-build-path)/bin -l:libvesper-log.so
 
 all: libvcore.so
 
@@ -49,6 +52,7 @@ uninstall:
 libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
 	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o
 	mkdir -p temp
+	cp $(vesper-dir)$(cmake-build-path)/bin/lib*.so ./
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
 	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
 	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o \
