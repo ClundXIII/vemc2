@@ -8,22 +8,25 @@ using namespace std;
 int main(int argc, char *argv[]){
 
     Vesper::Vout::init();
-    sleep(1);
 
-    vemc2::universe *world = new vemc2::universe();
-    sleep(1);
+    vemc2::universe *world1 = new vemc2::universe();
+    vemc2::universe *world2 = new vemc2::universe();
 
     //world->setSimulationType(vemc2::planetSimulation);
-    world->insertBody(new vemc2::simulation::body(5, 5, 5, 50));
-    world->insertBody(new vemc2::simulation::body(5, 2, 5, 5));
-    world->insertObject(new vemc2::simulation::object(5, 2, 5, 5));
-    world->insertBody(new vemc2::simulation::body(5, 5, 1, 42));
+    world1->insertBody(new vemc2::simulation::body(5, 5, 5, 50));
+    world2->insertBody(new vemc2::simulation::body(5, 2, 5, 5));
+    world2->insertObject(new vemc2::simulation::object(5, 2, 5, 5));
+    world1->insertBody(new vemc2::simulation::body(5, 5, 1, 42));
 
-    world->setObjectType(vemc2::t_body);
+    world2->setObjectType(vemc2::t_body);
+    world1->setObjectType(vemc2::t_quant);
 
-    delete world;
+    world1->start();
+    world2->run(10);
 
-    sleep(5);
+    delete world1;
+
+    delete world2;
 
     return 0;
 }

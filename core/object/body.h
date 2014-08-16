@@ -15,7 +15,7 @@ class body : object {
         body();
         body(body *toCopy);
         body(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts);
-        ~body();
+        virtual ~body();
 
         void draw();
         void drawField();

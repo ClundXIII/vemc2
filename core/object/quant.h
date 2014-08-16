@@ -9,17 +9,18 @@ namespace simulation{
 class quant : object{
 
 	public:
-	
+
 		quant();
-	
-		~quant();
-		
+		quant(quant *toCopy);
+
+		virtual ~quant();
+
 	protected:
 	private:
-		
-		
-	
-	
+
+
+
+
 
 };
 

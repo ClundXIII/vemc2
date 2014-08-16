@@ -16,7 +16,7 @@ clean:
 	rm temp/*
 
 vemc2_nogui: temp/main.o
-	cp $(vesper-dir)$(cmake-build-path)/bin/lib*.so ./
+	cp $(vesper-dir)$(cmake-build-path)/lib*.so ./
 	$(CC) -o vemc2_nogui temp/main.o $(LDFLAGS)
 
 #all source files:

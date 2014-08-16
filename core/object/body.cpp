@@ -6,6 +6,12 @@ body::body(){
 }
 
 body::body(body *toCopy){
+
+    setMass(toCopy->getMass());
+
+    setX1(toCopy->getX1());
+    setX2(toCopy->getX2());
+    setX3(toCopy->getX3());
 }
 
 body::body(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts){

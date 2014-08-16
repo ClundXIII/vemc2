@@ -61,6 +61,22 @@ class universe{
          */
         void start();
 
+        /**
+         * This struct contains all the data while simulation.
+         * It is deleted and generated new after each reset to
+         * save the original scene. (If you want to try the
+         * simulation with other settings, etc)
+         */
+        struct{
+            union{
+                simulation::body   **b;
+                simulation::quant  **q;
+            }objects;
+
+            int objectCount;
+        }simulateStruct;
+
+        void clearSimulateStruct();
 
         /**
          * The run() function starts the simulation
