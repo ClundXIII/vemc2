@@ -31,7 +31,7 @@ class effect{
 
         /**
          * This function is being called by the simulation thread.
-         * The effects should save the changes theirselves to
+         * The effects should save the changes themselves to
          * apply them in the upValues() function.
          */
         virtual void tick() =0;
