@@ -62,6 +62,22 @@ class universe{
         void start();
 
         /**
+         * The stop function stops the simulation
+         * and terminates all running threads.
+         */
+        void stop();
+
+        /**
+         * pause() and unpause() is used to
+         * pause and resume the simulation
+         *
+         */
+        void pause();
+        void unpause();
+
+        simulation::sim_thread *simulationThread=0;
+
+        /**
          * This struct contains all the data while simulation.
          * It is deleted and generated new after each reset to
          * save the original scene. (If you want to try the
@@ -147,6 +163,10 @@ class universe{
                 bool      quant_Simulation;
                 bool      body_Simulation;
                 bool      use_srt;
+                bdt       DeadZone;
+                struct{
+                    bdt G;
+                }NatConst;
             }sim;
 
             struct{ //win
@@ -250,10 +270,6 @@ class universe{
         effect **effectArray;
         int      effectCount;
 
-    protected:
-
-        Vesper::Logging *out;
-
         /**
          * The field struct contain all fields sorted by type.
          * This struct will be used by the effects, so that
@@ -262,8 +278,13 @@ class universe{
          * For own theories / fields, extend this array
          */
         struct field_struct{
-            //
+            vemc2::simulation::Gfield *G;
+            //vemc2::simulation::Efield *E;
         }fields;
+
+    protected:
+
+        Vesper::Logging *out;
 
         vemc2::simulation_type simType;
 

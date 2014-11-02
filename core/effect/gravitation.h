@@ -1,24 +1,23 @@
-#ifndef INERTIA_H_INCLUDED
-#define INERTIA_H_INCLUDED
+#ifndef GRAVITATION_H_INCLUDED
+#define GRAVITATION_H_INCLUDED
 
 #include "effect.h"
 
 namespace vemc2{
 namespace simulation{
 
-class inertia : effect{
-
+class gravitation : effect {
     public:
 
-        inertia(vemc2::universe *globUniversets);
-        ~inertia();
+        gravitation(vemc2::universe *globUniversets);
+        ~gravitation();
+
 
         void tick();
 
         void upValues();
 
     protected:
-
     private:
 
 };
@@ -28,4 +27,4 @@ class inertia : effect{
 
 
 
-#endif /* INERTIA_H_INCLUDED */
+#endif /* GRAVITATION_H_INCLUDED */

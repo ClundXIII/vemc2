@@ -44,9 +44,9 @@ sim_thread::~sim_thread(){
     //dtor
 }
 
-/*void sim_thread::start(){
-    launch();
-}*/
+void sim_thread::start(){
+    //launch();
+}
 
 void sim_thread::run(){
 

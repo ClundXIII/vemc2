@@ -6,6 +6,8 @@
 #include "./../define.h"
 #include "./../myMath.h"
 
+#include <vector>
+
 using namespace vemc2::simulation;
 
 namespace vemc2{
@@ -22,6 +24,7 @@ class object : drawable {
         virtual void drawField();
 
         virtual bdt getMass();
+        virtual std::vector<bdt> getX();
         virtual bdt getX1();
         virtual bdt getX2();
         virtual bdt getX3();
@@ -50,6 +53,12 @@ class object : drawable {
                 bdt X3;
             }v;
         }data;
+
+
+        void addF(std::vector<bdt> Fta);
+        void addA(std::vector<bdt> Ata);
+        void addV(std::vector<bdt> Vta);
+
 
     protected:
 

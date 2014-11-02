@@ -16,18 +16,19 @@ class field : drawable{
          * We don't declare any contructors / destructors so the
          * compiler doesn't search for them ;-)
          */
-        //field();
-        //~field();
+        field(vemc2::universe *globUniversets);
+        virtual ~field();
 
         virtual void draw();
 
     protected:
-    private:
 
         /**
          * This is a pointer to the universe the field belongs to.
          */
         vemc2::universe *globUniverse;
+
+    private:
 
 };
 

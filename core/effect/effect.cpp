@@ -2,14 +2,12 @@
 
 using namespace vemc2::simulation;
 
-/*void effect::insertObjects(object **objectListts){
-    objectList = objectListts;
+effect::effect(vemc2::universe *globUniversets){
+    globUniverse = globUniversets;
 }
 
-void effect::insertDtPointer(bdt *dtts){
-    dt = dtts;
+effect::~effect(){
 }
 
-object **effect::objectList;
-bdt     *effect::dt;
-*/
+void effect::tick(){}
+void effect::upValues(){}

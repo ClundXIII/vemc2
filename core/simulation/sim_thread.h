@@ -18,7 +18,7 @@ class sim_thread : public std::thread{
         sim_thread(vemc2::universe *globUniversets);
         ~sim_thread();
 
-        //void start();
+        void start();
 
         void run();
 

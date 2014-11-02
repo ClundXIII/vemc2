@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 using namespace vemc2::simulation;
 
@@ -217,6 +218,13 @@ void object::drawField(){
 
 
 bdt object::getMass(){return mass;}
+std::vector<bdt> object::getX(){
+    std::vector<bdt> retVec;
+    retVec[0] = getX1();
+    retVec[1] = getX2();
+    retVec[2] = getX3();
+    return retVec;
+}
 bdt object::getX1()  {return posX1;}
 bdt object::getX2()  {return posX2;}
 bdt object::getX3()  {return posX3;}
@@ -231,11 +239,30 @@ void object::setDataNull(){
     data.F.X2 = 0;
     data.F.X3 = 0;
 
-    data.v.X1 = 0;
-    data.v.X2 = 0;
-    data.v.X3 = 0;
-
     data.a.X1 = 0;
     data.a.X2 = 0;
     data.a.X3 = 0;
+
+    data.v.X1 = 0;
+    data.v.X2 = 0;
+    data.v.X3 = 0;
 }
+
+void object::addF(std::vector<bdt> Fta){
+    data.F.X1 += Fta[0];
+    data.F.X2 += Fta[1];
+    data.F.X3 += Fta[2];
+}
+
+void object::addA(std::vector<bdt> Ata){
+    data.a.X1 += Ata[0];
+    data.a.X2 += Ata[1];
+    data.a.X3 += Ata[2];
+}
+
+void object::addV(std::vector<bdt> Vta){
+    data.v.X1 += Vta[0];
+    data.v.X2 += Vta[1];
+    data.v.X3 += Vta[2];
+}
+

@@ -19,15 +19,15 @@
  */
     ///If we wanna be a noob and use float ;-)
     /*#ifdef __CYGWIN__
-        typedef long double bdt;
+        typedef float bdt;
     #else
-        #define bdt long double
+        #define bdt float
     #endif*/
     ///use double:
     /*#ifdef __CYGWIN__
-        typedef long double double;
+        typedef double bdt;
     #else
-        #define double long double
+        #define bdt double
     #endif*/
     ///If we wanna use long double (standard):
     #ifdef __CYGWIN__
@@ -42,6 +42,7 @@ namespace simulation{class eld;};
 //the function itself is in mymath/eld.cpp
 vemc2::simulation::eld retEld(long double base, int exponent);
 
+//bdt vemc2::simulation::mymath::getAbs(std::vector<bdt> vec);
 
 
 #endif // MYMATH_H_INCLUDED

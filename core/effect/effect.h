@@ -26,21 +26,21 @@ class effect{
          * We don't declare any contructors / destructors so the
          * compiler doesn't search for them ;-)
          */
-        //effect();
-        //~effect();
+        effect(vemc2::universe *globUniversets);
+        virtual ~effect();
 
         /**
          * This function is being called by the simulation thread.
          * The effects should save the changes themselves to
          * apply them in the upValues() function.
          */
-        virtual void tick() =0;
+        virtual void tick(); // =0;
 
         /**
          * This function applies the changes / effects / etc
          * which were calculated by the tick() function before.
          */
-        virtual void upValues()  =0;
+        virtual void upValues(); //  =0;
 
     protected:
 

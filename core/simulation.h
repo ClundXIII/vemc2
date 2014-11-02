@@ -7,11 +7,15 @@
 #include "effect/inertia.h"
 
 #include "field/field.h"
+#include "field/Gfield.h"
+#include "field/Efield.h"
 
 #include "object/object.h"
 #include "object/noobject.h"
 #include "object/body.h"
 #include "object/quant.h"
+
+#include "simulation/sim_thread.h"
 
 namespace vemc2{
     enum simulation_type{

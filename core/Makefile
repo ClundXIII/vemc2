@@ -1,7 +1,8 @@
 #Makefile for vemc2 (c) by Simon Michalke
 #this is the libcore Makefile, so we only get a .so
 
-vesper-dir=/media/simon/simondss/42vesper/fork
+#vesper-dir=/media/simon/simondss/42vesper/fork
+vesper-dir=$(HOME)/vesper-libs-fork
 cmake-build-path=/bin
 
 CC=g++
@@ -50,12 +51,12 @@ uninstall:
 #	mkdir -p temp
 
 libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o
+	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o
 	mkdir -p temp
 	cp $(vesper-dir)$(cmake-build-path)/lib*.so ./
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
 	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o \
+	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o \
 	$(LDFLAGS)
 
 temp/object.o: object/object.cpp object/object.h
@@ -90,6 +91,8 @@ temp/sim_thread.o: simulation/sim_thread.cpp simulation/sim_thread.h universe.h 
 	$(CC) $(CFLAGS) simulation/sim_thread.cpp    -o temp/sim_thread.o
 temp/effectthread.o: simulation/effectthread.cpp simulation/effectthread.h
 	$(CC) $(CFLAGS) simulation/effectthread.cpp  -o temp/effectthread.o
+temp/gravitation.o: effect/gravitation.cpp effect/gravitation.h
+	$(CC) $(CFLAGS) effect/gravitation.cpp       -o temp/gravitation.o
 
 #Header files please:
 copy-header:
@@ -107,6 +110,7 @@ copy-header:
 	cp universe.h                    ./../header/core/universe.h
 	cp effect/effect.h               ./../header/core/effect/effect.h
 	cp effect/inertia.h              ./../header/core/effect/inertia.h
+	cp effect/gravitation.h          ./../header/core/effect/gravitation.h
 	cp settings/settings.h           ./../header/core/settings/settings.h
 	cp settings/settingdefines.h     ./../header/core/settings/settingdefines.h
 	cp simulation/sim_thread.h       ./../header/core/simulation/sim_thread.h
@@ -159,6 +163,9 @@ effect/effect.h:
 effect/inertia.h: effect/effect.h
 	@#@mkdir -p ./../header/core/effect
 	@#cp effect/inertia.h              ./../header/core/effect/inertia.h
+effect/gravitation.h: effect/effect.h
+	@#@mkdir -p ./../header/core/effect
+	@#cp effect/gravitation.h          ./../header/core/effect/gravitation.h
 
 settings/settings.h: define.h myMath.h
 	@#@mkdir -p ./../header/core/settings

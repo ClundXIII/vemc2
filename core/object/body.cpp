@@ -31,6 +31,13 @@ void body::newValues(){}
 void body::tick(){}
 
 bdt body::getMass(){return mass;}
+std::vector<bdt> body::getX(){
+    std::vector<bdt> retVec;
+    retVec[0] = getX1();
+    retVec[1] = getX2();
+    retVec[2] = getX3();
+    return retVec;
+}
 bdt body::getX1()  {return posX1;}
 bdt body::getX2()  {return posX2;}
 bdt body::getX3()  {return posX3;}

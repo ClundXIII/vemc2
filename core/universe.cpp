@@ -10,7 +10,7 @@ using namespace vemc2::simulation;
 using namespace vemc2::settings;
 
 universe::universe(){
-    //Vesper::Vout::init();
+    Vesper::Vout::init();
     //out = new Vesper::Logging(Vesper::LoggingType::server);
     //out << "===============================================" << endl;
     //out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014";
@@ -145,19 +145,40 @@ void universe::resetWorld(){
 
 }
 
+void universe::start(){
+    if (simulationThread == 0)
+        simulationThread = new simulation::sim_thread(this);
+
+    simulationThread->stop();
+    simulationThread->start();
+}
+
+void universe::stop(){
+
+    simulationThread->stop();
+}
+
+void universe::pause(){
+    if (simulationThread == 0) return;
+    else
+        simulationThread->pause();
+}
+
+void universe::unpause(){
+    if (simulationThread == 0) return;
+    else
+        simulationThread->unpause();
+}
+
 void universe::clearSimulateStruct(){
     if (simulateStruct.objectCount == 0) return;
 
     if (simulateStruct.objects.b == 0) return;
 
-    for (int i; i<simulateStruct.objectCount; i++)
+    for (int i=0; i<simulateStruct.objectCount; i++)
         delete simulateStruct.objects.b[i];
 
     delete simulateStruct.objects.b;
-
-}
-
-void universe::start(){
 
 }
 

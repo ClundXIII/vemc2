@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "universe.h"
+#include <universe.h>
 
 using namespace std;
 //using namespace vemc2;
@@ -22,7 +22,9 @@ int main(int argc, char *argv[]){
     world1->setObjectType(vemc2::t_quant);
 
     world1->start();
-    world2->run(10);
+    //sleep(10);
+    world1->stop();
+    //world2->run(10);
 
     delete world1;
 

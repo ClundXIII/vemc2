@@ -6,6 +6,10 @@ quant::quant(){
 	//
 }
 
+quant::quant(quant *toCopy){
+	//
+}
+
 quant::~quant(){
 	//dtor
 }

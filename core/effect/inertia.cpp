@@ -6,7 +6,9 @@
 
 using namespace vemc2::simulation;
 
-inertia::inertia(){
+inertia::inertia(vemc2::universe *globUniversets) :
+    effect(globUniversets)
+{
 }
 
 inertia::~inertia(){
