@@ -14,7 +14,7 @@ all: libvcore.so
 
 clean:
 	@touch temp/dummy
-	rm temp/* 
+	rm temp/*
 
 preinst:
 	mkdir -p /opt/lib
@@ -37,7 +37,7 @@ install:
 
 install-local:
 	sudo echo "$pwd" > /etc/ld.so.conf.d/vemc2.conf
-	
+
 	ln -fs libvcore.so.`cat version`             libvcore.so`cat version | head -c 3`
 	ln -fs libvcore.so.`cat version | head -c 3` libvcore.so`cat version | head -c 1`
 	ln -fs libvcore.so.`cat version | head -c 1` libvcore.so
@@ -51,12 +51,12 @@ uninstall:
 #	mkdir -p temp
 
 libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o
+	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o temp/vector.o
 	mkdir -p temp
 	cp $(vesper-dir)$(cmake-build-path)/lib*.so ./
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
 	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o \
+	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o temp/vector.o \
 	$(LDFLAGS)
 
 temp/object.o: object/object.cpp object/object.h
@@ -93,6 +93,8 @@ temp/effectthread.o: simulation/effectthread.cpp simulation/effectthread.h
 	$(CC) $(CFLAGS) simulation/effectthread.cpp  -o temp/effectthread.o
 temp/gravitation.o: effect/gravitation.cpp effect/gravitation.h
 	$(CC) $(CFLAGS) effect/gravitation.cpp       -o temp/gravitation.o
+temp/vector.o: mymath/vector.cpp mymath/vector.h myMath.h
+	$(CC) $(CFLAGS) mymath/vector.cpp             -o temp/vector.o
 
 #Header files please:
 copy-header:
@@ -127,6 +129,7 @@ mymath/eld.h: define.h myMath.h
 mymath/math_struct.h: myMath.h mymath/eld.h
 	@#@mkdir -p ./../header/core/mymath
 	@#cp mymath/math_struct.h          ./../header/core/mymath/math_struct.h
+mamath/vector.h: myMath.h
 
 object/drawable.h: define.h
 	@#@mkdir -p ./../header/core/object

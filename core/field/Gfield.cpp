@@ -80,6 +80,7 @@ std::vector<bdt> Gfield::getVecA(std::vector<bdt> posX, bdt mass){
         retVec[0] += G * tempBody->getMass() * dX_sq[0];
         retVec[1] += G * tempBody->getMass() * dX_sq[1];
         retVec[2] += G * tempBody->getMass() * dX_sq[2];
+
     }
 
     return retVec;
