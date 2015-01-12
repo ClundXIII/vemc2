@@ -146,6 +146,11 @@
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>
+		<Unit filename="core/mymath/vec3bdt.h">
+			<Option virtualFolder="core/src/mymath/" />
+			<Option target="all" />
+			<Option target="libcore" />
+		</Unit>
 		<Unit filename="core/mymath/vector.cpp">
 			<Option virtualFolder="core/src/mymath/" />
 			<Option target="all" />

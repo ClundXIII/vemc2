@@ -17,10 +17,14 @@ class vector : public std::vector<T>{
 
         static std::vector<T> addTwo(std::vector<T> vec1,  std::vector<T> vec2);
 
-        //null vector. May be useful
-        static const std::vector<bdt> null;
+        //null vector. May be useful --> mv'ed to vec3bdt class
+        //static const std::vector<bdt> null;
 
-        void invert();
+        //void invert();
+
+        //does not change the vector
+        std::vector<T> normalize();
+        T              getLength();
 
         //returns the invert
         template <class S>
@@ -39,18 +43,33 @@ class vector : public std::vector<T>{
         std::vector<T> operator+(std::vector<T> toAdd);
         std::vector<T> operator-(std::vector<T> toSub);
 
+
         //changes this vector obviously
+        std::vector<T> set(std::vector<T> toSet);
         std::vector<T> operator=(std::vector<T> toSet);
 
     protected:
-    private:
-
         //returns this*toMul; does not change this vector
         std::vector<T> multiplicateTo(bdt toMul);
         //returns this+toAdd; does not change this vector
         std::vector<T> additionTo(std::vector<T> toAdd);
 
+    private:
+
+    /* specializing */
+
+    public:
+
+
+        /*template<>
+        std::vector<bdt> operator=(std::vector<bdt> toSet);*/
+
+
 };
+
+//generate some explcite
+//template<>
+//class vector<bdt>;
 
 }; /* namespace mymath */
 }; /* namespace vecm2 */

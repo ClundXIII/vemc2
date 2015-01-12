@@ -83,7 +83,7 @@ temp/inertia.o: effect/inertia.cpp effect/inertia.h universe.h mymath/math_struc
 	$(CC) $(CFLAGS) effect/inertia.cpp           -o temp/inertia.o
 temp/effect.o: effect/effect.cpp effect/effect.h
 	$(CC) $(CFLAGS) effect/effect.cpp            -o temp/effect.o
-temp/Gfield.o: field/Gfield.cpp field/Gfield.h
+temp/Gfield.o: field/Gfield.cpp field/Gfield.h mymath/vec3bdt.h
 	$(CC) $(CFLAGS) field/Gfield.cpp             -o temp/Gfield.o
 temp/Efield.o: field/Efield.cpp field/Efield.h
 	$(CC) $(CFLAGS) field/Efield.cpp             -o temp/Efield.o
@@ -93,7 +93,7 @@ temp/effectthread.o: simulation/effectthread.cpp simulation/effectthread.h
 	$(CC) $(CFLAGS) simulation/effectthread.cpp  -o temp/effectthread.o
 temp/gravitation.o: effect/gravitation.cpp effect/gravitation.h
 	$(CC) $(CFLAGS) effect/gravitation.cpp       -o temp/gravitation.o
-temp/vector.o: mymath/vector.cpp mymath/vector.h myMath.h
+temp/vector.o: mymath/vector.cpp mymath/vector.h myMath.h mymath/vec3bdt.h
 	$(CC) $(CFLAGS) mymath/vector.cpp             -o temp/vector.o
 
 #Header files please:
