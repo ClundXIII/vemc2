@@ -51,12 +51,12 @@ uninstall:
 #	mkdir -p temp
 
 libvcore.so: temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o temp/vector.o
+	     temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o temp/vector.o temp/vec3bdt.o
 	mkdir -p temp
 	cp $(vesper-dir)$(cmake-build-path)/lib*.so ./
 	$(CC) -g -shared -Wl,-soname,libvcore.so.`cat version | head -c 1` -o libvcore.so.`cat version` \
 	temp/object.o temp/eld.o temp/noobject.o temp/field.o temp/quant.o temp/universe.o temp/drawable.o temp/settings.o temp/ccs.o temp/inertia.o \
-	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o temp/vector.o \
+	temp/effect.o temp/Gfield.o temp/Efield.o temp/sim_thread.o temp/effectthread.o temp/body.o temp/gravitation.o temp/vector.o temp/vec3bdt.o \
 	$(LDFLAGS)
 
 temp/object.o: object/object.cpp object/object.h
@@ -94,7 +94,9 @@ temp/effectthread.o: simulation/effectthread.cpp simulation/effectthread.h
 temp/gravitation.o: effect/gravitation.cpp effect/gravitation.h
 	$(CC) $(CFLAGS) effect/gravitation.cpp       -o temp/gravitation.o
 temp/vector.o: mymath/vector.cpp mymath/vector.h myMath.h mymath/vec3bdt.h
-	$(CC) $(CFLAGS) mymath/vector.cpp             -o temp/vector.o
+	$(CC) $(CFLAGS) mymath/vector.cpp            -o temp/vector.o
+temp/vec3bdt.o: mymath/vec3bdt.cpp mymath/vec3bdt.h
+	$(CC) $(CFLAGS) mymath/vec3bdt.cpp           -o temp/vec3bdt.o
 
 #Header files please:
 copy-header:

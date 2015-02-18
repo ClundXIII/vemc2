@@ -165,7 +165,7 @@ class universe{
                 bool      use_srt;
                 bdt       DeadZone;
                 struct{
-                    bdt G;
+                    double G;
                 }NatConst;
             }sim;
 
@@ -284,7 +284,7 @@ class universe{
 
     protected:
 
-        Vesper::Logging *out;
+        Vesper::Logging out;
 
         vemc2::simulation_type simType;
 

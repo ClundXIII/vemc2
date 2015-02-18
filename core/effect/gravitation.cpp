@@ -19,12 +19,11 @@ void gravitation::tick(){
     object **tempobjectList = globUniverse->objectArray;
     Gfield  *tempGfield     = globUniverse->fields.G;
     object  *tempObj;
-    bdt      dt = globUniverse->settings.sim.dt;
 
     for (int i=0; i<globUniverse->objectCount; i++){
         tempObj = tempobjectList[i];
 
-        tempObj->addA(tempGfield->getVecA(tempObj->getX1(), tempObj->getX2(), tempObj->getX3(), tempObj->getMass()));
+        tempObj->addA(tempGfield->getVecA(tempObj->getX(), tempObj->getMass()));
     }
 
 

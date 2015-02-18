@@ -45,7 +45,8 @@ sim_thread::~sim_thread(){
 }
 
 void sim_thread::start(){
-    //launch();
+    //this->Launch();
+    detach();
 }
 
 void sim_thread::run(){

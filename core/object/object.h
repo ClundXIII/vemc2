@@ -5,6 +5,7 @@
 
 #include "./../define.h"
 #include "./../myMath.h"
+#include "./../mymath/vec3bdt.h"
 
 #include <vector>
 
@@ -24,7 +25,7 @@ class object : drawable {
         virtual void drawField();
 
         virtual bdt getMass();
-        virtual std::vector<bdt> getX();
+        virtual vemc2::mymath::vec3bdt getX();
         virtual bdt getX1();
         virtual bdt getX2();
         virtual bdt getX3();

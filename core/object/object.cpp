@@ -6,8 +6,6 @@
 
 using namespace vemc2::simulation;
 
-object **GLOBALOBJECTS;
-
 object::object(){
     posX1 = 0;
     posX2 = 0;
@@ -218,8 +216,8 @@ void object::drawField(){
 
 
 bdt object::getMass(){return mass;}
-std::vector<bdt> object::getX(){
-    std::vector<bdt> retVec;
+vemc2::mymath::vec3bdt object::getX(){
+    vemc2::mymath::vec3bdt retVec;
     retVec[0] = getX1();
     retVec[1] = getX2();
     retVec[2] = getX3();

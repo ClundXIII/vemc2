@@ -2,18 +2,19 @@
 #define VECTOR_H_INCLUDED
 
 #include <vector>
+//#include "./../mymath/vec3bdt.h"
 #include "./../myMath.h"
 
 namespace vemc2{
 namespace mymath{
 
 template <class T>
-class vector : public std::vector<T>{
+class vector : public ::std::vector<T>{
 
     public:
-        vector<T>();
-        vector<T>(int i); //Count of elements
-        vector<T>(T x1, T x2, T x3);
+        vector();
+        vector(int i); //Count of elements
+        vector(T x1, T x2, T x3);
 
         static std::vector<T> addTwo(std::vector<T> vec1,  std::vector<T> vec2);
 
@@ -23,12 +24,11 @@ class vector : public std::vector<T>{
         //void invert();
 
         //does not change the vector
-        std::vector<T> normalize();
-        T              getLength();
+        vector normalize();
+        T      getLength();
 
         //returns the invert
-        template <class S>
-        static std::vector<T> invert(std::vector<S> toInv);
+        static vector invert(std::vector<T> toInv);
 
         //changes this vector
         void mul(bdt toMul);
@@ -38,21 +38,21 @@ class vector : public std::vector<T>{
         void add(std::vector<S> toAdd);
 
         //these are not changing this vector
-        std::vector<T> operator*(bdt toMul);
-        std::vector<T> operator/(bdt toDiv);
-        std::vector<T> operator+(std::vector<T> toAdd);
-        std::vector<T> operator-(std::vector<T> toSub);
+        vector operator*(bdt toMul);
+        vector operator/(bdt toDiv);
+        vector operator+(std::vector<T> toAdd);
+        vector operator-(std::vector<T> toSub);
 
 
         //changes this vector obviously
-        std::vector<T> set(std::vector<T> toSet);
-        std::vector<T> operator=(std::vector<T> toSet);
+        vector set(std::vector<T> toSet);
+        vector operator=(std::vector<T> toSet);
 
     protected:
         //returns this*toMul; does not change this vector
-        std::vector<T> multiplicateTo(bdt toMul);
+        vector multiplicateTo(bdt toMul);
         //returns this+toAdd; does not change this vector
-        std::vector<T> additionTo(std::vector<T> toAdd);
+        vector additionTo(std::vector<T> toAdd);
 
     private:
 
@@ -60,16 +60,13 @@ class vector : public std::vector<T>{
 
     public:
 
-
-        /*template<>
-        std::vector<bdt> operator=(std::vector<bdt> toSet);*/
-
-
 };
 
-//generate some explcite
-//template<>
-//class vector<bdt>;
+
+//template class vector<long double>;
+
+/*template <class T>
+class vector;*/
 
 }; /* namespace mymath */
 }; /* namespace vecm2 */

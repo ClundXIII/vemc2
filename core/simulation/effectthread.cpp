@@ -69,7 +69,7 @@ void effectthread::run(){
             //we are now taking this serious now
             std::cout << "Thread with ID " << this->get_id() << " is taking this serious now!"<< std::endl;
 
-            //decide between running onw or two effects
+            //decide between running one or two effects
             //we do this now (with too much obvious code)
             //to get a better performance
             if (only_one == true){
@@ -80,7 +80,7 @@ void effectthread::run(){
                     locker.unlock(); //we are done for this tick!
 
                     locker.lock(); //wait for upValues
-                    singleEffectToRun->tick();
+                    singleEffectToRun->upValues();
                     locker.unlock(); //we are done for this tick!
                 }
             }

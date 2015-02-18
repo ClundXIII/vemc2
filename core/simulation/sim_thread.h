@@ -18,15 +18,19 @@ class sim_thread : public std::thread{
         sim_thread(vemc2::universe *globUniversets);
         ~sim_thread();
 
+        //starts the threads
         void start();
 
-        void run();
-
+        //pauses the threads
         void pause();
 
+        //unpauses / continues the threads
         void unpause();
 
+        //terminate all threads
         void stop();
+
+        void run(); //this function simulates stuff.
 
     protected:
 

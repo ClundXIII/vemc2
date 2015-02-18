@@ -1,7 +1,6 @@
 #include "Gfield.h"
 
 #include "./../universe.h"
-#include "./../mymath/vec3bdt.h"
 
 using namespace vemc2;
 using namespace vemc2::mymath;
@@ -17,9 +16,9 @@ Gfield::~Gfield(){
     //
 }
 
-/*void Gfield::setDeadZone(bdt *Zonets){
+void Gfield::setDeadZone(bdt *Zonets){
     DeadZone = Zonets;
-}*/
+}
 
 std::vector<bdt> Gfield::getVecA(bdt posX1, bdt posX2, bdt posX3, bdt mass){
     vec3bdt posX(posX1, posX2, posX3);
@@ -48,7 +47,7 @@ bdt* Gfield::getVecA_array(bdt posX1, bdt posX2, bdt posX3, bdt mass){
     return retArray;
 }
 
-std::vector<bdt> Gfield::getVecA(std::vector<bdt> posX, bdt mass){
+vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
     vec3bdt retVec, posXvec;
 
     retVec = posX;
@@ -74,7 +73,7 @@ std::vector<bdt> Gfield::getVecA(std::vector<bdt> posX, bdt mass){
 
         e = dX.normalize(); //the direction vector
 
-        retVec = e * (G * mass * tempBody->getMass() / (dX.getLength() * dX.getLength()));
+        retVec = retVec + e * (G * mass / (dX.getLength() * dX.getLength()));
 
     }
 

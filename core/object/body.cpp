@@ -31,8 +31,8 @@ void body::newValues(){}
 void body::tick(){}
 
 bdt body::getMass(){return mass;}
-std::vector<bdt> body::getX(){
-    std::vector<bdt> retVec;
+vemc2::mymath::vec3bdt body::getX(){
+    vemc2::mymath::vec3bdt retVec;
     retVec[0] = getX1();
     retVec[1] = getX2();
     retVec[2] = getX3();

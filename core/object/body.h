@@ -23,7 +23,7 @@ class body : object {
         void tick();
 
         bdt getMass();
-        std::vector<bdt> getX();
+        vemc2::mymath::vec3bdt getX();
         bdt getX1();
         bdt getX2();
         bdt getX3();

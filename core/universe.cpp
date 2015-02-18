@@ -4,23 +4,25 @@
 #include <stdio.h>
 #include <string.h>
 
-using namespace Vesper::LoggingType;
 using namespace vemc2;
 using namespace vemc2::simulation;
 using namespace vemc2::settings;
+using namespace Vesper::LoggingTypes;
 
-universe::universe(){
-    Vesper::Vout::init();
-    //out = new Vesper::Logging(Vesper::LoggingType::server);
-    //out << "===============================================" << endl;
-    //out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014";
-    //out << endl;
+universe::universe() :
+    out(Vesper::LoggingTypes::server)
+
+    {
+    //out = new Vesper::Logging(Vesper::LoggingTypes::server);
+    out << "===============================================" << eom;
+    out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << eom;
     //out << "vcore Library, Version 0.0.01-pre / 23042014";
     //out << endl;
     //out << "Have a lot of fun ...                ";
     //out << endl;
     //out << "    creating new universe         ...";
     //out << endl;
+    out.flush();
     drawableArray =0;
     objectArray   =0;
     bodyArray     =0;
