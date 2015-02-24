@@ -9,20 +9,21 @@ using namespace vemc2::simulation;
 using namespace vemc2::settings;
 using namespace Vesper::LoggingTypes;
 
+#define v0 if (verboseLevel >= 0)
+#define v1 if (verboseLevel >= 1)
+#define v2 if (verboseLevel >= 2)
+#define v3 if (verboseLevel >= 3)
+
 universe::universe() :
     out(Vesper::LoggingTypes::server)
 
     {
-    //out = new Vesper::Logging(Vesper::LoggingTypes::server);
-    out << "===============================================" << eom;
-    out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << eom;
-    //out << "vcore Library, Version 0.0.01-pre / 23042014";
-    //out << endl;
-    //out << "Have a lot of fun ...                ";
-    //out << endl;
-    //out << "    creating new universe         ...";
-    //out << endl;
-    out.flush();
+    v0 out << "===============================================" << eom;
+    v0 out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << eom;
+    v0 out << "vcore Library, Version 0.0.02-pre / 19022015" << eom;
+    v1 out << "Have a lot of fun ...                " << eom;
+    v0 out << "    creating new universe         ..." << eom;
+
     drawableArray =0;
     objectArray   =0;
     bodyArray     =0;
@@ -47,48 +48,87 @@ universe::universe() :
 
     simulateStruct.objectCount = 0;
 
+    setSimulationType(planetSimulation);
+
+    verboseLevel = 0;
+
     update();
+
+    out << "==================done!========================" << eom;
+}
+
+
+universe::universe(int vLevel) :
+    out(Vesper::LoggingTypes::server)
+{
+
+    verboseLevel = vLevel;
+
+    v0 out << "===============================================" << eom;
+    v0 out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << eom;
+    v0 out << "vcore Library, Version 0.0.02-pre / 19022015" << eom;
+    v1 out << "Have a lot of fun ...                " << eom;
+    v0 out << "    creating new universe         ..." << eom;
+
+    drawableArray =0;
+    objectArray   =0;
+    bodyArray     =0;
+    quantArray    =0;
+    fieldArray    =0;
+    noobjectArray =0;
+
+    effectArray   =0;
+
+    drawableCount = 2168;
+    objectCount   = 2084;
+    bodyCount     = 1024;
+    quantCount    = 1024;
+    fieldCount    =  128;
+    noobjectCount =   16;
+
+    effectCount = 16;
+
+    useForSimulation = t_none;
+    simulateObjectCount = 0;
+    simulateObjects = 0;
+
+    simulateStruct.objectCount = 0;
+
+    setSimulationType(planetSimulation);
+
+    update();
+
+    v0 out << "==================done!========================" << eom;
 }
 
 universe::~universe(){
 
-    //out << "(END) delete() invoked ... cleaning up ...";
-    //out << endl;
+    v0 out << "(END) delete() invoked ... cleaning up ..." << eom;
 
     //cleaning up
     deleteAllDrawables();
     deleteAllEffects();
 
-    //out << "If you see this, there wasn't a single";
-    //out << endl;
-    //out << "SEGFAULT ... HORAAAAYYYY!!!!";
-    //out << endl;
-    //out << "";
-    //out << endl;
-    //out << "World sucessfully deleted!";
-    //out << endl;
+    v0 out << "... done with cleaning up" << eom;
 }
 
 void universe::update(){
-    //out << "(00)update() invoked!                ";
-    //out << endl;
-    //out << "(01)getting global settings       ...";
-    //out << endl;
+    v1 out << "(00)update() invoked!                " << eom;
+    v2 out << "(01)getting global settings       ..." << eom;
+
     getGlobalSettings();
-    //out << "                                done!";
-    //out << endl;
-    //out << "(02)reserving space for drawables ...";
-    //out << endl;
+
+    v2 out << "                                done!" << eom;
+    v2 out << "(02)reserving space for drawables ..." << eom;
+
     resetArrays();
-    //out << "                                done!";
-    //out << endl;
-    //out << "(10)creating simulation           ...";
-    //out << endl;
-    //out << "(11)setting up effects            ...";
-    //out << endl;
+
+    v2 out << "                                done!" << eom;
+    v2 out << "(10)creating simulation           ..." << eom;
+    v2 out << "(11)setting up effects            ..." << eom;
+
     if (effectArray != 0){ //we have to delete the old effects first!
-        //out << "    deleting old effects ...";
-        //out << endl;
+        v2 out << "    deleting old effects ..." << eom;
         for (int i=0; i<effectCount; i++){
             delete effectArray[i];
         }
@@ -97,15 +137,11 @@ void universe::update(){
     effectArray = new effect*[effectCount];
     for (int i=0; i<effectCount; i++)
         effectArray[i] = 0;
-    //out << "                                done!";
-    //out << endl;
-    //out << "(12)creating simThread            ...";
-    //out << endl;
-    //out << "                                done!";
-    //out << endl;
+    v2 out << "                                done!" << eom;
+    v2 out << "(12)creating simThread            ..." << eom;
+    v2 out << "                                done!" << eom;
 
-    //out << "  sucessfully created a new universe!";
-    //out << endl;
+    v0 out << "  sucessfully created a new universe!" << eom;
 }
 
 void universe::resetArrays(){
@@ -254,16 +290,13 @@ int universe::insertDrawable(vemc2::simulation::drawable *toInsert){
 
     int pos = sTAE( (void**)drawableArray);
     if (pos >= (drawableCount - 1) ){
-        //out << "drawableCount exceed limits in universe.cpp::insertDrawable!";
-        //out << endl;
+        v0 out << "drawableCount exceed limits in universe.cpp::insertDrawable!" << eom;
         return 1;
     }
 
     drawableArray[pos] = toInsert;
 
-    //out << "Inserted drawable at position ";
-    //out << pos;
-    //out << endl;
+    v1 out << "Inserted drawable at position " << pos << eom;
 
     return 0;
 }
@@ -275,26 +308,20 @@ int universe::insertObject(vemc2::simulation::object *toInsert){
     //first insert this in the mother class array:
     ret = insertDrawable( (drawable*) toInsert);
     if (ret != 0){
-        //out << "insertDrawable returned ";
-        //out << ret;
-        //out << " in universe.cpp::insertObject";
-        //out << endl;
+        v0 out << "insertDrawable returned " << ret << " in universe.cpp::insertObject" << eom;
         return 2;
     }
 
 
     int pos = sTAE( (void**)objectArray);
     if (pos >= (objectCount - 1) ){
-        //out << "objectCount exceed limits in universe.cpp::insertObject!";
-        //out << endl;
+        v0 out << "objectCount exceed limits in universe.cpp::insertObject!" << eom;
         return 1;
     }
 
     objectArray[pos] = toInsert;
 
-    //out << "Inserted object at position ";
-    //out << pos;
-    //out << endl;
+    v1 out << "Inserted object at position " << pos<< eom;
 
     return 0;
 }
@@ -306,26 +333,20 @@ int universe::insertBody(vemc2::simulation::body *toInsert){
     //first insert this in the mother class array:
     ret = insertObject( (object*) toInsert);
     if (ret != 0){
-        //out << "insertObject returned ";
-        //out << ret;
-        //out << " in universe.cpp::insertBody";
-        //out << endl;
+        v0 out << "insertObject returned " << ret << " in universe.cpp::insertBody" << eom;
         return 2;
     }
 
 
     int pos = sTAE( (void**)bodyArray);
     if (pos >= (bodyCount - 1) ){
-        //out << "bodyCount exceed limits in universe.cpp::insertBody!";
-        //out << endl;
+        v0 out << "bodyCount exceed limits in universe.cpp::insertBody!" << eom;
         return 1;
     }
 
     bodyArray[pos] = toInsert;
 
-    //out << "Inserted body at position ";
-    //out << pos;
-    //out << endl;
+    v1 out << "Inserted body at position " << pos << eom;
 
     return 0;
 }

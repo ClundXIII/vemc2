@@ -16,11 +16,11 @@ Gfield::~Gfield(){
     //
 }
 
-void Gfield::setDeadZone(bdt *Zonets){
+/*void Gfield::setDeadZone(bdt *Zonets){
     DeadZone = Zonets;
-}
+}*/
 
-std::vector<bdt> Gfield::getVecA(bdt posX1, bdt posX2, bdt posX3, bdt mass){
+vemc2::mymath::vec3bdt Gfield::getVecA(bdt posX1, bdt posX2, bdt posX3, bdt mass){
     vec3bdt posX(posX1, posX2, posX3);
 
     return getVecA(posX, mass);
@@ -30,13 +30,13 @@ std::vector<bdt> Gfield::getVecA(bdt posX1, bdt posX2, bdt posX3, bdt mass){
  * THE NOOB FUNCTION
  */
 bdt* Gfield::getVecA_array(bdt posX1, bdt posX2, bdt posX3, bdt mass){
-    std::vector<bdt> posX;
+    vec3bdt posX;
 
     posX[0] = posX1;
     posX[1] = posX2;
     posX[2] = posX3;
 
-    std::vector<bdt> retVec = getVecA(posX, mass);
+    vec3bdt retVec = getVecA(posX, mass);
 
     bdt *retArray = new bdt[3];
 

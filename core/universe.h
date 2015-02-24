@@ -25,7 +25,23 @@ class universe{
     public:
 
         universe();
+        universe(int vLevel);
         ~universe();
+
+        /**
+         * This function sets the Verbose Level for the
+         * universe. Default is 0
+         * Level:
+         * -1 : no output at all
+         *  0 : very little, just creating universe
+         *      and switching simulationType, etc
+         *  1 : plus when and where adding an object
+         *      collision etc
+         *  2 : plus detailed information about 1
+         *  3 : just everything
+         */
+        void setVerboseLevel(int l);
+
 
         /**
          * the update() function applies the changed
@@ -283,6 +299,8 @@ class universe{
         }fields;
 
     protected:
+
+        int verboseLevel;
 
         Vesper::Logging out;
 
