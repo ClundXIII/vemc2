@@ -16,7 +16,8 @@
 #include "simulation.h"
 #include "settings/settings.h"
 
-#include <vesper_log/Logging.hpp>
+//#include <vesper_log/Logging.hpp>
+#include <Logging.hpp>
 
 namespace vemc2{
 
@@ -35,6 +36,7 @@ class universe{
          * -1 : no output at all
          *  0 : very little, just creating universe
          *      and switching simulationType, etc
+         *      and errors
          *  1 : plus when and where adding an object
          *      collision etc
          *  2 : plus detailed information about 1

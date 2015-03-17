@@ -358,10 +358,8 @@ int universe::insertQuant(vemc2::simulation::quant *toInsert){
     //first insert this in the mother class array:
     ret = insertObject( (object*) toInsert);
     if (ret != 0){
-        //out << "insertObject returned ";
-        //out << ret;
-        //out << " in universe.cpp::insertQuant";
-        //out << endl;
+        v0 out << "insertObject returned " << ret;
+        v0 out << " in universe.cpp::insertQuant" << eom;
         return 2;
     }
 
