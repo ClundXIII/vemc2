@@ -1,4 +1,4 @@
-#Makefile for vemc2 (c) by Simon Michalke
+##Makefile for vemc2 (c) by Simon Michalke
 #this is the overall Makefile
 
 all:
