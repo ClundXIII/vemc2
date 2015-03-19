@@ -1,6 +1,17 @@
+*.save
 *.layout
 */temp/*
 */obj/*
 *.so
 *.so.*
+*.a
+*CMakeCache.txt
+*/CMakeFiles/*
+cons/Makefile
+core/Makefile
+cmake_install.cmake
+install_manifest.txt
+graphic/graphicgl
+cons/vcons
+
 

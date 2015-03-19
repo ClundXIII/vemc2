@@ -19,7 +19,7 @@ compile-all:
 	mkdir -p core/temp
 	mkdir -p cons/temp
 	make -C core
-	sudo make -C core install
+	cd core; sudo make install
 	make -C cons
 
 startall: compile-all

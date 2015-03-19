@@ -10,49 +10,50 @@
 using namespace vemc2::simulation;
 
 sim_thread::sim_thread(vemc2::universe *globUniversets)
-    :
-    thread(sim_thread::static_run, this)
     {
     globUniverse = globUniversets;
 
     running = false;
-    paused  = false;
+    paused  = true;
+    tHelper = 0;
 
     if (globUniverse->settings.sim_thread.useParaProc){
-        //getting thread count
-        int tCount = globUniverse->settings.sim_thread.countParaThreads;
-        //getting effect count
-        int eCount = globUniverse->effectCount;
-
-        paraThreads = new effectthread*[tCount];
-
-        //create the threads:
-        for (int i=0; i<tCount; i++)
-            paraThreads[i] = new effectthread(globUniverse->effectArray[i]);
-        //fill in the threads with the effects:
-        for (int i=0, j=0; i<eCount; i++){
-            paraThreads[i] = new effectthread(globUniverse->effectArray[i]);
-
-            if (j>=tCount) j=0; //starting at thread 0
-        }
+        //not implemented yet
     }
     else
         paraThreads = 0;
 }
 
 sim_thread::~sim_thread(){
-    //dtor
+    running = false;
+    paused = true;
+    if (tHelper){
+        sleep(1);
+        delete tHelper;
+        tHelper = 0;
+    }
 }
 
 void sim_thread::start(){
-    //this->Launch();
-    detach();
+    if (running) return;
+
+    paused = true;
+
+    if (tHelper){
+        sleep(1);
+        delete tHelper;
+        tHelper = 0;
+    }
+
+    running = true;
+    tHelper = new std::thread(sim_thread::static_run, this);
 }
 
 void sim_thread::run(){
 
     ///TODO this doesnt work ... make more!!
 
+    sleep(1);
     running = true;
 
     if (globUniverse->settings.sim_thread.useParaProc){

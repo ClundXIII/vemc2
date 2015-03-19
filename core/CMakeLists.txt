@@ -29,6 +29,34 @@ set(HEADERS
     ${PROJECT_SOURCE_DIR}/simulation.h
 )
 
+# add API header files of this module
+set(API_HEADERS
+    ${PROJECT_SOURCE_DIR}/field/Efield.h
+    ${PROJECT_SOURCE_DIR}/field/Gfield.h
+    ${PROJECT_SOURCE_DIR}/field/field.h
+    ${PROJECT_SOURCE_DIR}/simulation/effectthread.h
+    ${PROJECT_SOURCE_DIR}/simulation/sim_thread.h
+    ${PROJECT_SOURCE_DIR}/define.h
+    ${PROJECT_SOURCE_DIR}/effect/effect.h
+    ${PROJECT_SOURCE_DIR}/effect/inertia.h
+    ${PROJECT_SOURCE_DIR}/effect/gravitation.h
+    ${PROJECT_SOURCE_DIR}/mymath/math_struct.h
+    ${PROJECT_SOURCE_DIR}/mymath/vector.h
+    ${PROJECT_SOURCE_DIR}/mymath/vec3bdt.h
+    ${PROJECT_SOURCE_DIR}/mymath/eld.h
+    ${PROJECT_SOURCE_DIR}/universe.h
+    ${PROJECT_SOURCE_DIR}/settings/settings.h
+    ${PROJECT_SOURCE_DIR}/settings/settingdefines.h
+    ${PROJECT_SOURCE_DIR}/myMath.h
+    ${PROJECT_SOURCE_DIR}/object/drawable.h
+    ${PROJECT_SOURCE_DIR}/object/noobject.h
+    ${PROJECT_SOURCE_DIR}/object/object.h
+    ${PROJECT_SOURCE_DIR}/object/quant.h
+    ${PROJECT_SOURCE_DIR}/object/body.h
+    ${PROJECT_SOURCE_DIR}/simulation.h
+
+)
+
 # add source files of this module
 set(SOURCES
     ${PROJECT_SOURCE_DIR}/object/object.cpp
@@ -58,7 +86,21 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
 add_library(libvcore-objects OBJECT ${HEADERS} ${SOURCES})
 
 # combine object files to static and shared library
-add_library(libvcore-static STATIC $<TARGET_OBJECTS:libvcore-objects>)
-add_library(libvcore SHARED $<TARGET_OBJECTS:libvcore-objects>)
+add_library(vcore-static STATIC $<TARGET_OBJECTS:libvcore-objects>)
+add_library(vcore SHARED $<TARGET_OBJECTS:libvcore-objects>)
 
+install(TARGETS vcore-static ARCHIVE DESTINATION lib)
+install(TARGETS vcore LIBRARY DESTINATION lib)
 
+MACRO(INSTALL_HEADERS_WITH_DIRECTORY HEADER_LIST)
+
+FOREACH(HEADER ${${HEADER_LIST}})
+STRING(REGEX MATCH "(.*)[/\\]" DIR ${HEADER})
+INSTALL(FILES ${HEADER} DESTINATION include/${DIR})
+ENDFOREACH(HEADER)
+
+ENDMACRO(INSTALL_HEADERS_WITH_DIRECTORY)
+
+#INSTALL_HEADERS_WITH_DIRECTORY(HEADERS)
+
+INSTALL( DIRECTORY ${PROJECT_SOURCE_DIR} DESTINATION /usr/local/include/vemc2/ )

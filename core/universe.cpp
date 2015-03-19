@@ -366,16 +366,13 @@ int universe::insertQuant(vemc2::simulation::quant *toInsert){
 
     int pos = sTAE( (void**)quantArray);
     if (pos >= (quantCount - 1) ){
-        //out << "quantCount exceed limits in universe.cpp::insertQuant!";
-        //out << endl;
+        v0 out << "quantCount exceed limits in universe.cpp::insertQuant!" << eom;
         return 1;
     }
 
     quantArray[pos] = toInsert;
 
-    //out << "Inserted quant at position ";
-    //out << pos;
-    //out << endl;
+    v1 out << "Inserted quant at position " << pos << eom;
 
     return 0;
 }
@@ -387,26 +384,20 @@ int universe::insertField(vemc2::simulation::field *toInsert){
     //first insert this in the mother class array:
     ret = insertDrawable( (drawable*) toInsert);
     if (ret != 0){
-        //out << "insertDrawable returned ";
-        //out << ret;
-        //out << " in universe.cpp::insertField";
-        //out << endl;
+        v0 out << "insertDrawable returned " << ret << " in universe.cpp::insertField" << eom;
         return 2;
     }
 
 
     int pos = sTAE( (void**)fieldArray);
     if (pos >= (fieldCount - 1) ){
-        //out << "fieldCount exceed limits in universe.cpp::insertField!";
-        //out << endl;
+        v0 out << "fieldCount exceed limits in universe.cpp::insertField!" << eom;
         return 1;
     }
 
     fieldArray[pos] = toInsert;
 
-    //out << "Inserted field at position ";
-    //out << pos;
-    //out << endl;
+    v1 out << "Inserted field at position " << pos << eom;
 
 
     return 0;
@@ -419,26 +410,20 @@ int universe::insertNoobject(vemc2::simulation::noobject *toInsert){
     //first insert this in the mother class array:
     ret = insertDrawable( (drawable*) toInsert);
     if (ret != 0){
-        //out << "insertDrawable returned ";
-        //out << ret;
-        //out << " in universe.cpp::insertNoobject";
-        //out << endl;
+        v0 out << "insertDrawable returned " << ret << " in universe.cpp::insertNoobject" << eom;
         return 2;
     }
 
 
     int pos = sTAE( (void**)noobjectArray);
     if (pos >= (noobjectCount - 1) ){
-        //out << "noobjectCount exceed limits in universe.cpp::insertNoobject!";
-        //out << endl;
+        v0 out << "noobjectCount exceed limits in universe.cpp::insertNoobject!" << eom;
         return 1;
     }
 
     noobjectArray[pos] = toInsert;
 
-    //out << "Inserted noobject at position ";
-    //out << pos;
-    //out << endl;
+    v1 out << "Inserted noobject at position " << pos << eom;
 
     return 0;
 }
@@ -508,15 +493,12 @@ void universe::reserveDrawableArraySpace(\
     drawableArray = new drawable*[drawableCountts];
     for (int i=0; i<drawableCountts; i++)
         drawableArray[i] = 0;
-    //out << "    ";
-    //out << drawableCountts;
-    //out << " drawables";
-    //out << endl;
+    v2 out << "    " << drawableCountts << " drawables" << eom;
 
     objectArray   = new object*[objectCountts];
     for (int i=0; i<objectCountts; i++)
         objectArray[i] = 0;
-    //out << "    ";
+    v2 out << "    ";
     //out << objectCountts;
     //out << " objects";
     //out << endl;
@@ -524,7 +506,7 @@ void universe::reserveDrawableArraySpace(\
     bodyArray     = new body*[bodyCountts];
     for (int i=0; i<bodyCountts; i++)
         bodyArray[i] = 0;
-    //out << "    ";
+    v2 out << "    ";
     //out << bodyCountts;
     //out << " bodies";
     //out << endl;
@@ -532,26 +514,17 @@ void universe::reserveDrawableArraySpace(\
     quantArray    = new quant*[quantCountts];
     for (int i=0; i<quantCountts; i++)
         quantArray[i] = 0;
-    //out << "    ";
-    //out << quantCountts;
-    //out << " quants";
-    //out << endl;
+    v2 out << "    " << quantCountts << " quants" << eom;
 
     fieldArray    = new field*[fieldCountts];
     for (int i=0; i<fieldCountts; i++)
         fieldArray[i] = 0;
-    //out << "    ";
-    //out << fieldCountts;
-    //out << " fields";
-    //out << endl;
+    v2 out << "    " << fieldCountts << " fields" << eom;
 
     noobjectArray = new noobject*[noobjectCountts];
     for (int i=0; i<noobjectCountts; i++)
         noobjectArray[i] = 0;
-    //out << "    ";
-    //out << noobjectCountts;
-    //out << " noobjects";
-    //out << endl;
+    v2 out << "    " << noobjectCountts << " noobjects" << eom;
 
     drawableCount = drawableCountts;
     objectCount   = objectCountts;
@@ -568,8 +541,7 @@ void universe::invokeAfterSim(){}
 
 void universe::deleteAllDrawables(){
     if (drawableArray != 0){
-        //out << "    deleting old drawables ...";
-        //out << endl;
+        v1 out << "    deleting old drawables ..." << eom;
         for (int i=0; i<drawableCount; i++)
             if (drawableArray[i])
                 delete(drawableArray[i]);

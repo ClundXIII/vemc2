@@ -11,7 +11,7 @@ namespace simulation{
 
 class effectthread;
 
-class sim_thread : public std::thread{
+class sim_thread {
 
     public:
 
@@ -41,11 +41,13 @@ class sim_thread : public std::thread{
 
         vemc2::simulation::effectthread **paraThreads;
 
+
     private:
 
         bool paused;
         bool running;
 
+        std::thread *tHelper;
 };
 
 }; /* namespace simulation */

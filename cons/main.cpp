@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include <universe.h>
+#include <vemc2/universe.h>
 
-#include <vesper_log/Logging.hpp>
+#include <Logging.hpp>
 
 using namespace std;
 using namespace vemc2;
