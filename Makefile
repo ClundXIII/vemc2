@@ -6,6 +6,10 @@ all:
 	make -C cons
 	make -C graphic
 
+init-cmake:
+	cd core; cmake .
+	cd cons; cmake .
+
 libcore:
 	make -C core
 
@@ -28,10 +32,6 @@ startall: compile-all
 clean-all:
 	make -C core clean
 	make -C cons clean
-
-init-all:
-	make -C core preinst
-	make -C core install
 
 install-libs-local:
 	make -C core install-local
