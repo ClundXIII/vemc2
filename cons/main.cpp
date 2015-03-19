@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <vemc2/universe.h>
+#include <vemc2/core/universe.h>
 
 #include <Logging.hpp>
 
