@@ -10,7 +10,7 @@ The physical effects will be in 'physics'.
 The Objects have to use a 'physic helper'
 (instead of the old MassPointHelper). -->
 this will be a lib!
-'graphik' will be the 3D OpenGL Graphic ...
+'graphic' will be the 3D OpenGL Graphic ...
 really? YES ;D (a lib, too ...)
 in header we need a link to all root headers
 of all libs. (Maybe there will be a .deb
