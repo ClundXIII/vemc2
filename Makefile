@@ -20,7 +20,6 @@ graphic:
 	make -C graphic
 
 compile-all:
-	mkdir -p core/temp
 	mkdir -p cons/temp
 	make -C core
 	cd core; sudo make install
