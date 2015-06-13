@@ -2,6 +2,14 @@
 project(libvcore)
 cmake_minimum_required(VERSION 2.8)
 
+set(VESPER_INCLUDE_DIR "" CACHE FILEPATH "/usr/include")
+
+#if(NOT "${VESPER_INCLUDE_DIR}/Logging.hpp")
+#  message("Can't find Logging.h in ${VESPER_INCLUDE_DIR}")
+#endif()
+
+include_directories(${VESPER_INCLUDE_DIR})
+
 # add header files of this module
 set(HEADERS
     ${PROJECT_SOURCE_DIR}/field/Efield.h
