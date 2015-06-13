@@ -14,6 +14,8 @@ using namespace vemc2::simulation;
 namespace vemc2{
 namespace simulation{
 
+struct soa_object;
+
 class object : drawable {
     public:
         object();
@@ -60,6 +62,14 @@ class object : drawable {
         void addA(std::vector<bdt> Ata);
         void addV(std::vector<bdt> Vta);
 
+        /**
+         * struct of array functions:
+         */
+
+        /**
+         * generates a struct of arrays for the object
+         */
+        static soa_object* soa_generate(object **objs, int count); //=0;
 
     protected:
 
@@ -67,6 +77,32 @@ class object : drawable {
         bdt mass;
 
 };
+
+
+struct soa_object{
+    int element_count;
+
+    bdt posX1[], posX2[], posX3[];
+
+    struct { //data
+            struct{ //F
+                bdt X1[];
+                bdt X2[];
+                bdt X3[];
+            }F;
+            struct{ //a
+                bdt X1[];
+                bdt X2[];
+                bdt X3[];
+            }a;
+            struct{ //v
+                bdt X1[];
+                bdt X2[];
+                bdt X3[];
+            }v;
+        }data;
+};
+
 
 } /*namespace simulation */
 } /*namespace vemc2 */

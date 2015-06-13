@@ -264,3 +264,18 @@ void object::addV(std::vector<bdt> Vta){
     data.v.X3 += Vta[2];
 }
 
+soa_object* object::soa_generate(object **objs, int count){
+    soa_object *newSOA = new soa_object;
+
+    newSOA->element_count = count;
+
+    newSOA->posX1 = new bdt[count];
+    newSOA->posX2 = new bdt[count];
+    newSOA->posX3 = new bdt[count];
+
+    for (int i=0; i<count; i++){
+
+    }
+
+    return newSOA;
+}
