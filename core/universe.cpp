@@ -20,7 +20,7 @@ universe::universe() :
     {
     v0 out << "===============================================" << eom;
     v0 out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << eom;
-    v0 out << "vcore Library, Version 0.0.02-pre / 19022015" << eom;
+    v0 out << "vcore Library, Version 0.0.03-pre / 17062015" << eom;
     v1 out << "Have a lot of fun ...                " << eom;
     v0 out << "    creating new universe         ..." << eom;
 
