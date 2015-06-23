@@ -82,23 +82,23 @@ class object : drawable {
 struct soa_object{
     int element_count;
 
-    bdt posX1[], posX2[], posX3[];
+    bdt *posX1, *posX2, *posX3;
 
     struct { //data
             struct{ //F
-                bdt X1[];
-                bdt X2[];
-                bdt X3[];
+                bdt *X1;
+                bdt *X2;
+                bdt *X3;
             }F;
             struct{ //a
-                bdt X1[];
-                bdt X2[];
-                bdt X3[];
+                bdt *X1;
+                bdt *X2;
+                bdt *X3;
             }a;
             struct{ //v
-                bdt X1[];
-                bdt X2[];
-                bdt X3[];
+                bdt *X1;
+                bdt *X2;
+                bdt *X3;
             }v;
         }data;
 };
