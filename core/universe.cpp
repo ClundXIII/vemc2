@@ -1,4 +1,6 @@
 #include "universe.h"
+#include "effect/gravitation.h"
+#include "effect/inertia.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -66,7 +68,7 @@ universe::universe(int vLevel) :
 
     v0 out << "===============================================" << eom;
     v0 out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << eom;
-    v0 out << "vcore Library, Version 0.0.02-pre / 19022015" << eom;
+    v0 out << "vcore Library, Version 0.0.03-pre / 17062015" << eom;
     v1 out << "Have a lot of fun ...                " << eom;
     v0 out << "    creating new universe         ..." << eom;
 
@@ -134,11 +136,16 @@ void universe::update(){
         }
         delete effectArray;
     }
-    effectArray = new effect*[effectCount];
-    for (int i=0; i<effectCount; i++)
+    effectArray = new effect*[effectCount+1]; //last element is 0
+    for (int i=0; i<(effectCount+1); i++)
         effectArray[i] = 0;
     v2 out << "                                done!" << eom;
     v2 out << "(12)creating simThread            ..." << eom;
+    if (!simulationThread){
+        v2 out << "(13)deleting old one          ..." << eom;
+        delete simulationThread;
+    }
+    simulationThread = new simulation::sim_thread(this);
     v2 out << "                                done!" << eom;
 
     v0 out << "  sucessfully created a new universe!" << eom;
@@ -221,9 +228,45 @@ void universe::clearSimulateStruct(){
 }
 
 void universe::run(){
+    if (!simulationThread){
+        v1 out << "cannot run, simulationThread=0 in universe.cpp::run()" << eom;
+        return;
+    }
+
+    try{
+        simulationThread->unpause();
+        simulationThread->run();
+    }
+    catch (char* errorstr){
+        v0 out << "error in universe.cpp::run():" << eom;
+        v0 out << "      ->" << errorstr << eom;
+    }
+    catch (...){
+        v0 out << "unknown error in universe.cpp::run()" << eom;
+    }
 }
 
-void universe::run(double secondsToRun){
+void universe::run(bdt secondsToRun){
+
+
+    if (!simulationThread){
+        v1 out << "cannot run, simulationThread=0 in universe.cpp::run()" << eom;
+        return;
+    }
+
+    //set the time when to stop
+    simulationThread->time_to_stop = settings.sim.global_time + secondsToRun;
+
+    try{
+        simulationThread->run();
+    }
+    catch (char* errorstr){
+        v0 out << "error in universe.cpp::run():" << eom;
+        v0 out << "      ->" << errorstr << eom;
+    }
+    catch (...){
+        v0 out << "unknown error in universe.cpp::run()" << eom;
+    }
 }
 
 /**
@@ -238,6 +281,16 @@ int universe::setSimulationType(vemc2::simulation_type simTypets){
     switch (simType){
       case vemc2::planetSimulation:
         setObjectType(vemc2::t_body);
+        effectCount = 2;
+        effectArray = new effect*[effectCount+1]; //last element is 0
+        effectArray[0] = (simulation::effect*) new simulation::gravitation(this);
+        effectArray[1] = (simulation::effect*) new simulation::inertia(this);
+        effectArray[2] = 0;
+        fieldCount = 1;
+        fieldArray = new simulation::field*[fieldCount+1]; //last element is 0
+        //fieldArray[0] = (simulation::field*) new simulation::Gfield(this);
+        fieldArray[1] = 0;
+        fields.G = new simulation::Gfield(this);
        break;
 
       case vemc2::quantumSimulation:
@@ -250,6 +303,11 @@ int universe::setSimulationType(vemc2::simulation_type simTypets){
 
       case vemc2::bodySimulation:
         setObjectType(vemc2::t_body);
+        effectCount = 2;
+        effectArray = new effect*[effectCount+1]; //last element is 0
+        effectArray[0] = (simulation::effect*) new simulation::gravitation(this);
+        effectArray[1] = (simulation::effect*) new simulation::inertia(this);
+        effectArray[2] = 0;
        break;
 
       default:
@@ -464,6 +522,7 @@ void universe::getGlobalSettings(){
     settings.sim_thread.paraLevel           = 0;
 
     settings.sim.dt                         = settings::Sim::actIntervall;
+    settings.sim.global_time                = 0;
     settings.sim.quant_Simulation           = settings::Sim::quant_Simulation;
 
     settings.win.SPSreal                    = settings::Win::SPSreal;
@@ -498,18 +557,12 @@ void universe::reserveDrawableArraySpace(\
     objectArray   = new object*[objectCountts];
     for (int i=0; i<objectCountts; i++)
         objectArray[i] = 0;
-    v2 out << "    ";
-    //out << objectCountts;
-    //out << " objects";
-    //out << endl;
+    v2 out << "    " << objectCountts << " objects" << eom;
 
     bodyArray     = new body*[bodyCountts];
     for (int i=0; i<bodyCountts; i++)
         bodyArray[i] = 0;
-    v2 out << "    ";
-    //out << bodyCountts;
-    //out << " bodies";
-    //out << endl;
+    v2 out << "    " << bodyCountts << " bodies" << eom;
 
     quantArray    = new quant*[quantCountts];
     for (int i=0; i<quantCountts; i++)

@@ -20,8 +20,10 @@ class Gfield : field {
 
         //static void setDeadZone(bdt *Zonets);
 
+        //virtual void draw();
+
         vemc2::mymath::vec3bdt getVecA(bdt posX1, bdt posX2, bdt posX3, bdt mass);
-        bdt*       getVecA_array(bdt posX1, bdt posX2, bdt posX3, bdt mass);
+        bdt*             getVecA_array(bdt posX1, bdt posX2, bdt posX3, bdt mass);
         vemc2::mymath::vec3bdt getVecA(vemc2::mymath::vec3bdt posX, bdt mass);
 
     protected:

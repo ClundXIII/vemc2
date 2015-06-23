@@ -10,7 +10,7 @@ using namespace vemc2::simulation;
 namespace vemc2{
 namespace simulation{
 
-class body : object {
+class body : public object {
     public:
         body();
         body(body *toCopy);

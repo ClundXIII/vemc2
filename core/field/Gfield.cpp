@@ -59,7 +59,7 @@ vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
     body *tempBody = 0;
     vec3bdt dX, e;
 
-    for (int i=0; i<globUniverse->bodyCount; i++ ){
+    for (int i=0; globUniverse->bodyArray[i] != 0; i++ ){
         tempBody = globUniverse->bodyArray[i];
 
 
@@ -71,9 +71,9 @@ vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
         if (dX.getLength() < globUniverse->settings.sim.DeadZone)
             continue;
 
-        e = dX.normalize(); //the direction vector
+//        e = dX.normalize(); //the direction vector
 
-        retVec = retVec + e * (G * mass / (dX.getLength() * dX.getLength()));
+//        retVec = retVec + e * (G * mass / (dX.getLength() * dX.getLength()));
 
     }
 

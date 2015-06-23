@@ -2,6 +2,7 @@
 #define SIM_THREAD_H_INCLUDED
 
 #include <thread>
+#include "../myMath.h"
 
 namespace vemc2{
 
@@ -17,6 +18,9 @@ class sim_thread {
 
         sim_thread(vemc2::universe *globUniversets);
         ~sim_thread();
+
+        //the simulation will stop at this time (world and not real time)
+        bdt time_to_stop;
 
         //starts the threads
         void start();

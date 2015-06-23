@@ -118,11 +118,11 @@ class universe{
          * stop().
          * This should be used if you handle
          * your threads by your own.
-         * the runt(*) function automatically stops after
+         * the run(*) function automatically stops after
          * certain conditions you can set for your own
          */
         void run();
-        void run(double secondsToRun);
+        void run(bdt secondsToRun);
 
         /**
          * These are the settings for the universum
@@ -178,6 +178,7 @@ class universe{
 
             struct{ // sim
                 bdt       dt;
+                bdt       global_time;
                 bool      quant_Simulation;
                 bool      body_Simulation;
                 bool      use_srt;
@@ -301,6 +302,8 @@ class universe{
         }fields;
 
     protected:
+
+        friend class simulation::sim_thread;
 
         int verboseLevel;
 

@@ -16,11 +16,11 @@ gravitation::~gravitation(){
 
 void gravitation::tick(){
 
-    object **tempobjectList = globUniverse->objectArray;
+    body   **tempobjectList = globUniverse->bodyArray;
     Gfield  *tempGfield     = globUniverse->fields.G;
-    object  *tempObj;
+    body    *tempObj;
 
-    for (int i=0; i<globUniverse->objectCount; i++){
+    for (int i=0; globUniverse->bodyArray[i] != 0; i++){
         tempObj = tempobjectList[i];
 
         tempObj->addA(tempGfield->getVecA(tempObj->getX(), tempObj->getMass()));

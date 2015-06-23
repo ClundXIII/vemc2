@@ -23,8 +23,7 @@ class effect{
     public:
 
         /**
-         * We don't declare any contructors / destructors so the
-         * compiler doesn't search for them ;-)
+         *
          */
         effect(vemc2::universe *globUniversets);
         virtual ~effect();

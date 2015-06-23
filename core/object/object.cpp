@@ -241,9 +241,9 @@ void object::setDataNull(){
     data.a.X2 = 0;
     data.a.X3 = 0;
 
-    data.v.X1 = 0;
-    data.v.X2 = 0;
-    data.v.X3 = 0;
+    //data.v.X1 = 0;
+    //data.v.X2 = 0;
+    //data.v.X3 = 0;
 }
 
 void object::addF(std::vector<bdt> Fta){

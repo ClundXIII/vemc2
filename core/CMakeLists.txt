@@ -88,7 +88,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/mymath/vec3bdt.cpp
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -g -fsanitize=address")
 
 # add object files to be compiled
 add_library(libvcore-objects OBJECT ${HEADERS} ${SOURCES})

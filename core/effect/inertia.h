@@ -13,9 +13,9 @@ class inertia : effect{
         inertia(vemc2::universe *globUniversets);
         ~inertia();
 
-        void tick();
+        virtual void tick();
 
-        void upValues();
+        virtual void upValues();
 
     protected:
 

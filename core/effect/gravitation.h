@@ -13,9 +13,9 @@ class gravitation : effect {
         ~gravitation();
 
 
-        void tick();
+        virtual void tick();
 
-        void upValues();
+        virtual void upValues();
 
     protected:
     private:
