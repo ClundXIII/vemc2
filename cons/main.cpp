@@ -8,20 +8,33 @@ using namespace std;
 using namespace vemc2;
 using namespace Vesper;
 using namespace Vesper::LoggingTypes;
+using namespace vemc2::mymath;
 
 int main(int argc, char *argv[]){
 
     Logging out(Vesper::LoggingTypes::client);
 
     universe *testWorld = new universe(3);
-    testWorld->insertBody(new simulation::body(5, 5, 5, 50));
-    testWorld->insertBody(new simulation::body(7, 2, 3, 10));
-    testWorld->insertBody(new simulation::body(1, 0, 21, 42));
+    testWorld->insertBody(new simulation::body(.5,  5,   5, 50));
+    testWorld->insertBody(new simulation::body( 7, -2,  -3, 10));
+    testWorld->insertBody(new simulation::body(-1,  0,  21, 42));
 
     testWorld->setSimulationType(planetSimulation);
 
-    testWorld->run(5);
+    testWorld->run(10);
     delete testWorld;
+    /*try {
+        vec3bdt test1(1, 2, 3), test2(4, 5, 6), test3;
+
+        test3 = test1 + test2;
+
+        cout << test3[0] << test3[1] << test3[2] << endl;
+    }
+    catch (char* c){
+        cout << c << endl;
+    }
+    catch (...){
+    }*/
 
     /*out << "Creating World #1" << eom;
     universe *world1 = new universe();

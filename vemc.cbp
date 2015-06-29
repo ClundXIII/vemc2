@@ -107,7 +107,7 @@
 			<Option target="libcore" />
 		</Unit>
 		<Unit filename="core/field/Gfield.cpp">
-			<Option virtualFolder="core/src/field/" />
+			<Option virtualFolder="core/src/settings/" />
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>

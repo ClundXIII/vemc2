@@ -2,6 +2,8 @@
 
 #include "./../universe.h"
 
+#include <iostream>
+
 using namespace vemc2;
 using namespace vemc2::mymath;
 using namespace vemc2::simulation;
@@ -50,7 +52,10 @@ bdt* Gfield::getVecA_array(bdt posX1, bdt posX2, bdt posX3, bdt mass){
 vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
     vec3bdt retVec, posXvec;
 
-    retVec = posX;
+    retVec.resize(3);
+    retVec[0] = 0;
+    retVec[1] = 0;
+    retVec[2] = 0;
     posXvec = posX;
 
 
@@ -63,19 +68,24 @@ vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
         tempBody = globUniverse->bodyArray[i];
 
 
-        dX = posXvec + tempBody->getX();
+        //std::cout << tempBody->getX()[0] << std::endl;
+        dX = tempBody->getX() - posXvec;
 
         //if ( (dX[0]*dX[0]+dX[1]*dX[1]+dX[2]*dX[2]) < deadZoneSq)
         //    continue;
         //nice, but not optimized:
-        if (dX.getLength() < globUniverse->settings.sim.DeadZone)
+        if (dX.getLength() <= globUniverse->settings.sim.DeadZone)
             continue;
 
-//        e = dX.normalize(); //the direction vector
+        //std::cout << "no cont" << std::endl;
 
-//        retVec = retVec + e * (G * mass / (dX.getLength() * dX.getLength()));
+        e = dX.normalize(); //the direction vector
+        //globUniverse->out << "lengthdX:" << dX.getLength() << Vesper::LoggingTypes::eom;
+        //globUniverse->out << "lengthe:" << e.getLength() << Vesper::LoggingTypes::eom;
+
+        retVec = retVec + e * (G * mass * tempBody->getMass() / (dX.getLength() * dX.getLength()));
 
     }
-
+    //std::cout << "length:" << retVec.getLength() << std::endl;
     return retVec;
 }

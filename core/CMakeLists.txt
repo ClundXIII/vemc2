@@ -89,6 +89,7 @@ set(SOURCES
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -g -fsanitize=address")
+set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
 
 # add object files to be compiled
 add_library(libvcore-objects OBJECT ${HEADERS} ${SOURCES})

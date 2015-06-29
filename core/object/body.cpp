@@ -42,7 +42,7 @@ bdt body::getX1()  {return posX1;}
 bdt body::getX2()  {return posX2;}
 bdt body::getX3()  {return posX3;}
 
-void body::setMass(bdt massts){}
-void body::setX1(bdt X1ts)    {}
-void body::setX2(bdt X2ts)    {}
-void body::setX3(bdt X3ts)    {}
+void body::setMass(bdt massts){mass = massts;}
+void body::setX1(bdt X1ts)    {posX1 = X1ts;}
+void body::setX2(bdt X2ts)    {posX2 = X2ts;}
+void body::setX3(bdt X3ts)    {posX3 = X3ts;}

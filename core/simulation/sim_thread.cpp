@@ -97,8 +97,8 @@ void sim_thread::run(){
 
             globUniverse->out << "time: " << globUniverse->settings.sim.global_time << eom;
             for (int i=0; globUniverse->objectArray[i] != 0; i++){
-                globUniverse->out << i << ":" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
-                globUniverse->out << i << ":" << globUniverse->objectArray[i]->data.F.X1 << " " << globUniverse->objectArray[i]->data.a.X1 << " " << globUniverse->objectArray[i]->data.v.X1 << eom;
+                globUniverse->out << i << ":x:" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
+                globUniverse->out << i << ":v:" << globUniverse->objectArray[i]->data.v.X1 << " " << globUniverse->objectArray[i]->data.v.X2 << " " << globUniverse->objectArray[i]->data.v.X3 << eom;
             }
 
             globUniverse->settings.sim.global_time += globUniverse->settings.sim.dt;
@@ -107,7 +107,7 @@ void sim_thread::run(){
         }
     }
 
-    std::cout << "Sim>Simulation stopped!" << std::endl;
+    globUniverse->out << "Simulation stopped!" << eom;
 }
 
 void sim_thread::pause(){

@@ -2,6 +2,8 @@
 
 #include "./../universe.h"
 
+#include <iostream>
+
 using namespace vemc2;
 using namespace vemc2::simulation;
 

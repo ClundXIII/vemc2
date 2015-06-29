@@ -11,12 +11,12 @@ vector<T>::vector() /*: std::vector<T>()*/ {
 
 template<class T>
 vector<T>::vector(int i) /*: std::vector<T>()*/ {
-    this->reserve(i);
+    this->resize(i);
 }
 
 template<class T>
 vector<T>::vector(T x1, T x2, T x3) /*: std::vector<T>()*/ {
-    this->reserve(3);
+    this->resize(3);
 
     this[1] = x1;
     this[2] = x2;
@@ -31,7 +31,7 @@ std::vector<T> vector<T>::addTwo(std::vector<T> vec1,  std::vector<T> vec2){
         throw (char*) "error: size not identical in vector.cpp::static_addTwo";
 
     std::vector<T> retVec;
-    retVec.reserve(vec1.size());
+    retVec.resize(vec1.size());
 
     for (int i=0; i<vec1.size(); i++)
         retVec[i] = vec1[i] + vec2[i];
@@ -41,7 +41,9 @@ std::vector<T> vector<T>::addTwo(std::vector<T> vec1,  std::vector<T> vec2){
 
 template<class T>
 vector<T> vector<T>::normalize(){
-    return (*this)/this->getLength();
+    T length = getLength();
+    if (length == 0) return (*this);
+    return (*this)/length;
 }
 
 template<class T>
@@ -63,6 +65,7 @@ const std::vector<bdt> vector<T>::null = vector<bdt>(3, 0);*/
 template<class T>
 vector<T> vector<T>::invert(std::vector<T> toInv){
     vector<T> retV;
+    retV.resize(toInv.size());
     for (int i=0; i<toInv.size(); i++)
         retV[i] = -1 * toInv[i];
 
@@ -87,6 +90,7 @@ vector<T> vector<T>::operator*(bdt toMul){
 }
 template<class T>
 vector<T> vector<T>::operator/(bdt toDiv){
+    if (toDiv == 0) throw (char*) "toDiv is 0 in vector.cpp::operator/()";
     return multiplicateTo(1/toDiv);
 }
 template<class T>
@@ -103,6 +107,9 @@ vector<T> vector<T>::set(std::vector<T> toSet){
     if (toSet.size() != this->size())
         throw (char*) "error: size not identical in vector.cpp::set()";
 
+    if (toSet.size() == 0)
+        throw (char*) "error: size is 0 in vector.cpp::set()";
+
     for (int i=0; i<this->size(); i++)
         (*this)[i] = toSet[i];
 
@@ -117,7 +124,7 @@ vector<T> vector<T>::operator=(std::vector<T> toSet){
 template<class T>
 vector<T> vector<T>::multiplicateTo(bdt toMul){
     vector<T> retVec;
-    retVec.reserve(this->size());
+    retVec.resize(this->size());
 
     for (int i=0; i<this->size(); i++)
         retVec[i] = (*this)[i] * toMul;
@@ -128,6 +135,7 @@ vector<T> vector<T>::multiplicateTo(bdt toMul){
 template<class T>
 vector<T> vector<T>::additionTo(std::vector<T> toAdd){
     vector<T> retV;
+    retV.resize(this->size());
     retV.set(addTwo(*this, toAdd));
     return retV;
 }
@@ -139,4 +147,3 @@ template class vector<bdt>;
 
 /* static */
 //std::vector<bdt> vec3bdt::null = vec3bdt(0, 0, 0);
-

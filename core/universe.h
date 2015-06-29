@@ -301,13 +301,13 @@ class universe{
             //vemc2::simulation::Efield *E;
         }fields;
 
+        Vesper::Logging out;
+
     protected:
 
         friend class simulation::sim_thread;
 
         int verboseLevel;
-
-        Vesper::Logging out;
 
         vemc2::simulation_type simType;
 

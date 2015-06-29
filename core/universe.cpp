@@ -134,7 +134,7 @@ void universe::update(){
         for (int i=0; i<effectCount; i++){
             delete effectArray[i];
         }
-        delete effectArray;
+        delete[] effectArray;
     }
     effectArray = new effect*[effectCount+1]; //last element is 0
     for (int i=0; i<(effectCount+1); i++)
@@ -143,7 +143,7 @@ void universe::update(){
     v2 out << "(12)creating simThread            ..." << eom;
     if (!simulationThread){
         v2 out << "(13)deleting old one          ..." << eom;
-        delete simulationThread;
+        delete[] simulationThread;
     }
     simulationThread = new simulation::sim_thread(this);
     v2 out << "                                done!" << eom;
@@ -524,6 +524,10 @@ void universe::getGlobalSettings(){
     settings.sim.dt                         = settings::Sim::actIntervall;
     settings.sim.global_time                = 0;
     settings.sim.quant_Simulation           = settings::Sim::quant_Simulation;
+    settings.sim.DeadZone                   = 0.2;
+
+    //settings.sim.NatConst.G                 = 0.0000000000667384;
+    settings.sim.NatConst.G                 = 0.667384; //test G (aka y "gamma")
 
     settings.win.SPSreal                    = settings::Win::SPSreal;
 
@@ -598,12 +602,12 @@ void universe::deleteAllDrawables(){
         for (int i=0; i<drawableCount; i++)
             if (drawableArray[i])
                 delete(drawableArray[i]);
-        delete drawableArray;
-        delete objectArray;
-        delete bodyArray;
-        delete quantArray;
-        delete fieldArray;
-        delete noobjectArray;
+        delete[] drawableArray;
+        delete[] objectArray;
+        delete[] bodyArray;
+        delete[] quantArray;
+        delete[] fieldArray;
+        delete[] noobjectArray;
     }
 }
 

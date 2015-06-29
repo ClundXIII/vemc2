@@ -12,7 +12,17 @@ vec3bdt::vec3bdt(bdt x1, bdt x2, bdt x3) : vector<bdt>(3) {
 }
 
 vec3bdt vec3bdt::to3Bdt(std::vector<bdt> toConvert){
-    return vec3bdt(toConvert[0], toConvert[1], toConvert[2]);
+
+    if (toConvert.size() == 0)
+        throw (char*) "toConvert.size() is 0 in vec3bdt.cpp::to3Bdt";
+
+    vec3bdt retV;
+    retV[0] = toConvert[0];
+    retV[1] = toConvert[1];
+    retV[2] = toConvert[2];
+
+    //return vec3bdt(toConvert[0], toConvert[1], toConvert[2]);
+    return retV;
 }
 
 vec3bdt vec3bdt::operator*(bdt toMul){return to3Bdt(multiplicateTo(toMul));}

@@ -49,7 +49,7 @@ void inertia::upValues(){
         tempObj->setX2(tempObj->getX2() + tempObj->data.v.X2 * dt);
         tempObj->setX3(tempObj->getX3() + tempObj->data.v.X3 * dt);
 
-        //reset force, velocity and accelaration
+        //reset force and accelaration
         tempObj->setDataNull();
     }
 
