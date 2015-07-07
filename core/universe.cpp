@@ -526,8 +526,8 @@ void universe::getGlobalSettings(){
     settings.sim.quant_Simulation           = settings::Sim::quant_Simulation;
     settings.sim.DeadZone                   = 0.2;
 
-    //settings.sim.NatConst.G                 = 0.0000000000667384;
-    settings.sim.NatConst.G                 = 0.667384; //test G (aka y "gamma")
+    settings.sim.NatConst.G                 = 0.0000000000667384;
+    //settings.sim.NatConst.G                 = 0.667384; //test G (aka y "gamma")
 
     settings.win.SPSreal                    = settings::Win::SPSreal;
 
