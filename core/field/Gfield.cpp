@@ -69,7 +69,7 @@ vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
 
 
         //std::cout << tempBody->getX()[0] << std::endl;
-        dX = tempBody->getX() - posXvec;
+        dX = posXvec - tempBody->getX();
 
         //if ( (dX[0]*dX[0]+dX[1]*dX[1]+dX[2]*dX[2]) < deadZoneSq)
         //    continue;
