@@ -92,9 +92,6 @@ void sim_thread::run(){
                 std::cout << "Sim>SimulationThread unpaused!" << std::endl;
             }*/
 
-            //globUniverse->effectArray[0]->tick();
-            //globUniverse->effectArray[1]->upValues();
-
             globUniverse->out << "time: " << globUniverse->settings.sim.global_time << eom;
             for (int i=0; globUniverse->objectArray[i] != 0; i++){
                 globUniverse->out << i << ":x:" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
