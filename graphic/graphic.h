@@ -8,10 +8,10 @@
 namespace vemc2{
 namespace graphic{
 
-class graphicgl : public std::thread{
+class graphicgl{
     public:
 
-        graphicgl();
+        graphicgl(int argc, char **argv);
         ~graphicgl();
 
         /**
@@ -20,22 +20,26 @@ class graphicgl : public std::thread{
          *
          * returns 0 if sucess!
          */
-        int attachUniverse(vemc2::universe *universets);
+        static void attachUniverse(vemc2::universe *universets);
 
-        void run();
+        static void draw_function(void);
 
-        void stop();
+        static void reshape_function(int width, int height);
 
-        static void static_run(vemc2::graphic::graphicgl *toRun);
+        static bool isRunning();
 
+        static void stop();
+
+        static vemc2::universe *attachedWorld;
 
     protected:
 
-        vemc2::universe *attachedWorld;
-
     private:
 
-        bool running;
+        static int argc;
+        static char **argv;
+
+        static bool running;
 
 };
 
