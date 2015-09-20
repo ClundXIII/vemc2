@@ -6,7 +6,7 @@ using namespace vemc2;
 using namespace vemc2::simulation;
 
 void simulation::body::draw(){
-    graphic::draw(graphic::graphicgl::attachedWorld, getX1(),getX2(),getX3(),mass);
+    graphic::draw(graphic::graphicgl::attachedWorld, getX1(),getX2(),getX3(),mass/100);
 }
 
 void graphic::draw(universe *parentUniverse, bdt posX, bdt posY, bdt posZ, float diameter){

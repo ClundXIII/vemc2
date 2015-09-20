@@ -47,9 +47,13 @@ int main(int argc, char **argv){
             u->insertBody(new simulation::body( 7, -2,  -3, 10));
             u->insertBody(new simulation::body(-1,  0,  21, 42));
 
+            u->settings.graphic.useSphereForObj = true;
+
             u->setSimulationType(planetSimulation);
 
-            u->run(10);
+            u->settings.sim.dt *= 10;
+
+            u->run(1000000000000);
         }
         else if (in == "restart"){
             delete g;

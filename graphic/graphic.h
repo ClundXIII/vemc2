@@ -26,6 +26,15 @@ class graphicgl{
 
         static void reshape_function(int width, int height);
 
+        static void move_function();
+
+        static void keyPressed_function(unsigned char key, int x, int y);
+
+        static void keyUp_function(unsigned char key, int x, int y);
+
+        static void mouseMove_function(int width, int height);
+        static void mouse_function(int button, int state,int x, int y);
+
         static bool isRunning();
 
         static void stop();
@@ -33,6 +42,26 @@ class graphicgl{
         static vemc2::universe *attachedWorld;
 
     protected:
+
+        static struct posdata{
+            bool followObject;
+            int objNumber;
+
+            float distance;
+            float west;
+            float north;
+
+            float posX;
+            float posY;
+            float posZ;
+
+        }position_data;
+
+
+        static bool* keyStates;
+        static bool* mouseStates;
+        static int   mouseXpreviousState;
+        static int   mouseYpreviousState;
 
     private:
 

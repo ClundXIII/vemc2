@@ -71,6 +71,10 @@ void sim_thread::run(){
             throw (char*) "effectArray[i] is 0 in sim_thread.cpp::run()";
 
     globUniverse->out << "         ... and go!" << eom;
+    for (int i=0; globUniverse->objectArray[i] != 0; i++){
+        globUniverse->out << i << ":x:" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
+        globUniverse->out << i << ":v:" << globUniverse->objectArray[i]->data.v.X1 << " " << globUniverse->objectArray[i]->data.v.X2 << " " << globUniverse->objectArray[i]->data.v.X3 << eom;
+    }
 
     if (globUniverse->settings.sim_thread.useParaProc){
         while (running){
@@ -95,11 +99,11 @@ void sim_thread::run(){
             //globUniverse->effectArray[0]->tick();
             //globUniverse->effectArray[1]->upValues();
 
-            globUniverse->out << "time: " << globUniverse->settings.sim.global_time << eom;
+            /*globUniverse->out << "time: " << globUniverse->settings.sim.global_time << eom;
             for (int i=0; globUniverse->objectArray[i] != 0; i++){
                 globUniverse->out << i << ":x:" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
                 globUniverse->out << i << ":v:" << globUniverse->objectArray[i]->data.v.X1 << " " << globUniverse->objectArray[i]->data.v.X2 << " " << globUniverse->objectArray[i]->data.v.X3 << eom;
-            }
+            }*/
 
             globUniverse->settings.sim.global_time += globUniverse->settings.sim.dt;
             if (globUniverse->settings.sim.global_time >= time_to_stop)
@@ -107,6 +111,11 @@ void sim_thread::run(){
         }
     }
 
+    globUniverse->out << "End data: " << eom;
+    for (int i=0; globUniverse->objectArray[i] != 0; i++){
+        globUniverse->out << i << ":x:" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
+        globUniverse->out << i << ":v:" << globUniverse->objectArray[i]->data.v.X1 << " " << globUniverse->objectArray[i]->data.v.X2 << " " << globUniverse->objectArray[i]->data.v.X3 << eom;
+    }
     globUniverse->out << "Simulation stopped!" << eom;
 }
 
