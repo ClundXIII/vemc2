@@ -69,7 +69,7 @@ vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
 
 
         //std::cout << tempBody->getX()[0] << std::endl;
-        dX = tempBody->getX() - posXvec;
+        dX = posXvec - tempBody->getX();
 
         //if ( (dX[0]*dX[0]+dX[1]*dX[1]+dX[2]*dX[2]) < deadZoneSq)
         //    continue;
@@ -83,7 +83,7 @@ vemc2::mymath::vec3bdt Gfield::getVecA(vec3bdt posX, bdt mass){
         //globUniverse->out << "lengthdX:" << dX.getLength() << Vesper::LoggingTypes::eom;
         //globUniverse->out << "lengthe:" << e.getLength() << Vesper::LoggingTypes::eom;
 
-        retVec = retVec + e * (G * mass * tempBody->getMass() / (dX.getLength() * dX.getLength()));
+        retVec = retVec - e * (G * mass * tempBody->getMass() / (dX.getLength() * dX.getLength()));
 
     }
     //std::cout << "length:" << retVec.getLength() << std::endl;
