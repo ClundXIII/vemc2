@@ -4,7 +4,7 @@
 all:
 	make -C core
 	make -C cons
-	#make -C graphic
+	make -C graphic
 
 init-cmake:
 	cd core; cmake .

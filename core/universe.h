@@ -21,6 +21,8 @@
 
 namespace vemc2{
 
+class parser;
+
 class universe{
 
     public:
@@ -28,6 +30,8 @@ class universe{
         universe();
         universe(int vLevel);
         ~universe();
+
+        void parse(std::string command);
 
         /**
          * This function sets the Verbose Level for the
@@ -305,6 +309,9 @@ class universe{
         Vesper::Logging out;
 
     protected:
+
+        friend class parser;
+        parser *command_helper;
 
         friend class simulation::sim_thread;
 

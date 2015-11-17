@@ -86,6 +86,12 @@ void graphicgl::keyPressed_function(unsigned char key, int x, int y) {
 
 void graphicgl::keyUp_function(unsigned char key, int x, int y) {
     keyStates[key] = false;
+    if (key == 'w'){
+        position_data.distance -= 10;
+    }
+    if (key == 's'){
+        position_data.distance += 10;
+    }
 }
 
 void graphicgl::mouseMove_function(int width, int height){
@@ -93,6 +99,13 @@ void graphicgl::mouseMove_function(int width, int height){
     if (mouseStates[0]){
         position_data.west -= (mouseXpreviousState - width)/5;
         position_data.north -= (mouseYpreviousState - height)/5;
+        mouseXpreviousState = width;
+        mouseYpreviousState = height;
+    }
+    else if (mouseStates[2]){
+        position_data.west -= (mouseXpreviousState - width)/5;
+        position_data.distance -= (mouseYpreviousState - height)/5;
+
         mouseXpreviousState = width;
         mouseYpreviousState = height;
     }
@@ -134,7 +147,14 @@ void graphicgl::mouse_function(int button, int state, int x, int y){
         else
             mouseStates[2] = false;
     }
+    else if (button == 3){
+        position_data.distance -= 5;
+    }
+    else if (button == 4){
+        position_data.distance += 5;
+    }
 }
+
 
 bool graphicgl::isRunning(){
     return running;
@@ -160,6 +180,7 @@ void graphicgl::attachUniverse(vemc2::universe *universets){
     glutMouseFunc(graphicgl::mouse_function);
     glutMotionFunc(graphicgl::mouseMove_function);
     glutPassiveMotionFunc(graphicgl::mouseMove_function);
+    glutKeyboardUpFunc(graphicgl::keyUp_function);
 
     std::cout << "starting loop ..." << std::endl;
 

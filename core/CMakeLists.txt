@@ -35,6 +35,7 @@ set(HEADERS
     ${PROJECT_SOURCE_DIR}/object/quant.h
     ${PROJECT_SOURCE_DIR}/object/body.h
     ${PROJECT_SOURCE_DIR}/simulation.h
+    ${PROJECT_SOURCE_DIR}/parser/parser.h
 )
 
 # add API header files of this module
@@ -62,7 +63,7 @@ set(API_HEADERS
     ${PROJECT_SOURCE_DIR}/object/quant.h
     ${PROJECT_SOURCE_DIR}/object/body.h
     ${PROJECT_SOURCE_DIR}/simulation.h
-
+    ${PROJECT_SOURCE_DIR}/parser/parser.h
 )
 
 # add source files of this module
@@ -86,6 +87,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/effect/gravitation.cpp
     ${PROJECT_SOURCE_DIR}/mymath/vector.cpp
     ${PROJECT_SOURCE_DIR}/mymath/vec3bdt.cpp
+    ${PROJECT_SOURCE_DIR}/parser/parser.cpp
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -g") # -fsanitize=address")

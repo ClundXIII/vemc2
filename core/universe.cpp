@@ -1,6 +1,7 @@
 #include "universe.h"
 #include "effect/gravitation.h"
 #include "effect/inertia.h"
+#include "parser/parser.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -56,6 +57,8 @@ universe::universe() :
 
     update();
 
+    command_helper = new vemc2::parser(this);
+
     out << "==================done!========================" << eom;
 }
 
@@ -100,6 +103,8 @@ universe::universe(int vLevel) :
 
     update();
 
+    command_helper = new vemc2::parser(this);
+
     v0 out << "==================done!========================" << eom;
 }
 
@@ -112,6 +117,10 @@ universe::~universe(){
     deleteAllEffects();
 
     v0 out << "... done with cleaning up" << eom;
+}
+
+void universe::parse(std::string command){
+    command_helper->execute(command);
 }
 
 void universe::update(){

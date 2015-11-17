@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="etc/;core/;core/;core/etc/;docs/;core/src/;core/src/universe/;core/src/object/;core/src/random/;core/src/object/kids/;core/src/mymath/;core/src/field/;core/src/effect/;core/src/settings/;cons/;core/src/simulation/;graphic/;graphic/etc/;graphic/src/;" />
+		<Option virtualFolders="etc/;core/;core/;core/etc/;docs/;core/src/;core/src/universe/;core/src/object/;core/src/random/;core/src/object/kids/;core/src/mymath/;core/src/field/;core/src/effect/;core/src/settings/;cons/;core/src/simulation/;graphic/;graphic/src/;graphic/etc/;core/src/parser/;" />
 		<Build>
 			<Target title="all">
 				<Option type="4" />
@@ -216,6 +216,10 @@
 			<Option target="all" />
 			<Option target="libcore" />
 		</Unit>
+		<Unit filename="core/parser/parser.cpp">
+			<Option virtualFolder="core/src/parser/" />
+		</Unit>
+		<Unit filename="core/parser/parser.h" />
 		<Unit filename="core/settings/ccs.cpp">
 			<Option virtualFolder="core/src/settings/" />
 			<Option target="all" />

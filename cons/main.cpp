@@ -21,6 +21,8 @@ int main(int argc, char *argv[]){
 
     testWorld->setSimulationType(planetSimulation);
 
+    testWorld->parse("asdf");
+
     testWorld->run(10);
     delete testWorld;
     /*try {
