@@ -1,8 +1,11 @@
 #include <iostream>
+#include <cstring>
 
 #include <vemc2/core/universe.h>
 
 #include <Logging.hpp>
+
+#define worldCount 256
 
 using namespace std;
 using namespace vemc2;
@@ -14,60 +17,122 @@ int main(int argc, char *argv[]){
 
     Logging out(Vesper::LoggingTypes::client);
 
-    universe *testWorld = new universe(3);
-    testWorld->insertBody(new simulation::body(.5,  5,   5, 50));
-    testWorld->insertBody(new simulation::body( 7, -2,  -3, 10));
-    testWorld->insertBody(new simulation::body(-1,  0,  21, 42));
+    universe **allWorlds      = new universe*[worldCount];
+    for (int i=0; i<worldCount; i++)
+        allWorlds[i] = 0;
+    string   **universe_names = new string*[256];
 
-    testWorld->setSimulationType(planetSimulation);
+    string input;
+    char input_buffer[256];
+    char command_buffer[256], argument_buffer[256];
+    string command, arguments;
 
-    testWorld->parse("asdf");
+    int selectedUniverse = -1;
 
-    testWorld->run(10);
-    delete testWorld;
-    /*try {
-        vec3bdt test1(1, 2, 3), test2(4, 5, 6), test3;
+    while (input != "quit" && input != "exit"){
 
-        test3 = test1 + test2;
+        if (selectedUniverse == -1){
+            out << "none" << ">";out.flush();
+        }
+        else{
+            out << selectedUniverse << ">";out.flush();
+        }
 
-        cout << test3[0] << test3[1] << test3[2] << endl;
+        for (int i=0; i<sizeof(input_buffer); i++){
+            input_buffer[i] = '\0';
+        }
+        for (int i=0; i<sizeof(command_buffer); i++){
+            command_buffer[i] = '\0';
+        }
+        input.clear();
+
+        cin.getline(input_buffer, sizeof(input_buffer));
+        input = input_buffer;
+
+        int i=0;
+        for (;i<input.size();i++){
+            if (input[i] == ' ')
+                break;
+            command_buffer[i]=input[i];
+        }
+        command_buffer[i] = '\0';
+        i++;
+
+        int j=0;
+        for (;i<input.size();i++,j++){
+            argument_buffer[j] = input[i];
+        }
+        argument_buffer[j] = '\0';
+
+        command = command_buffer;
+        arguments = argument_buffer;
+
+        //cout << "Command " << command << " Arguments " << arguments << endl;
+
+        if (selectedUniverse < 0){
+            if ( command == "create"){
+                int selected = -1;
+                try {
+                    selected = atoi(arguments.c_str());
+                }
+                catch (...){
+                    out << "error while parsing argument" << eom;
+                }
+                if (allWorlds[selected] != 0){
+                    out << "Universe already exists. Try deleting it please." << eom;
+                }
+                else {
+                    allWorlds[selected] = new universe();
+                    selectedUniverse = selected;
+                    out << "Switching to universe #" << selected << eom;
+                }
+
+            }
+            else if (command == "select"){
+                int selected = -1;
+                try {
+                    selected = atoi(arguments.c_str());
+                }
+                catch (...){
+                    out << "error while parsing argument" << eom;
+                }
+                if (allWorlds[selected] != 0){
+                    selectedUniverse = selected;
+                }
+                else {
+                    out << "cannot select universe, try creating it with create" << eom;
+                }
+            }
+            else if (input == "quit" || input == "exit"){
+
+            }
+            else {
+                out<<"unknown command; Available: \ncreate - creates a universe\nselect - select a universe\nexit - exit the program"<<eom;
+            }
+        }
+        else{
+            if (input == "deselect"){
+                selectedUniverse = -1;
+            }
+            else if (input == "delete"){
+                delete allWorlds[selectedUniverse];
+                allWorlds[selectedUniverse] = 0;
+                selectedUniverse = -1;
+            }
+            else if (input == "quit" || input == "exit"){
+
+            }
+            else
+                allWorlds[selectedUniverse]->parse(input);
+        }
+
     }
-    catch (char* c){
-        cout << c << endl;
-    }
-    catch (...){
-    }*/
 
-    /*out << "Creating World #1" << eom;
-    universe *world1 = new universe();
+    for (int i=0; i<worldCount; i++)
+        if (allWorlds[i] != 0)
+            delete allWorlds[i];
 
-    out << "Creating World #2" << eom;
-    universe *world2 = new universe(3);
-
-    out << "Set SimulationType ..." << eom;
-    world1->setSimulationType(vemc2::planetSimulation);
-
-    out << "Set SimulationType2..." << eom;
-    world2->setSimulationType(vemc2::planetSimulation);
-
-    out << "inserting objects ..." << eom;
-    world1->insertBody(new simulation::body(5, 5, 5, 50));
-    world2->insertBody(new simulation::body(5, 2, 5, 5));
-    world2->insertObject(new simulation::object(5, 2, 5, 5));
-    world1->insertBody(new simulation::body(5, 5, 1, 42));
-
-    out << "start World #1" << eom;
-    //world1->start();
-    //sleep(10);
-    world1->stop();
-    out << "w1 stopped, run World #2" << eom;
-    world2->run(10);
-
-    out << "deleting world #1" << eom;
-    delete world1;
-
-    out << "deleting world #2" << eom;
-    delete world2;*/
+    delete[] allWorlds;
 
     out << "Client over and out." << eom;
     return 0;
