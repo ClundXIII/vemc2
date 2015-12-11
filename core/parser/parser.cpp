@@ -1,6 +1,8 @@
 #include "parser.h"
 
 #include <iostream>
+#include <list>
+#include <array>
 
 using namespace vemc2;
 using namespace std;
@@ -41,6 +43,40 @@ int parser::execute(std::string command){
     return 0;
 }
 
+/**
+ * Splits the cmd into segments
+ * uses STL, yay!
+ */
+std::list<std::string> splitInChars(std::string cmd){
+    int retcharLength=0, i=0;
+
+    std::string currentSegment="";
+    std::list<std::string> retList;
+
+
+    while (cmd[i]!=0){
+        if (cmd[i] == ' '){
+            if (currentSegment!=""){
+                retList.push_back(currentSegment);
+                currentSegment="";
+            }
+        }
+        else{
+            currentSegment.append(1, cmd[i]);
+        }
+        i++;
+    }
+    retList.push_back(currentSegment);
+    return retList;
+}
+
 void parser::execute_static(vemc2::universe *parentUniverse, std::string command){
-    throw "test exception 123";
+
+    std::list<std::string> cmds = splitInChars(command);
+
+    while(!cmds.empty()){
+        parentUniverse->out << (string)cmds.front() << eom;
+        cmds.pop_front();
+    }
+
 }
