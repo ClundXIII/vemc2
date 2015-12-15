@@ -219,7 +219,9 @@
 		<Unit filename="core/parser/parser.cpp">
 			<Option virtualFolder="core/src/parser/" />
 		</Unit>
-		<Unit filename="core/parser/parser.h" />
+		<Unit filename="core/parser/parser.h">
+			<Option virtualFolder="core/src/parser/" />
+		</Unit>
 		<Unit filename="core/settings/ccs.cpp">
 			<Option virtualFolder="core/src/settings/" />
 			<Option target="all" />

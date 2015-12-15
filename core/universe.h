@@ -129,7 +129,7 @@ class universe{
         void run(bdt secondsToRun);
 
         /**
-         * These are the settings for the universum
+         * These are the settings for the universe
          *
          *
          *
@@ -143,7 +143,7 @@ class universe{
                 char*  Name_Font;
                 int    UndergroundNr;
                 int    BackgroundNr;
-                float  Underground_Heigh;
+                float  under_heigh;
             }texture;
 
             struct{ // graphic

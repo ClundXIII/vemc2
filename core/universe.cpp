@@ -123,6 +123,11 @@ void universe::parse(std::string command){
     command_helper->execute(command);
 }
 
+void universe::setVerboseLevel(int l){
+    verboseLevel = l;
+    v2 out << "set vlevel to " << l << eom;
+}
+
 void universe::update(){
     v1 out << "(00)update() invoked!                " << eom;
     v2 out << "(01)getting global settings       ..." << eom;
@@ -506,7 +511,7 @@ void universe::getGlobalSettings(){
 
     settings.texture.UndergroundNr          = 0;
     settings.texture.BackgroundNr           = 0;
-    settings.texture.Underground_Heigh      = 0;
+    settings.texture.under_heigh            = 0;
 
     settings.graphic.useColoredObjs         = settings::Graphic::useColoredObjs;
     settings.graphic.vLines                 = settings::Graphic::vLines;
