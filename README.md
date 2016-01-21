@@ -22,7 +22,7 @@ See below for manual installation. If you do not have sudo rights, then do the m
 ###Automatic
 
     git clone https://github.com/ClundXIII/vemc2-installer
-    #install nanomessage header files and a standard gcc compiler suite with opengl development packages
+    #install nanomessage: http://nanomsg.org/download.html and a standard gcc compiler suite with opengl development packages
     bash vemc2-installer/install.sh
 
 Please not that this will need sudo rights in order to install the vesper-libs. They are required for logging.
