@@ -9,6 +9,7 @@ all:
 init-cmake:
 	cd core; cmake .
 	cd cons; cmake .
+	mkdir graphic/temp
 
 libcore:
 	make -C core
