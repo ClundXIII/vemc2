@@ -76,7 +76,7 @@ add the following lines before "# add header files of this module":
 add the following lines before "# add header files of this module":
     
     include_directories(~/ ~/vesper-libs/vesper_log)
-    link_directories(~/vemc2/core ~/vesper/bin)
+    link_directories(~/vemc2/core ~/vesper-libs/bin)
     
 (assuming vesper-libs and vemc2 are both in ~) The result should look like:
 
