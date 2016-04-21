@@ -141,9 +141,3 @@ vector<T> vector<T>::additionTo(std::vector<T> toAdd){
 }
 
 template class vector<bdt>;
-
-//vec3bdt::vec3bdt(){this->reserve(3);}
-//vec3bdt::vec3bdt(bdt x1, bdt x2, bdt x3) : vector(x1, x2, x3){}
-
-/* static */
-//std::vector<bdt> vec3bdt::null = vec3bdt(0, 0, 0);

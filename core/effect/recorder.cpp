@@ -12,7 +12,7 @@ recorder::recorder(vemc2::universe *globUniversets):
 }
 
 recorder::~recorder(){
-    delete data;
+    delete[] data;
 }
 
 int recCount;
