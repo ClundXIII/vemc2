@@ -20,6 +20,10 @@ body::body(bdt posX1ts, bdt posX2ts, bdt posX3ts, bdt massts){
     posX3 = posX3ts;
 
     mass = massts;
+
+    data.v.X1 = 0;
+    data.v.X2 = 0;
+    data.v.X3 = 0;
 }
 
 body::~body(){
