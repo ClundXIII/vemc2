@@ -8,9 +8,8 @@ using namespace vemc2;
 using namespace vemc2::simulation;
 
 gravitation::gravitation(vemc2::universe *globUniversets) :
-    effect(globUniversets)
-{
-
+    effect(globUniversets){
+    setPriority(50);
 }
 
 gravitation::~gravitation(){

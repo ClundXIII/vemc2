@@ -35,6 +35,10 @@ class object : drawable {
         virtual void setX2(bdt X2ts);
         virtual void setX3(bdt X3ts);
 
+        virtual bdt* getX1p();
+        virtual bdt* getX2p();
+        virtual bdt* getX3p();
+
         virtual void setDataNull();
 
         struct effect_data{ //data

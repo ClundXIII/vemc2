@@ -5,6 +5,7 @@
 
 #include "effect/effect.h"
 #include "effect/inertia.h"
+#include "effect/recorder.h"
 
 #include "field/field.h"
 #include "field/Gfield.h"

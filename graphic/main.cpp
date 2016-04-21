@@ -43,13 +43,29 @@ int main(int argc, char **argv){
         }
         else if (in == "test"){
 
-            u->insertBody(new simulation::body(.5,  5,   5, 50));
-            u->insertBody(new simulation::body( 7, -2,  -3, 10));
-            u->insertBody(new simulation::body(-1,  0,  21, 42));
+            simulation::body b1(.5,  5,   5, 50);
+            simulation::body b2( 7, -2,  -3, 10);
+            simulation::body b3(-1,  0,  21, 42);
+            u->insertBody(&b1);
+            u->insertBody(&b2);
+            u->insertBody(&b3);
 
             u->settings.graphic.useSphereForObj = true;
 
             u->setSimulationType(planetSimulation);
+
+            simulation::recorder rec(u);
+            rec.push_value(b1.getX1p(), "object 1 x", "m");
+            rec.push_value(b1.getX2p(), "object 1 y", "m");
+            rec.push_value(b1.getX3p(), "object 1 z", "m");
+            rec.push_value(b2.getX1p(), "object 2 x", "m");
+            rec.push_value(b2.getX2p(), "object 2 y", "m");
+            rec.push_value(b2.getX3p(), "object 2 z", "m");
+            rec.push_value(b3.getX1p(), "object 3 x", "m");
+            rec.push_value(b3.getX2p(), "object 3 y", "m");
+            rec.push_value(b3.getX3p(), "object 3 z", "m");
+
+            u->insertEffect(&rec);
 
             u->settings.sim.dt *= 10;
 

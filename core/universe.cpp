@@ -333,6 +333,38 @@ int universe::setSimulationType(vemc2::simulation_type simTypets){
     return 0;
 }
 
+int universe::insertEffect(vemc2::simulation::effect *effectToIns){
+
+
+    effect** tmpEarray = effectArray;
+
+    effectCount++;
+    effectArray = new effect*[effectCount+1]; //last element is 0
+
+    int i=0;
+    int nextEffectToIns =0;
+
+    bool inserted = false;
+
+    for (;i<effectCount; i++){
+        if (inserted || (effectToIns->getPriority() >= tmpEarray[nextEffectToIns]->getPriority())){
+            effectArray[i]=tmpEarray[nextEffectToIns];
+            nextEffectToIns++;
+            v2 out << "inserted original at "<< i << Vesper::LoggingTypes::eom;
+        }
+        else{
+            effectArray[i] = effectToIns;
+            v2 out << "inserted new at "<< i << Vesper::LoggingTypes::eom;
+            inserted = true;
+        }
+
+    }
+
+    //delete tmpEarray;
+
+    return 0;
+}
+
 void universe::setObjectType(objectType typets){
     useForSimulation = typets;
 

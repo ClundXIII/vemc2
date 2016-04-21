@@ -221,6 +221,8 @@ class universe{
          */
         int setSimulationType(vemc2::simulation_type simTypets);
 
+        int insertEffect(vemc2::simulation::effect *effectToIns);
+
         /**
          * This sets the object Type that is being used for simulating
          */

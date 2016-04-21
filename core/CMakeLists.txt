@@ -21,6 +21,7 @@ set(HEADERS
     ${PROJECT_SOURCE_DIR}/effect/effect.h
     ${PROJECT_SOURCE_DIR}/effect/inertia.h
     ${PROJECT_SOURCE_DIR}/effect/gravitation.h
+    ${PROJECT_SOURCE_DIR}/effect/recorder.h
     ${PROJECT_SOURCE_DIR}/mymath/math_struct.h
     ${PROJECT_SOURCE_DIR}/mymath/vector.h
     ${PROJECT_SOURCE_DIR}/mymath/vec3bdt.h
@@ -49,6 +50,7 @@ set(API_HEADERS
     ${PROJECT_SOURCE_DIR}/effect/effect.h
     ${PROJECT_SOURCE_DIR}/effect/inertia.h
     ${PROJECT_SOURCE_DIR}/effect/gravitation.h
+    ${PROJECT_SOURCE_DIR}/effect/recorder.h
     ${PROJECT_SOURCE_DIR}/mymath/math_struct.h
     ${PROJECT_SOURCE_DIR}/mymath/vector.h
     ${PROJECT_SOURCE_DIR}/mymath/vec3bdt.h
@@ -80,6 +82,7 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/settings/ccs.cpp
     ${PROJECT_SOURCE_DIR}/effect/inertia.cpp
     ${PROJECT_SOURCE_DIR}/effect/effect.cpp
+    ${PROJECT_SOURCE_DIR}/effect/recorder.cpp
     ${PROJECT_SOURCE_DIR}/field/Gfield.cpp
     ${PROJECT_SOURCE_DIR}/field/Efield.cpp
     ${PROJECT_SOURCE_DIR}/simulation/sim_thread.cpp

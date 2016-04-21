@@ -7,8 +7,8 @@
 using namespace vemc2::simulation;
 
 inertia::inertia(vemc2::universe *globUniversets) :
-    effect(globUniversets)
-{
+    effect(globUniversets){
+    setPriority(100);
 }
 
 inertia::~inertia(){

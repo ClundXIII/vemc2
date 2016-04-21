@@ -65,6 +65,10 @@ void object::setX1(bdt X1ts)    {posX1 = X1ts;}
 void object::setX2(bdt X2ts)    {posX2 = X2ts;}
 void object::setX3(bdt X3ts)    {posX3 = X3ts;}
 
+bdt* object::getX1p(){return &posX1;}
+bdt* object::getX2p(){return &posX2;}
+bdt* object::getX3p(){return &posX3;}
+
 void object::setDataNull(){
     data.F.X1 = 0;
     data.F.X2 = 0;

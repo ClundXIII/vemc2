@@ -41,6 +41,8 @@ class effect{
          */
         virtual void upValues(); //  =0;
 
+        int getPriority();
+
     protected:
 
         /**
@@ -48,8 +50,12 @@ class effect{
          */
         vemc2::universe *globUniverse;
 
+        void setPriority(int pToSet);
+
     private:
-        //
+
+        int priority;
+        bool prioIsSet;
 
 };
 

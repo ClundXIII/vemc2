@@ -1,4 +1,6 @@
 #include "parser.h"
+#include "../universe.h"
+#include "../effect/gravitation.h"
 
 #include <iostream>
 #include <list>
@@ -152,7 +154,32 @@ void parser::execute_static(vemc2::universe *parentUniverse, std::string command
         }
     }
     else if (primaryCommand == "insert"){
-        //
+        if (cmds.empty()){
+            parentUniverse->out << "expect at least one Parameter for \"insert\"" << eom;
+            return;
+        }
+
+        std::string secondaryCommand = cmds.front();
+        cmds.pop_front();
+        if (secondaryCommand == "effect"){
+                if (cmds.empty()){
+                    parentUniverse->out << "expect at least one Parameter for \"insert effect\"" << eom;
+                    return;
+                }
+                else{
+                    if (cmds.front() == "gravitation")
+                        parentUniverse->insertEffect((vemc2::simulation::effect*)new vemc2::simulation::gravitation(parentUniverse));
+                    else if (cmds.front() == "inertia")
+                        parentUniverse->insertEffect((vemc2::simulation::effect*)new vemc2::simulation::inertia(parentUniverse));
+                    else if (cmds.front() == "recorder")
+                        parentUniverse->insertEffect((vemc2::simulation::effect*)new vemc2::simulation::recorder(parentUniverse));
+                    else
+                        parentUniverse->out << "unknown effect" << eom;
+                }
+        }
+        else{
+            parentUniverse->out << "unknown parameter for \"insert\"" << eom;
+        }
     }
     else if (primaryCommand == "start"){
         parentUniverse->start();
