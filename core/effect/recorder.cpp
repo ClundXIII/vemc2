@@ -9,6 +9,8 @@ recorder::recorder(vemc2::universe *globUniversets):
     setPriority(99);
     data = new recordValuePackage[256];
     valuePackageSize =0;
+
+    console_output = true;
 }
 
 recorder::~recorder(){
@@ -32,7 +34,7 @@ void recorder::tick(){
 
     if (recCount>1000){
         for (int i=0; i<valuePackageSize; i++){
-            globUniverse->out << data[i].label << ": " << *(data[i].toRecord) << data[i].unit << Vesper::LoggingTypes::eom;
+            if (console_output) globUniverse->out << data[i].label << ": " << *(data[i].toRecord) << data[i].unit << Vesper::LoggingTypes::eom;
         }
         recCount = 0;
     }

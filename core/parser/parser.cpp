@@ -129,6 +129,13 @@ void parser::execute_static(vemc2::universe *parentUniverse, std::string command
         else if (secondaryCommand == "settings.gravPlane"){
 
         }
+        else if (secondaryCommand == "tts"){
+                if (cmds.empty()){
+                    parentUniverse->out << "expect at least one Parameter for \"set tts\"" << eom;
+                    return;
+                }
+                parentUniverse->simulationThread->time_to_stop = atoi( ((std::string)cmds.front()).c_str() );
+        }
         else{
             parentUniverse->out << "unknown parameter for \"set\"" << eom;
         }
@@ -249,12 +256,13 @@ void parser::execute_static(vemc2::universe *parentUniverse, std::string command
             rec->push_value(b3->getX2p(), "object 3 y", "m");
             rec->push_value(b3->getX3p(), "object 3 z", "m");
 
+            rec->console_output = false;
+
             parentUniverse->insertEffect(rec);
 
             parentUniverse->settings.sim.dt *= 10;
             parentUniverse->simulationThread->time_to_stop = 100000;
 
-            //parentUniverse->start();
     }
     else{
         parentUniverse->out << "unknown Command: \"" << primaryCommand << "\"" << eom;

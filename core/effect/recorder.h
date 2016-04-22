@@ -27,6 +27,8 @@ class recorder : public effect{
 
         int writeToFile(const char* filename);
 
+        bool console_output;
+
     protected:
     private:
 
