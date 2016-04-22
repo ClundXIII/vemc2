@@ -227,33 +227,34 @@ void parser::execute_static(vemc2::universe *parentUniverse, std::string command
     }
     else if (primaryCommand == "demo"){
 
-            simulation::body b1(.5,  5,   5, 50);
-            simulation::body b2( 7, -2,  -3, 10);
-            simulation::body b3(-1,  0,  21, 42);
-            parentUniverse->insertBody(&b1);
-            parentUniverse->insertBody(&b2);
-            parentUniverse->insertBody(&b3);
+            simulation::body* b1 = new simulation::body(.5,  5,   5, 50);
+            simulation::body* b2 = new simulation::body( 7, -2,  -3, 10);
+            simulation::body* b3 = new simulation::body(-1,  0,  21, 42);
+            parentUniverse->insertBody(b1);
+            parentUniverse->insertBody(b2);
+            parentUniverse->insertBody(b3);
 
             parentUniverse->settings.graphic.useSphereForObj = true;
 
             parentUniverse->setSimulationType(planetSimulation);
 
-            simulation::recorder rec(parentUniverse);
-            rec.push_value(b1.getX1p(), "object 1 x", "m");
-            rec.push_value(b1.getX2p(), "object 1 y", "m");
-            rec.push_value(b1.getX3p(), "object 1 z", "m");
-            rec.push_value(b2.getX1p(), "object 2 x", "m");
-            rec.push_value(b2.getX2p(), "object 2 y", "m");
-            rec.push_value(b2.getX3p(), "object 2 z", "m");
-            rec.push_value(b3.getX1p(), "object 3 x", "m");
-            rec.push_value(b3.getX2p(), "object 3 y", "m");
-            rec.push_value(b3.getX3p(), "object 3 z", "m");
+            simulation::recorder* rec = new simulation::recorder(parentUniverse);
+            rec->push_value(b1->getX1p(), "object 1 x", "m");
+            rec->push_value(b1->getX2p(), "object 1 y", "m");
+            rec->push_value(b1->getX3p(), "object 1 z", "m");
+            rec->push_value(b2->getX1p(), "object 2 x", "m");
+            rec->push_value(b2->getX2p(), "object 2 y", "m");
+            rec->push_value(b2->getX3p(), "object 2 z", "m");
+            rec->push_value(b3->getX1p(), "object 3 x", "m");
+            rec->push_value(b3->getX2p(), "object 3 y", "m");
+            rec->push_value(b3->getX3p(), "object 3 z", "m");
 
-            parentUniverse->insertEffect(&rec);
+            parentUniverse->insertEffect(rec);
 
             parentUniverse->settings.sim.dt *= 10;
+            parentUniverse->simulationThread->time_to_stop = 100000;
 
-            parentUniverse->run(1000000000000);
+            //parentUniverse->start();
     }
     else{
         parentUniverse->out << "unknown Command: \"" << primaryCommand << "\"" << eom;

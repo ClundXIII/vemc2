@@ -85,7 +85,6 @@ void sim_thread::run(){
             globUniverse->out << i << ":x:" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
             globUniverse->out << i << ":v:" << globUniverse->objectArray[i]->data.v.X1 << " " << globUniverse->objectArray[i]->data.v.X2 << " " << globUniverse->objectArray[i]->data.v.X3 << eom;
         }
-        return;
 
         if (globUniverse->settings.sim_thread.useParaProc){
             while (running){
