@@ -329,7 +329,7 @@ class universe{
         void getGlobalSettings();
 
         /**
-         * This fuction reserves the space for our drawable
+         * This function reserves the space for our drawable
          * arrays. It is being invoked in the contructor.
          * maybe we need long instead of int ...
          */
@@ -350,9 +350,13 @@ class universe{
          * by a custom universe class.
          * So don't add any content ;-)
          */
-        void invokeBeforeSim();
-        void invokeMiddleSim();
-        void invokeAfterSim();
+        virtual void invokeBeforeSim();
+        virtual void invokeMiddleSim();
+        virtual void invokeAfterSim();
+
+        bool invokedFuncBefore = false;
+        bool invokedFuncMiddle = false;
+        bool invokedFuncAfter  = false;
 
     private:
 

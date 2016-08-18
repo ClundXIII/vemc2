@@ -1,7 +1,10 @@
 #ifndef RECORDER_H
 #define RECORDER_H
 
+#include "../define.h"
 #include "effect.h"
+
+#include <fstream>
 
 namespace vemc2{
 
@@ -31,6 +34,9 @@ class recorder : public effect{
 
     protected:
     private:
+
+        bool fileOutput;
+        std::ofstream *file = 0;
 
         recordValuePackage* data;
         int valuePackageSize;

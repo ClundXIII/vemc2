@@ -257,6 +257,7 @@ void parser::execute_static(vemc2::universe *parentUniverse, std::string command
             rec->push_value(b3->getX3p(), "object 3 z", "m");
 
             rec->console_output = false;
+            rec->writeToFile("demo_test.data");
 
             parentUniverse->insertEffect(rec);
 

@@ -2,9 +2,9 @@
 #Simon Michalke, (c) 2014
 
 CC=g++
-#CFLAGS=-pthread -std=c++11 -fPIC -c -O3#optimized
-CFLAGS=-pthread -std=c++11 -fPIC -c -Wall -g #debugging
-LDFLAGS=-pthread -std=c++11 -lvesper-log -lvcore -lGL -lGLU -lglut
+#CFLAGS=-pthread -std=c++11 -fPIC -c -O3 #optimized
+CFLAGS=-pthread -std=c++11 -fPIC -c -Wall -g -fsanitize=address #debugging
+LDFLAGS=-pthread -std=c++11 -lvesper-log -lvcore -lGL -lGLU -lglut -fsanitize=address
 INCLDIR=-I./..
 
 all: libvgl main
@@ -14,7 +14,7 @@ clean:
 	rm temp/*
 
 libvgl: temp/graphic.o temp/draws.o
-	$(CC) -g -shared -Wl,-soname,libvgl.so.`cat version | head -c 1` -o libvgl.so.`cat version` \
+	$(CC) $(CFLAGS) -g -shared -Wl,-soname,libvgl.so.`cat version | head -c 1` -o libvgl.so.`cat version` \
 	temp/graphic.o temp/draws.o \
 	$(LDFLAGS) -L/opt/lib/vemc2/ -lvcore
 

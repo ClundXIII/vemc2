@@ -1,6 +1,9 @@
 #include "recorder.h"
 #include "../universe.h"
 
+#include <fstream>
+#include <iostream>
+
 using namespace vemc2::simulation;
 
 recorder::recorder(vemc2::universe *globUniversets):
@@ -11,9 +14,13 @@ recorder::recorder(vemc2::universe *globUniversets):
     valuePackageSize =0;
 
     console_output = true;
+    fileOutput = false;
 }
 
 recorder::~recorder(){
+    file->close();
+    if (file)
+        delete file;
     delete[] data;
 }
 
@@ -55,4 +62,13 @@ int recorder::push_value(bdt *toRecord, const char* label, const char* unit){
 }
 
 int recorder::writeToFile(const char* filename){
+    file = new std::ofstream(filename);
+    fileOutput = true;
+
+    *file << "#";
+    for (int i=0; i<valuePackageSize; i++){
+        *file << data[i].label << " [" << data[i].unit << "] ";
+    }
+
+    *file << "\n";
 }

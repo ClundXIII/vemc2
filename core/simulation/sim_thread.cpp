@@ -94,26 +94,30 @@ void sim_thread::run(){
         }
         else{ //not parallel
             while (running){
+
+                if (globUniverse->invokedFuncBefore)
+                    globUniverse->invokeBeforeSim();
+
                 for (int i=0; i<globUniverse->effectCount; i++)
                     globUniverse->effectArray[i]->tick();
 
+                if (globUniverse->invokedFuncMiddle)
+                    globUniverse->invokeMiddleSim();
+
                 for (int i=0; i<globUniverse->effectCount; i++)
                     globUniverse->effectArray[i]->upValues();
-                /*if (paused){
-                    while (paused) //wait for paused to get false
+
+
+                if (globUniverse->invokedFuncAfter)
+                    globUniverse->invokeAfterSim();
+
+                if (paused){
+                    while (paused){ //wait for paused to get false
                         sleep(1);
+                    }
                     //when we reach this point, we are unpaused!
-                    std::cout << "Sim>SimulationThread unpaused!" << std::endl;
-                }*/
-
-                //globUniverse->effectArray[0]->tick();
-                //globUniverse->effectArray[1]->upValues();
-
-                /*globUniverse->out << "time: " << globUniverse->settings.sim.global_time << eom;
-                for (int i=0; globUniverse->objectArray[i] != 0; i++){
-                    globUniverse->out << i << ":x:" << globUniverse->objectArray[i]->getX1() << " " << globUniverse->objectArray[i]->getX2() << " " << globUniverse->objectArray[i]->getX3() << eom;
-                    globUniverse->out << i << ":v:" << globUniverse->objectArray[i]->data.v.X1 << " " << globUniverse->objectArray[i]->data.v.X2 << " " << globUniverse->objectArray[i]->data.v.X3 << eom;
-                }*/
+                    globUniverse->out << "Sim>SimulationThread unpaused!" << eom;
+                }
 
                 globUniverse->settings.sim.global_time += globUniverse->settings.sim.dt;
                 if (globUniverse->settings.sim.global_time >= time_to_stop)
