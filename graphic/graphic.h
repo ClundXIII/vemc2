@@ -1,7 +1,7 @@
 #ifndef GRAPHIC_H_INCLUDED
 #define GRAPHIC_H_INCLUDED
 
-#include <core/universe.h>
+#include <vemc2/core/universe.h>
 
 #include <thread>
 
