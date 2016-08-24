@@ -21,10 +21,11 @@ libvgl: temp/graphic.o temp/draws.o
 install: libvgl
 	mkdir -p /usr/local/lib
 	cp libvgl.so.`cat version` /usr/local/lib/libvgl.so
+	ln -s /usr/local/lib/libvgl.so /usr/local/lib/libvgl.so.0
 	mkdir -p /usr/local/include/vemc2/graphic
 	cp graphic.h /usr/local/include/vemc2/graphic/
 	cp draws.h   /usr/local/include/vemc2/graphic/
-
+	ldconfig
 
 main: temp/main.o temp/graphic.o temp/draws.o
 	$(CC) -g -o graphicgl \
