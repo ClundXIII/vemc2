@@ -66,7 +66,7 @@ void graphicgl::draw_function(){
 
 
     glFlush(); // Flush the OpenGL buffers to the window
-
+    glutPostRedisplay();
 }
 
 void  graphicgl::reshape_function(int width, int height) {
@@ -164,6 +164,23 @@ void graphicgl::stop(){
     running = false;
 }
 
+using namespace std::chrono;
+
+high_resolution_clock::time_point last_timestamp = high_resolution_clock::now();
+
+void control_fps(){
+
+    high_resolution_clock::time_point thist = high_resolution_clock::now();
+
+    long millis_to_wait = 330/((long) (duration_cast<milliseconds>( thist - last_timestamp ).count()));
+
+    last_timestamp = high_resolution_clock::now();
+
+    std::chrono::milliseconds timespan(millis_to_wait);
+
+    std::this_thread::sleep_for(timespan);
+}
+
 void graphicgl::attachUniverse(vemc2::universe *universets){
     attachedWorld = universets;
 
@@ -174,8 +191,8 @@ void graphicgl::attachUniverse(vemc2::universe *universets){
 
     glutCreateWindow("Vemc2 graphic Window");
 
-    glutIdleFunc(graphicgl::draw_function);
-    //glutDisplayFunc(graphicgl::draw_function);
+    glutIdleFunc(control_fps);
+    glutDisplayFunc(graphicgl::draw_function);
     glutReshapeFunc(graphicgl::reshape_function);
     glutMouseFunc(graphicgl::mouse_function);
     glutMotionFunc(graphicgl::mouseMove_function);
