@@ -27,6 +27,7 @@ compile-all:
 	cd core; sudo make install
 	make -C cons
 	make -C graphic
+	cd graphic; sudo make install
 
 startall: compile-all
 	bash -c "cd cons; bash portablestart.sh; cd .."

@@ -18,6 +18,9 @@ libvgl: temp/graphic.o temp/draws.o
 	temp/graphic.o temp/draws.o \
 	$(LDFLAGS) -L/opt/lib/vemc2/ -lvcore
 
+install: libvgl
+	cp libvgl.so.`cat version` /usr/local/lib/libvgl.so
+
 main: temp/main.o temp/graphic.o temp/draws.o
 	$(CC) -g -o graphicgl \
 	temp/main.o temp/graphic.o temp/draws.o \
