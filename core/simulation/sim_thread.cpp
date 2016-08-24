@@ -120,7 +120,7 @@ void sim_thread::run(){
                 }
 
                 globUniverse->settings.sim.global_time += globUniverse->settings.sim.dt;
-                if (globUniverse->settings.sim.global_time >= time_to_stop)
+                if ((time_to_stop>0)&&(globUniverse->settings.sim.global_time >= time_to_stop))
                     running = false;
             }
         }
