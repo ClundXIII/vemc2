@@ -59,9 +59,9 @@ void graphicgl::draw_function(){
     glEnd();
 
     for (int i=0; attachedWorld->drawableArray[i] != 0; i++){
-        vemc2::simulation::body b = attachedWorld->bodyArray[i];
-        b.draw();
-        //std::cout << "."; std::cout.flush();
+        vemc2::simulation::body *b = attachedWorld->bodyArray[i];
+        if (b) b->draw();
+        attachedWorld->drawableArray[i]->draw();
     }
 
 
@@ -172,7 +172,7 @@ void graphicgl::attachUniverse(vemc2::universe *universets){
     glutInitWindowSize(500, 500);
     glutInitWindowPosition(100, 100);
 
-    glutCreateWindow("Your first OpenGL Window");
+    glutCreateWindow("Vemc2 graphic Window");
 
     glutIdleFunc(graphicgl::draw_function);
     //glutDisplayFunc(graphicgl::draw_function);

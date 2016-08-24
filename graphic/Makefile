@@ -14,13 +14,14 @@ clean:
 	rm temp/*
 
 libvgl: temp/graphic.o temp/draws.o
-	$(CC) $(CFLAGS) -g -shared -Wl,-soname,libvgl.so.`cat version | head -c 1` -o libvgl.so.`cat version` \
+	$(CC) -g -shared -Wl,-soname,libvgl.so.`cat version | head -c 1` -o libvgl.so.`cat version` \
 	temp/graphic.o temp/draws.o \
 	$(LDFLAGS) -L/opt/lib/vemc2/ -lvcore
 
 install: libvgl
 	mkdir -p /usr/local/lib
 	cp libvgl.so.`cat version` /usr/local/lib/libvgl.so
+	rm /usr/local/lib/libvgl.so.0
 	ln -s /usr/local/lib/libvgl.so /usr/local/lib/libvgl.so.0
 	mkdir -p /usr/local/include/vemc2/graphic
 	cp graphic.h /usr/local/include/vemc2/graphic/
