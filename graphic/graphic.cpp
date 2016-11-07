@@ -172,7 +172,7 @@ void control_fps(){
 
     high_resolution_clock::time_point thist = high_resolution_clock::now();
 
-    long millis_to_wait = 330/((long) (duration_cast<milliseconds>( thist - last_timestamp ).count()));
+    long millis_to_wait = 330/((long) (duration_cast<milliseconds>( thist - last_timestamp ).count())+0.0001);
 
     last_timestamp = high_resolution_clock::now();
 
