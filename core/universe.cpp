@@ -18,52 +18,17 @@ using namespace Vesper::LoggingTypes;
 #define v3 if (verboseLevel >= 3)
 
 universe::universe() :
-    out(Vesper::LoggingTypes::server)
-
+    universe(0)
     {
-    v0 out << "===============================================" << eom;
-    v0 out << "Virtual e = m * c^2 (c) by Simon Michalke, 2014" << eom;
-    v0 out << "vcore Library, Version 0.0.1-alpha / 29062015" << eom;
-    v1 out << "Have a lot of fun ...                " << eom;
-    v0 out << "    creating new universe         ..." << eom;
-
-    drawableArray =0;
-    objectArray   =0;
-    bodyArray     =0;
-    quantArray    =0;
-    fieldArray    =0;
-    noobjectArray =0;
-
-    effectArray   =0;
-
-    drawableCount = 2168;
-    objectCount   = 2084;
-    bodyCount     = 1024;
-    quantCount    = 1024;
-    fieldCount    =  128;
-    noobjectCount =   16;
-
-    effectCount = 16;
-
-    useForSimulation = t_none;
-    simulateObjectCount = 0;
-    simulateObjects = 0;
-
-    simulateStruct.objectCount = 0;
-
-    setSimulationType(planetSimulation);
-
-    verboseLevel = 0;
-
-    update();
-
-    command_helper = new vemc2::parser(this);
-
-    out << "==================done!========================" << eom;
 }
 
 
 universe::universe(int vLevel) :
+    universe(vLevel, 1024, 1024, 128, 16)
+    {
+}
+
+universe::universe(int vLevel, int bodyCountts, int quantCountts, int fieldCountts, int noobjectCountts) :
     out(Vesper::LoggingTypes::server)
 {
 
@@ -84,12 +49,12 @@ universe::universe(int vLevel) :
 
     effectArray   =0;
 
-    drawableCount = 2168;
-    objectCount   = 2084;
-    bodyCount     = 1024;
-    quantCount    = 1024;
-    fieldCount    =  128;
-    noobjectCount =   16;
+    drawableCount = bodyCountts + quantCountts + fieldCountts + noobjectCountts;
+    objectCount   = bodyCountts + quantCountts;
+    bodyCount     = bodyCountts;
+    quantCount    = quantCountts;
+    fieldCount    =  fieldCountts;
+    noobjectCount =   noobjectCountts;
 
     effectCount = 16;
 
@@ -394,7 +359,7 @@ int universe::insertDrawable(vemc2::simulation::drawable *toInsert){
 
     int pos = sTAE( (void**)drawableArray);
     if (pos >= (drawableCount - 1) ){
-        v0 out << "drawableCount exceed limits in universe.cpp::insertDrawable!" << eom;
+        v0 out << "drawableCount exceed limits in universe.cpp::insertDrawable! " << drawableCount << eom;
         return 1;
     }
 

@@ -2,9 +2,9 @@
 #Simon Michalke, (c) 2014
 
 CC=g++
-#CFLAGS=-pthread -std=c++11 -fPIC -c -O3 #optimized
-CFLAGS=-pthread -std=c++11 -fPIC -c -Wall -g -fsanitize=address #debugging
-LDFLAGS=-pthread -std=c++11 -lvesper-log -lvcore -lGL -lGLU -lglut -fsanitize=address
+CFLAGS=-pthread -std=c++11 -fPIC -c -O3 #optimized
+#CFLAGS=-pthread -std=c++11 -fPIC -c -Wall -g -fsanitize=address #debugging
+LDFLAGS=-pthread -std=c++11 -lvesper-log -lvcore -lGL -lGLU -lglut #-fsanitize=address
 INCLDIR=-I./..
 
 all: libvgl main

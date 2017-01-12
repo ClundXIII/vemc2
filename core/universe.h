@@ -29,6 +29,7 @@ class universe{
 
         universe();
         universe(int vLevel);
+        universe(int vLevel, int bodyCountts, int quantCountts, int fieldCountts, int noobjectCountts);
         ~universe();
 
         void parse(std::string command);
